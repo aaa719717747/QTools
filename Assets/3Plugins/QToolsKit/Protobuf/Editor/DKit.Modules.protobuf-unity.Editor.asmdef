@@ -1,0 +1,18 @@
+{
+  "name": "DKit.Modules.protobuf-unity.Editor",
+  "rootNamespace": "",
+  "references": [
+    "DKit.Modules.Protobuf.Runtime"
+  ],
+  "includePlatforms": [
+    "Editor"
+  ],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false,
+  "overrideReferences": false,
+  "precompiledReferences": [],
+  "autoReferenced": true,
+  "defineConstraints": [],
+  "versionDefines": [],
+  "noEngineReferences": false
+}

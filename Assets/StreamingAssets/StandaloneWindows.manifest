@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 4098544134
+CRC: 453344864
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -8,3 +8,7 @@ AssetBundleManifest:
     Info_1:
       Name: ui/sprites/shoorscreen1
       Dependencies: {}
+    Info_2:
+      Name: ui/prefabs/maincitypanel
+      Dependencies:
+        Dependency_0: ui/sprites/shoorscreen1
