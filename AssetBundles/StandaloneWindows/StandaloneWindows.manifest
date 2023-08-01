@@ -1,0 +1,10 @@
+ManifestFileVersion: 0
+CRC: 4098544134
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: ui/sprites/shootscreen0
+      Dependencies: {}
+    Info_1:
+      Name: ui/sprites/shoorscreen1
+      Dependencies: {}
