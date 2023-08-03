@@ -9,33 +9,19 @@ namespace _3Plugins.QToolsKit.UIFramework.Scripts
 {
     public class UIManager : MonoBehaviour
     {
-        private Dictionary<ViewEnum, FormUI> FormScripts = new Dictionary<ViewEnum, FormUI>();
+        private Dictionary<ViewEnum, IForm> _forms = new Dictionary<ViewEnum, IForm>();
 
         private void Start()
         {
             //初始化
             AssetBundleLoaderMgr.instance.Init();
-            // InitViewPanels();
-            TestCache();
             TestInstance();
-            TestInstance3();
         }
 
-
-        public void TestCache()
+        public void LoadUIPrefabs()
         {
-            Profiler.BeginSample("##################11111111####################");
-            for (int i = 0; i < 100; i++)
-            {
-                GameObject prefab =
-                    AssetBundleLoaderMgr.instance.LoadAsset<GameObject>("ui/prefabs/maincitypanel", "MainCityView");
-                //实例化预设
-                GameObject go = Instantiate(prefab, transform);
-                Destroy(go);
-            }
-
-            Profiler.EndSample();
         }
+
 
         public void TestInstance()
         {
@@ -52,20 +38,8 @@ namespace _3Plugins.QToolsKit.UIFramework.Scripts
 
             Profiler.EndSample();
         }
-        public void TestInstance3()
-        {
-            Profiler.BeginSample("##################33333333####################");
-            GameObject prefab =
-                AssetBundleLoaderMgr.instance.LoadAsset<GameObject>("ui/prefabs/maincitypanel", "MainCityView");
-            for (int i = 0; i < 100; i++)
-            {
-                //实例化预设
-                GameObject go = Instantiate(prefab, transform);
-                // Destroy(go);
-            }
 
-            Profiler.EndSample();
-        }
+
         public void InitViewPanels()
         {
             //加载预设
@@ -73,19 +47,19 @@ namespace _3Plugins.QToolsKit.UIFramework.Scripts
                 AssetBundleLoaderMgr.instance.LoadAsset<GameObject>("ui/prefabs/maincitypanel", "MainCityView");
             //实例化预设
             GameObject go = Instantiate(prefab, transform);
-            FormUI uiForm = go.GetComponent<FormUI>();
+            LoginForm uiForm = go.GetComponent<LoginForm>();
             uiForm.Bind(
                 new LoginView(),
                 new LoginModel());
             uiForm.viewEnum = ViewEnum.LOGIN;
-            FormScripts.Add(ViewEnum.LOGIN, uiForm);
+            _forms.Add(ViewEnum.LOGIN, uiForm);
         }
 
         public void ShowPanel(ViewEnum viewEnum)
         {
-            if (FormScripts.ContainsKey(viewEnum))
+            if (_forms.ContainsKey(viewEnum))
             {
-                FormScripts[viewEnum].OnShow();
+                _forms[viewEnum].OnShow();
             }
         }
 
