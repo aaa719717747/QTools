@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 5942629869829264015}
   - component: {fileID: 6748445357236161240}
   - component: {fileID: 2443407039972642713}
-  - component: {fileID: 1845280448934458117}
+  - component: {fileID: 6174357321087042721}
   m_Layer: 5
   m_Name: MainCityView
   m_TagString: Untagged
@@ -305,7 +305,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1845280448934458117
+--- !u!114 &6174357321087042721
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -314,6 +314,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5976724693951280815}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bce24c47f2962f04ba873034b18cd8a7, type: 3}
+  m_Script: {fileID: 11500000, guid: eb0e12137ce54875aa917c9405b749c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  viewEnum: 0
