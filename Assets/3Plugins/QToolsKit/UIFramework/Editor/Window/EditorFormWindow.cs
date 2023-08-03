@@ -22,6 +22,9 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
         private Vector2 _scrollRectDrawDirectory;
         public static UIPrefabData PrefabData = new UIPrefabData();
 
+        [FormerlySerializedAs("_isInMain")] [SerializeField]
+        private bool isInMain = true;
+
         [MenuItem("编辑器工具/UI编辑器")]
         public static void ShowWindow()
         {
@@ -50,16 +53,52 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
         {
             if (FormEditorConfig != null)
             {
-                EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox]);
-                DrawDirectory();
-                EditorGUILayout.EndVertical();
-                EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox]);
-                DrawPrefabInfo();
-                EditorGUILayout.EndVertical();
-                DrawGenerateNewForm();
+                EditorGUILayout.BeginHorizontal();
+                GUI.backgroundColor = isInMain ? Color.green : Color.white;
+                if (GUILayout.Button("基础配置", GUILayout.Height(35)))
+                {
+                    isInMain = true;
+                }
+
+                GUI.backgroundColor = Color.white;
+                GUI.backgroundColor = isInMain ? Color.green : Color.white;
+                if (GUILayout.Button("预制件配置", GUILayout.Height(35)))
+                {
+                    isInMain = false;
+                }
+
+                GUI.backgroundColor = Color.white;
+                EditorGUILayout.EndHorizontal();
+                if (isInMain)
+                {
+                    EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox]);
+                    DrawDirectory();
+                    EditorGUILayout.EndVertical();
+                }
+                else
+                {
+                    EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox]);
+                    DrawPrefabInfo();
+                    EditorGUILayout.EndVertical();
+                }
+
+
+                // EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox], GUILayout.Width(350));
+                // DrawGenerateNewForm();
+                // EditorGUILayout.EndVertical();
+                //
+                // EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox], GUILayout.Width(350));
+                // DrawUIFormEditorArea();
+                // EditorGUILayout.EndHorizontal();
             }
         }
 
+
+        private void DrawUIFormEditorArea()
+        {
+            EditorGUILayout.TextArea(
+                "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
+        }
 
         private void DrawGenerateNewForm()
         {
