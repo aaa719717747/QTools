@@ -1,0 +1,10 @@
+﻿using UnityEngine;
+using UnityEngine.UI;
+
+namespace #命名空间#
+{
+    public class #类名#Model : BaseModel
+    {
+   
+    }
+}

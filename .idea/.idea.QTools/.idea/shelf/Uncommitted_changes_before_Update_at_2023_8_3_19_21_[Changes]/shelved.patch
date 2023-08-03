@@ -1,0 +1,24 @@
+Index: Assets/3Plugins/QToolsKit/UIFramework/Scenes.meta
+===================================================================
+diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Scenes.meta b/Assets/3Plugins/QToolsKit/UIFramework/Scenes.meta
+--- a/Assets/3Plugins/QToolsKit/UIFramework/Scenes.meta	
++++ b/Assets/3Plugins/QToolsKit/UIFramework/Scenes.meta	
+@@ -1,5 +1,5 @@
+ fileFormatVersion: 2
+-guid: 131a6b21c8605f84396be9f6751fb6e3
++guid: 0fc751acc38f88f4187b9287d71eb58b
+ folderAsset: yes
+ DefaultImporter:
+   externalObjects: {}
+Index: Assets/3Plugins/QToolsKit/UIFramework/Scenes/SampleScene.unity.meta
+===================================================================
+diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Scenes/SampleScene.unity.meta b/Assets/3Plugins/QToolsKit/UIFramework/Scenes/SampleScene.unity.meta
+--- a/Assets/3Plugins/QToolsKit/UIFramework/Scenes/SampleScene.unity.meta	
++++ b/Assets/3Plugins/QToolsKit/UIFramework/Scenes/SampleScene.unity.meta	
+@@ -1,5 +1,5 @@
+ fileFormatVersion: 2
+-guid: 2cda990e2423bbf4892e6590ba056729
++guid: ad2f4b8634a9bae48a4b0e9b691150ad
+ DefaultImporter:
+   externalObjects: {}
+   userData: 
