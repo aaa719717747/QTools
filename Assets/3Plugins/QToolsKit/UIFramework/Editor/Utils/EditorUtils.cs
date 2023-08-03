@@ -10,12 +10,11 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Utils
         /// <summary>
         /// 生成新的Form模块
         /// </summary>
-        public static void GenerateNewForm(string formName,string gener)
+        public static void GenerateNewForm(string formName,UIFormEditorConfig config)
         {
             //应该先检查删除原文件夹
             //加载模板
-            string currentDirectory = Directory.GetCurrentDirectory();
-            Debug.Log(currentDirectory);
+
             string pathView = $"3Plugins/QToolsKit/UIFramework/Editor/TemplateAssets/ViewTemplate.txt";
             string viewTxt = Path.Combine(Application.dataPath, pathView);
             string pathModel = $"3Plugins/QToolsKit/UIFramework/Editor/TemplateAssets/ModelTemplate.txt";
@@ -35,7 +34,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Utils
             //     Debug.Log("Script generated successfully at path: " + scriptPath);
             // }
         }
-        
+
 
         /// <summary>
         /// pathView路径仅限于Assets/目录下
@@ -45,10 +44,11 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Utils
         /// <typeparam name="T"></typeparam>
         public static void CreateScriptableObject<T>(string pathView) where T : ScriptableObject
         {
-            var exampleAsset =  ScriptableObject.CreateInstance<T>();
+            var exampleAsset = ScriptableObject.CreateInstance<T>();
             AssetDatabase.CreateAsset(exampleAsset, pathView);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }
+       
     }
 }

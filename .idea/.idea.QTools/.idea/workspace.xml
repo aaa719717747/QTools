@@ -1,61 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ebb0ebae-187f-42f0-bae6-eabc873a3dba" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Configs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Configs/Scripts.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Configs/Scripts/UIFormEditorConfig.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Configs/Scripts/UIFormEditorConfig.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/TemplateAssets.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/TemplateAssets/FormTemplate.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/TemplateAssets/FormTemplate.txt.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/TemplateAssets/ModelTemplate.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/TemplateAssets/ModelTemplate.txt.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/TemplateAssets/ViewTemplate.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/TemplateAssets/ViewTemplate.txt.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Utils.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Utils/EditorUtils.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Utils/EditorUtils.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/EditorFormWindow.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/EditorFormWindow.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIForm.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIForm.cs.meta" afterDir="false" />
+    <list default="true" id="ebb0ebae-187f-42f0-bae6-eabc873a3dba" name="Changes" comment="ui编辑器">
+      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/UIPrefabData.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/UIPrefabData.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/StandaloneWindows" beforeDir="false" afterPath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/StandaloneWindows" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/prefabs/maincitypanel" beforeDir="false" afterPath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/prefabs/maincitypanel" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/sprites/shoorscreen1" beforeDir="false" afterPath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/sprites/shoorscreen1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/sprites/shoorscreen1.manifest" beforeDir="false" afterPath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/sprites/shoorscreen1.manifest" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/sprites/shootscreen0" beforeDir="false" afterPath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/sprites/shootscreen0" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/sprites/shootscreen0.manifest" beforeDir="false" afterPath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/sprites/shootscreen0.manifest" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/ExcelUtil.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/Protobuf/Sample/proto/DemoUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/Protobuf/Sample/proto/DemoUser.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Sample.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Sample/LoginForm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Sample/LoginForm.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Sample/LoginView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Sample/LoginView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Sample/MVC.controller" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Sample/MVC.controller.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/ViewAbstract.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/ViewAbstract.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/MainCityView.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/MainCityView.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/StandaloneWindows" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/StandaloneWindows" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/StandaloneWindows.manifest" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/StandaloneWindows.manifest" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/prefabs/maincitypanel" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/ui/prefabs/maincitypanel" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shoorscreen1" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shoorscreen1" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shoorscreen1.manifest" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shoorscreen1.manifest" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shootscreen0" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shootscreen0" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shootscreen0.manifest" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shootscreen0.manifest" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Utils/EditorUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Utils/EditorUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/EditorFormWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/EditorFormWindow.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +16,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/012ca6023c754e6384f20d14e09f256e5789b8/03/d2ec0e2b/Path.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5456dbfeccf644f7ab5b4d4a01ccf33e814a00/b3/ae94ec56/AssetDatabase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5456dbfeccf644f7ab5b4d4a01ccf33e814a00/f9/bd4e9dc2/EditorUtility.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a2c0aeec54124247bdff1197fabae8146400/d8/03a7045d/AssetBundle.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d87da959c26443e0baa9578975afed03157c00/d2/eacd854e/ScriptableObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/HierarchyTootip/Editor/HierarchyTootip.cs" root0="FORCE_HIGHLIGHTING" />
@@ -158,7 +110,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691028022497</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="ui编辑器">
+      <created>1691071603405</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1691071603405</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,6 +139,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="uiframe1" />
-    <option name="LAST_COMMIT_MESSAGE" value="uiframe1" />
+    <MESSAGE value="ui编辑器" />
+    <option name="LAST_COMMIT_MESSAGE" value="ui编辑器" />
   </component>
 </project>
