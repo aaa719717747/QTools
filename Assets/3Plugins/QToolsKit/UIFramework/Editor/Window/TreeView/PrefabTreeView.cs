@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
+using _3Plugins.QToolsKit.UIFramework.Editor.Window.Data;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
 {
@@ -74,10 +77,65 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
             }
         }
 
+        /// <summary>
+        /// 点击子叶节点事件
+        /// </summary>
+        /// <param name="id"></param>
         protected override void SingleClickedItem(int id)
         {
+            GameObject target = null;
             base.SingleClickedItem(id);
-            Debug.Log($"clik:{id}");
+
+            TreeViewItem clickedItem = FindItem(id, rootItem);
+
+            if (clickedItem != null)
+            {
+                string path = GetGameObjectNameFromTreeViewItem(clickedItem);
+                string rootName = Prefab.name;
+                if (path.Equals(rootName))
+                {
+                    target = Prefab.gameObject;
+                }else
+                {
+                    //第二节点
+                    target= Prefab.transform.Find(path).gameObject;
+                }
+                
+                Component[] components =  target.GetComponents<Component>();
+
+                FormWindowData.UpdateNodeComponentsList(components.ToList());
+            }
         }
+
+        
+        /// <summary>
+        /// 获取点击节点名称根据id
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        private string GetGameObjectNameFromTreeViewItem(TreeViewItem item)
+        {
+            if (item.depth == 0) // Top-level item
+            {
+                return item.displayName; // This is the prefab's root GameObject
+            }
+
+            // Traverse up the tree to find the root GameObject's children
+            List<string> path = new List<string>();
+            TreeViewItem currentItem = item;
+            while (currentItem.depth > 0)
+            {
+                path.Insert(0, currentItem.displayName);
+                currentItem = currentItem.parent;
+            }
+
+            // Now you have the path from the root to the clicked GameObject
+            // Build the full GameObject name using the path
+            string gameObjectName = string.Join("/", path);
+            return gameObjectName;
+        }
+     
+
+        
     }
 }

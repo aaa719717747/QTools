@@ -1,58 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ebb0ebae-187f-42f0-bae6-eabc873a3dba" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_4_9_31__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_4_9_31__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_4_9_31__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_4_9_31__Changes_1.xml" afterDir="false" />
+    <list default="true" id="ebb0ebae-187f-42f0-bae6-eabc873a3dba" name="Changes" comment="[目录树]修改间隔布局">
+      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/FormWindowData.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/FormWindowData.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Config.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/AssetBundleBrowserMain.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/AssetBundleBrowserMain.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/AssetBundleBuildTab.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/AssetBundleBuildTab.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/AssetBundleDataSource.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/AssetBundleDataSource/ABDataSource.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/AssetBundleDataSource/ABDataSource.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/AssetBundleDataSource/ABDataSourceProvider.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/AssetBundleDataSource/ABDataSourceProvider.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/AssetBundleDataSource/AssetDatabaseABDataSource.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/AssetBundleDataSource/AssetDatabaseABDataSource.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/AssetBundleManageTab.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/AssetBundleManageTab.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/AssetBundleModel.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/AssetBundleModel/ABModel.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/AssetBundleModel/ABModel.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/AssetBundleModel/ABModelAssetInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/AssetBundleModel/ABModelAssetInfo.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/AssetBundleModel/ABModelBundleInfo.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/AssetBundleModel/ABModelBundleInfo.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/AssetBundleTree.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/AssetBundleTree.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/AssetListTree.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/AssetListTree.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/BundleDetailList.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/BundleDetailList.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/Icons.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/Icons/ABundleBrowserIconY1756Basic.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/Icons/ABundleBrowserIconY1756Basic.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/Icons/ABundleBrowserIconY1756Scene.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/Icons/ABundleBrowserIconY1756Scene.png.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/InspectTab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/InspectTab/AssetBundleInspectTab.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/InspectTab/AssetBundleInspectTab.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/InspectTab/AssetBundleRecord.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/InspectTab/AssetBundleRecord.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/InspectTab/InspectSingleBundle.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/InspectTab/InspectSingleBundle.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/InspectTab/InspectTreeView.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/InspectTab/InspectTreeView.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/MessageList.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/MessageList.cs.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/MessageSystem.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Editor/MessageSystem.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/TreeView/PrefabTreeView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/TreeView/PrefabTreeView.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,10 +108,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="5476">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="5476" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -213,7 +168,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691402447158</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="[目录树]修改间隔布局">
+      <created>1691421234841</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1691421234841</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

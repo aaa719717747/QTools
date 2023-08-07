@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using _3Plugins.QToolsKit.UIFramework.Editor.Window.Data;
 using _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
@@ -35,8 +36,8 @@ public class PrefabTreeViewWindow : EditorWindow
 
         // 左侧窗口
         EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox],GUILayout.Width(position.width / 3));
-        leftScrollPosition = EditorGUILayout.BeginScrollView(leftScrollPosition);
-        if (GUILayout.Button("Button 1"))
+        // leftScrollPosition = EditorGUILayout.BeginScrollView(leftScrollPosition);
+        if (GUILayout.Button("Button 1",GUILayout.Height(30)))
         {
             Debug.Log("Button 1 clicked");
         }
@@ -45,7 +46,10 @@ public class PrefabTreeViewWindow : EditorWindow
 
         // 绘制搜索框
         // searchQuery = EditorGUILayout.ToolbarSearchField(searchQuery);
+        GUILayout.Label("Search Box Example", EditorStyles.boldLabel);
 
+        // 绘制搜索框
+        // searchQuery = EditorGUI.SearchField(new Rect(100,100,100,100), searchQuery);
         // 显示搜索结果
         EditorGUILayout.LabelField("Search query: " + searchQuery);
         
@@ -57,35 +61,38 @@ public class PrefabTreeViewWindow : EditorWindow
         {
             m_SimpleTreeView.OnGUI(new Rect(0, 0, position.width / 3, position.height));
         }
-        EditorGUILayout.EndScrollView();
+        // EditorGUILayout.EndScrollView();
         EditorGUILayout.EndVertical();
-      
-
-        
-        
-        
         EditorGUILayout.EndScrollView();
         EditorGUILayout.EndVertical();
 
+        
+        
         // 右侧窗口
         EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox],GUILayout.Width(position.width-(position.width / 3)));
         rightScrollPosition = EditorGUILayout.BeginScrollView(rightScrollPosition);
         // 在这里渲染按钮和文本区域
         EditorGUILayout.LabelField("Render your buttons and text areas here");
-        if (GUILayout.Button("Button 1"))
-        {
-            Debug.Log("Button 1 clicked");
-        }
-        if (GUILayout.Button("Button 2"))
-        {
-            Debug.Log("Button 2 clicked");
-        }
-        EditorGUILayout.TextArea("This is a text area");
+        
+        //渲染所有组件
+        RendererComponents();
+       
         EditorGUILayout.EndScrollView();
         EditorGUILayout.EndVertical();
 
         EditorGUILayout.EndHorizontal();
     }
+
+    private void RendererComponents()
+    {
+        for (int i = 0; i < FormWindowData.currentNodeComponents.Count; i++)
+        {
+            EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox]);
+            EditorGUILayout.LabelField(FormWindowData.currentNodeComponents[i].GetType().ToString(),this[LayoutStyle.Title]);
+            EditorGUILayout.EndVertical();
+        }
+    }
+
     // Add menu named "My Window" to the Window menu
     [MenuItem("TreeView Examples/Simple Tree Window")]
     static void ShowWindow()
