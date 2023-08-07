@@ -1,0 +1,41 @@
+Index: Assets/3Plugins/QToolsKit/UIFramework/Scripts/ViewAbstract.cs
+===================================================================
+diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Scripts/ViewAbstract.cs b/Assets/3Plugins/QToolsKit/UIFramework/Scripts/ViewAbstract.cs
+--- a/Assets/3Plugins/QToolsKit/UIFramework/Scripts/ViewAbstract.cs	
++++ b/Assets/3Plugins/QToolsKit/UIFramework/Scripts/ViewAbstract.cs	
+@@ -3,28 +3,22 @@
+ 
+ namespace _3Plugins.QToolsKit.UIFramework.Scripts
+ {
+-    public abstract class ViewAbstract<TView, TModel> : MonoBehaviour,IForm
++    public abstract class ViewAbstract<TView, TModel> : UIForm
+         where TView : BaseView
+         where TModel : BaseModel
+     {
+         public ViewEnum viewEnum;
+ 
+-        public void Bind(TView view, TModel model)
++        public ViewAbstract<TView, TModel> Bind(TView view, TModel model)
+         {
+             View = view;
+             Model = model;
++            return this;
+         }
+         public abstract TView View { get; set; }
+         public abstract TModel Model { get; set; }
+-
+-        public void OnShow()
+-        {
+-            
+-        }
+-
+-        public void OnClose()
+-        {
+-           
+-        }
++        public abstract void OnShow();
++        public abstract void OnClose();
++ 
+     }
+ }
+\ No newline at end of file

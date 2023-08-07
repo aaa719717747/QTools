@@ -9,15 +9,12 @@ using UnityEngine.Serialization;
 
 namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
 {
-    public class EditorFormWindow : EditorWindow
+    public class EditorFormWindowTest : EditorWindow
     {
         public static UIFormEditorConfig FormEditorConfig;
 
         [FormerlySerializedAs("_isFoldout")] [SerializeField]
         private bool isFoldoutDrawDirectory = true;
-
-        [FormerlySerializedAs("_isFoldoutDrawPrefab")] [SerializeField]
-        private bool isFoldoutDrawPrefab = true;
 
         private Vector2 _scrollRectDrawDirectory;
         public static UIPrefabData PrefabData = new UIPrefabData();
@@ -25,11 +22,19 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
         [FormerlySerializedAs("_isInMain")] [SerializeField]
         private bool isInMain = true;
 
-        [MenuItem("编辑器工具/UI编辑器")]
+        /*
+            * 快捷键的写法：
+               # 代表 shift  
+               & 代表  alt
+               % 代表 Ctrl
+               之后加上 大写的字母 
+            */
+
+        [MenuItem("项目工具/UI编辑器 %&Q")]
         public static void ShowWindow()
         {
             WindowInit();
-            EditorWindow.GetWindow(typeof(EditorFormWindow), false, "UI编辑器");
+            EditorWindow.GetWindow(typeof(EditorFormWindowTest), false, "UI编辑器");
         }
 
         private static void WindowInit()
@@ -61,7 +66,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                 }
 
                 GUI.backgroundColor = Color.white;
-                GUI.backgroundColor = isInMain ? Color.green : Color.white;
+                GUI.backgroundColor = !isInMain ? Color.green : Color.white;
                 if (GUILayout.Button("预制件配置", GUILayout.Height(35)))
                 {
                     isInMain = false;
@@ -77,16 +82,12 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                 }
                 else
                 {
-                    EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox]);
+                    EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
                     DrawPrefabInfo();
-                    EditorGUILayout.EndVertical();
+                    DrawGenerateNewForm();
+                    EditorGUILayout.EndHorizontal();
                 }
 
-
-                // EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox], GUILayout.Width(350));
-                // DrawGenerateNewForm();
-                // EditorGUILayout.EndVertical();
-                //
                 // EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox], GUILayout.Width(350));
                 // DrawUIFormEditorArea();
                 // EditorGUILayout.EndHorizontal();
@@ -99,7 +100,6 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
             EditorGUILayout.TextArea(
                 "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000");
         }
-
         private void DrawGenerateNewForm()
         {
             if (!string.IsNullOrEmpty(FormEditorConfig.generateParentDirectoryPath))
@@ -116,17 +116,20 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                 }
                 else
                 {
-                    GUI.backgroundColor = Color.green;
+                    GUI.backgroundColor = Color.yellow;
                     if (GUILayout.Button("生成C#代码", GUILayout.Height(35)))
                     {
-                        // EditorUtils.GenerateNewForm(FormEditorConfig);
+                        if (PrefabData.Prefab is null)
+                        {
+                            EditorUtility.DisplayDialog("警告", "UIPrefab预制件 空引用！请选择UIPrefab预制件！",
+                                "确定");
+                        }
                     }
 
                     GUI.backgroundColor = Color.white;
                 }
             }
         }
-
         private void DrawDirectory()
         {
             isFoldoutDrawDirectory = EditorGUILayout.Foldout(isFoldoutDrawDirectory, "基础配置");
@@ -149,18 +152,14 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                 EditorGUILayout.EndVertical();
             }
         }
-
         private void DrawPrefabInfo()
         {
-            isFoldoutDrawPrefab = EditorGUILayout.Foldout(isFoldoutDrawPrefab, "预制件配置");
-            if (isFoldoutDrawPrefab)
-            {
-                EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox]);
-                PrefabData.Prefab =
-                    (GameObject)EditorGUILayout.ObjectField("预制件:", PrefabData.Prefab, typeof(GameObject));
-                EditorGUILayout.EndVertical();
-            }
+            EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
+            PrefabData.Prefab =
+                (GameObject)EditorGUILayout.ObjectField("UIPrefab预制件:", PrefabData.Prefab, typeof(GameObject));
+            EditorGUILayout.EndHorizontal();
         }
+        
 
         /// <summary>
         /// 文字样式索引
