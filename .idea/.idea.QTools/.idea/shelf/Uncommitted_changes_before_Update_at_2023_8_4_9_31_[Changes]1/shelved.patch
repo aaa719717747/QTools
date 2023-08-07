@@ -1,0 +1,283 @@
+Index: Assets/3Plugins/QToolsKit/UIFramework/Sample/LoginForm.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Sample/LoginForm.cs b/Assets/3Plugins/QToolsKit/UIFramework/Sample/LoginForm.cs
+--- a/Assets/3Plugins/QToolsKit/UIFramework/Sample/LoginForm.cs	
++++ b/Assets/3Plugins/QToolsKit/UIFramework/Sample/LoginForm.cs	
+@@ -6,6 +6,14 @@
+     {
+         public override LoginView View { get; set; }
+         public override LoginModel Model { get; set; }
+-        
++        public override void OnShow()
++        {
++            
++        }
++
++        public override void OnClose()
++        {
++            
++        }
+     }
+ }
+\ No newline at end of file
+Index: Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs b/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs
+--- a/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs	
++++ b/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs	
+@@ -9,37 +9,14 @@
+ {
+     public class UIManager : MonoBehaviour
+     {
+-        private Dictionary<ViewEnum, IForm> _forms = new Dictionary<ViewEnum, IForm>();
++        private Dictionary<ViewEnum, UIForm> _forms =
++            new Dictionary<ViewEnum, UIForm>();
+ 
+         private void Start()
+         {
+             //初始化
+             AssetBundleLoaderMgr.instance.Init();
+-            TestInstance();
+-        }
+-
+-        public void LoadUIPrefabs()
+-        {
+         }
+-
+-
+-        public void TestInstance()
+-        {
+-            Profiler.BeginSample("##################22222222####################");
+-            GameObject prefab =
+-                AssetBundleLoaderMgr.instance.LoadAsset<GameObject>("ui/prefabs/maincitypanel", "MainCityView");
+-            for (int i = 0; i < 100; i++)
+-            {
+-                //实例化预设
+-                GameObject go = Instantiate(prefab, transform);
+-                go.hideFlags = HideFlags.HideInHierarchy;
+-                Destroy(go);
+-            }
+-
+-            Profiler.EndSample();
+-        }
+-
+-
+         public void InitViewPanels()
+         {
+             //加载预设
+@@ -47,11 +24,12 @@
+                 AssetBundleLoaderMgr.instance.LoadAsset<GameObject>("ui/prefabs/maincitypanel", "MainCityView");
+             //实例化预设
+             GameObject go = Instantiate(prefab, transform);
+-            LoginForm uiForm = go.GetComponent<LoginForm>();
+-            uiForm.Bind(
++            UIForm uiForm = go.GetComponent<UIForm>();
++            uiForm
++                .Bind(
+                 new LoginView(),
+-                new LoginModel());
+-            uiForm.viewEnum = ViewEnum.LOGIN;
++                new LoginModel())
++                .viewEnum= ViewEnum.LOGIN;
+             _forms.Add(ViewEnum.LOGIN, uiForm);
+         }
+ 
+Index: Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs
+===================================================================
+diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs b/Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs
+deleted file mode 100644
+--- a/Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs	
++++ /dev/null	
+@@ -1,8 +0,0 @@
+-namespace _3Plugins.QToolsKit.UIFramework.Scripts
+-{
+-    public interface IForm
+-    {
+-       public abstract void OnShow();
+-       public abstract void OnClose();
+-    }
+-}
+\ No newline at end of file
+Index: Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs.meta
+===================================================================
+diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs.meta b/Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs.meta
+deleted file mode 100644
+--- a/Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs.meta	
++++ /dev/null	
+@@ -1,3 +0,0 @@
+-fileFormatVersion: 2
+-guid: 62cff164328f4245ac69b02474505df4
+-timeCreated: 1691033731
+\ No newline at end of file
+Index: .idea/.idea.QTools/.idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.idea.QTools/.idea/workspace.xml b/.idea/.idea.QTools/.idea/workspace.xml
+--- a/.idea/.idea.QTools/.idea/workspace.xml	
++++ b/.idea/.idea.QTools/.idea/workspace.xml	
+@@ -2,13 +2,16 @@
+ <project version="4">
+   <component name="ChangeListManager">
+     <list default="true" id="ebb0ebae-187f-42f0-bae6-eabc873a3dba" name="Changes" comment="uiframe1">
+-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Sample/LoginForm.cs" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Sample/LoginForm.cs.meta" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs.meta" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Config.meta" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor.meta" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/UIFormEditor.cs" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/UIFormEditor.cs.meta" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIForm.cs" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIForm.cs.meta" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/FormUI.cs" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/FormUI.cs.meta" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Sample/LoginForm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Sample/LoginForm.cs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs.meta" beforeDir="false" />
+       <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/ViewAbstract.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/ViewAbstract.cs" afterDir="false" />
+     </list>
+@@ -17,6 +20,9 @@
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+     <option name="LAST_RESOLUTION" value="IGNORE" />
+   </component>
++  <component name="Git.Settings">
++    <option name="UPDATE_TYPE" value="REBASE" />
++  </component>
+   <component name="HighlightingSettingsPerFile">
+     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/df0aaee1feac4b8084d0040846eee8d415a400/0f/7c610971/UnityAction.cs" root0="SKIP_HIGHLIGHTING" />
+     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/df0aaee1feac4b8084d0040846eee8d415a400/2f/01258e9a/GameObject.cs" root0="SKIP_HIGHLIGHTING" />
+@@ -102,6 +108,7 @@
+       <updated>1690793543067</updated>
+       <workItem from="1690793564514" duration="27229000" />
+       <workItem from="1691032661307" duration="2979000" />
++      <workItem from="1691050539590" duration="6132000" />
+     </task>
+     <task id="LOCAL-00001" summary="uiframe1.co">
+       <created>1691028022497</created>
+Index: Assets/3Plugins/QToolsKit/UIFramework/Editor.meta
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Editor.meta b/Assets/3Plugins/QToolsKit/UIFramework/Editor.meta
+new file mode 100644
+--- /dev/null	
++++ b/Assets/3Plugins/QToolsKit/UIFramework/Editor.meta	
+@@ -0,0 +1,3 @@
++fileFormatVersion: 2
++guid: c99a99a90d2249e8b04439b4fbfbc50e
++timeCreated: 1691054147
+\ No newline at end of file
+Index: Assets/3Plugins/QToolsKit/UIFramework/Config.meta
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Config.meta b/Assets/3Plugins/QToolsKit/UIFramework/Config.meta
+new file mode 100644
+--- /dev/null	
++++ b/Assets/3Plugins/QToolsKit/UIFramework/Config.meta	
+@@ -0,0 +1,3 @@
++fileFormatVersion: 2
++guid: 39ccf2cee74c48a9af9c8ff4e5e903c8
++timeCreated: 1691054472
+\ No newline at end of file
+Index: Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIForm.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIForm.cs b/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIForm.cs
+new file mode 100644
+--- /dev/null	
++++ b/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIForm.cs	
+@@ -0,0 +1,12 @@
++using UnityEngine;
++
++namespace _3Plugins.QToolsKit.UIFramework.Scripts
++{
++    /// <summary>
++    /// 
++    /// </summary>
++    public class UIForm: MonoBehaviour
++    {
++        
++    }
++}
+\ No newline at end of file
+Index: Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIForm.cs.meta
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIForm.cs.meta b/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIForm.cs.meta
+new file mode 100644
+--- /dev/null	
++++ b/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIForm.cs.meta	
+@@ -0,0 +1,3 @@
++fileFormatVersion: 2
++guid: e7e8bc8b09124ee9ad94c939fa4b326a
++timeCreated: 1691053854
+\ No newline at end of file
+Index: Assets/3Plugins/QToolsKit/UIFramework/Editor/UIFormEditor.cs.meta
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Editor/UIFormEditor.cs.meta b/Assets/3Plugins/QToolsKit/UIFramework/Editor/UIFormEditor.cs.meta
+new file mode 100644
+--- /dev/null	
++++ b/Assets/3Plugins/QToolsKit/UIFramework/Editor/UIFormEditor.cs.meta	
+@@ -0,0 +1,3 @@
++fileFormatVersion: 2
++guid: b879721d20684fe9bb9c2f13fab83c05
++timeCreated: 1691054155
+\ No newline at end of file
+Index: Assets/3Plugins/QToolsKit/UIFramework/Editor/UIFormEditor.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Editor/UIFormEditor.cs b/Assets/3Plugins/QToolsKit/UIFramework/Editor/UIFormEditor.cs
+new file mode 100644
+--- /dev/null	
++++ b/Assets/3Plugins/QToolsKit/UIFramework/Editor/UIFormEditor.cs	
+@@ -0,0 +1,27 @@
++using _3Plugins.QToolsKit.UIFramework.Scripts;
++using UnityEditor;
++using UnityEngine;
++using UnityEngine.Serialization;
++
++namespace _3Plugins.QToolsKit.UIFramework.Editor
++{
++    [CustomEditor(typeof(UIForm))]
++    public class UIFormEditor : UnityEditor.Editor
++    {
++        private UIForm _form;
++        public override void OnInspectorGUI()
++        {
++            _form = target as UIForm;
++            
++            EditorGUILayout.Space(5);
++
++            EditorGUILayout.BeginVertical();
++            if (GUILayout.Button("×", GUILayout.Width(20), GUILayout.Height(20)))
++            {
++              
++            }
++
++            EditorGUILayout.EndVertical();
++        }
++    }
++}
+\ No newline at end of file
