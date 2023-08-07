@@ -17,7 +17,7 @@ public class PrefabTreeViewWindow : EditorWindow
     private Vector2 leftScrollPosition;
     private Vector2 treeviewScrollPosition;
     private Vector2 rightScrollPosition;
-
+    private string searchQuery = "";
     void OnEnable()
     {
         // Check whether there is already a serialized view state (state 
@@ -36,7 +36,20 @@ public class PrefabTreeViewWindow : EditorWindow
         // 左侧窗口
         EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox],GUILayout.Width(position.width / 3));
         leftScrollPosition = EditorGUILayout.BeginScrollView(leftScrollPosition);
-       
+        if (GUILayout.Button("Button 1"))
+        {
+            Debug.Log("Button 1 clicked");
+        }
+        
+        EditorGUILayout.LabelField("Search Field Example", EditorStyles.boldLabel);
+
+        // 绘制搜索框
+        searchQuery = EditorGUILayout.ToolbarSearchField(searchQuery);
+
+        // 显示搜索结果
+        EditorGUILayout.LabelField("Search query: " + searchQuery);
+        
+        
         EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox],GUILayout.Width(position.width / 3));
         treeviewScrollPosition= EditorGUILayout.BeginScrollView(leftScrollPosition);
         // 在这里渲染目录树
@@ -44,8 +57,9 @@ public class PrefabTreeViewWindow : EditorWindow
         {
             m_SimpleTreeView.OnGUI(new Rect(0, 0, position.width / 3, position.height));
         }
-        EditorGUILayout.EndVertical();
         EditorGUILayout.EndScrollView();
+        EditorGUILayout.EndVertical();
+      
 
         
         
