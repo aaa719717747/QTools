@@ -44,7 +44,7 @@ public class PrefabTreeViewWindow : EditorWindow
         EditorGUILayout.LabelField("Search Field Example", EditorStyles.boldLabel);
 
         // 绘制搜索框
-        searchQuery = EditorGUILayout.ToolbarSearchField(searchQuery);
+        // searchQuery = EditorGUILayout.ToolbarSearchField(searchQuery);
 
         // 显示搜索结果
         EditorGUILayout.LabelField("Search query: " + searchQuery);
