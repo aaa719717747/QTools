@@ -15,6 +15,7 @@ public class PrefabTreeViewWindow : EditorWindow
     PrefabTreeView m_SimpleTreeView;
     
     private Vector2 leftScrollPosition;
+    private Vector2 treeviewScrollPosition;
     private Vector2 rightScrollPosition;
 
     void OnEnable()
@@ -37,22 +38,18 @@ public class PrefabTreeViewWindow : EditorWindow
         leftScrollPosition = EditorGUILayout.BeginScrollView(leftScrollPosition);
        
         EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox],GUILayout.Width(position.width / 3));
+        treeviewScrollPosition= EditorGUILayout.BeginScrollView(leftScrollPosition);
         // 在这里渲染目录树
         if (m_SimpleTreeView != null)
         {
             m_SimpleTreeView.OnGUI(new Rect(0, 0, position.width / 3, position.height));
         }
         EditorGUILayout.EndVertical();
+        EditorGUILayout.EndScrollView();
+
         
-        // if (GUILayout.Button("Button 1"))
-        // {
-        //     Debug.Log("Button 1 clicked");
-        // }
-        // if (GUILayout.Button("Button 2"))
-        // {
-        //     Debug.Log("Button 2 clicked");
-        // }
-        // EditorGUILayout.LabelField("Render your directory tree here");
+        
+        
         EditorGUILayout.EndScrollView();
         EditorGUILayout.EndVertical();
 
