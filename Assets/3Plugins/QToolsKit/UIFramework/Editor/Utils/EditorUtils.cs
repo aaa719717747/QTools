@@ -1,7 +1,9 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using _3Plugins.QToolsKit.UIFramework.Editor.Configs.Scripts;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace _3Plugins.QToolsKit.UIFramework.Editor.Utils
 {
@@ -10,7 +12,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Utils
         /// <summary>
         /// 生成新的Form模块
         /// </summary>
-        public static void GenerateNewForm(string formName,UIFormEditorConfig config)
+        public static void GenerateNewForm(string formName, UIFormEditorConfig config)
         {
             //应该先检查删除原文件夹
             //加载模板
@@ -49,6 +51,30 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Utils
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }
-       
+
+        public static bool IsHavaTypeImageComponent(Component[] components)
+        {
+            foreach (Component VARIABLE in components)
+            {
+                if (VARIABLE is Image)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+        public static bool IsHavaTypeTextComponent(Component[] components)
+        {
+            foreach (Component VARIABLE in components)
+            {
+                if (VARIABLE is Text)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using _3Plugins.QToolsKit.UIFramework.Editor.Utils;
 using _3Plugins.QToolsKit.UIFramework.Editor.Window.Data;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
 {
@@ -63,17 +63,49 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
             base.RowGUI(args);
 
             // 获取你想要显示的图标
-            Texture2D icon = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/3Plugins/LanguageLocalizationHelper/Editor/Textures/text.jpg");
+            Texture2D iconText =
+                AssetDatabase.LoadAssetAtPath<Texture2D>(
+                    "Assets/3Plugins/LanguageLocalizationHelper/Editor/Textures/text.jpg");
+            Texture2D iconImage =
+                AssetDatabase.LoadAssetAtPath<Texture2D>(
+                    "Assets/3Plugins/LanguageLocalizationHelper/Editor/Textures/image.jpg");
 
-            if (icon != null)
+            GameObject target = null;
+            string path = GetGameObjectNameFromTreeViewItem(args.item);
+            string rootName = Prefab.name;
+            if (path.Equals(rootName))
             {
+                target = Prefab.gameObject;
+            }
+            else
+            {
+                target = Prefab.transform.Find(path).gameObject;
+            }
+
+            Component[] components = target.GetComponents<Component>();
+
+            int num = 0;
+            if (EditorUtils.IsHavaTypeImageComponent(components))
+            {
+                num++;
                 // 计算图标的位置
                 Rect iconRect = new Rect(args.rowRect);
-                iconRect.x+=250; // 10是图标和行末尾的间距
-                iconRect.width = 15;//icon.width;
-                iconRect.height = 15;//icon.height;
+                iconRect.x += (230+(num*20)); // 10是图标和行末尾的间距
+                iconRect.width = 15; //icon.width;
+                iconRect.height = 15; //icon.height;
                 // 绘制图标
-                GUI.DrawTexture(iconRect, icon);
+                GUI.DrawTexture(iconRect, iconImage);
+            }
+            if (EditorUtils.IsHavaTypeTextComponent(components))
+            {
+                num++;
+                // 计算图标的位置
+                Rect iconRect = new Rect(args.rowRect);
+                iconRect.x += (230+(num*20)); // 10是图标和行末尾的间距
+                iconRect.width = 15; //icon.width;
+                iconRect.height = 15; //icon.height;
+                // 绘制图标
+                GUI.DrawTexture(iconRect, iconText);
             }
         }
 
@@ -83,11 +115,13 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
         /// <param name="id"></param>
         protected override void SingleClickedItem(int id)
         {
+            Debug.Log(id);
             GameObject target = null;
             base.SingleClickedItem(id);
 
             TreeViewItem clickedItem = FindItem(id, rootItem);
 
+            Debug.Log();
             if (clickedItem != null)
             {
                 string path = GetGameObjectNameFromTreeViewItem(clickedItem);
@@ -95,19 +129,20 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
                 if (path.Equals(rootName))
                 {
                     target = Prefab.gameObject;
-                }else
+                }
+                else
                 {
                     //第二节点
-                    target= Prefab.transform.Find(path).gameObject;
+                    target = Prefab.transform.Find(path).gameObject;
                 }
-                
-                Component[] components =  target.GetComponents<Component>();
+
+                Component[] components = target.GetComponents<Component>();
 
                 FormWindowData.UpdateNodeComponentsList(components.ToList());
             }
         }
 
-        
+
         /// <summary>
         /// 获取点击节点名称根据id
         /// </summary>
@@ -134,8 +169,6 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
             string gameObjectName = string.Join("/", path);
             return gameObjectName;
         }
-     
-
         
     }
 }
