@@ -87,21 +87,23 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
             int num = 0;
             if (EditorUtils.IsHavaTypeImageComponent(components))
             {
+               
                 num++;
                 // 计算图标的位置
                 Rect iconRect = new Rect(args.rowRect);
-                iconRect.x += (230+(num*20)); // 10是图标和行末尾的间距
+                iconRect.x += (230 + (num * 20)); // 10是图标和行末尾的间距
                 iconRect.width = 15; //icon.width;
                 iconRect.height = 15; //icon.height;
                 // 绘制图标
                 GUI.DrawTexture(iconRect, iconImage);
             }
+
             if (EditorUtils.IsHavaTypeTextComponent(components))
             {
                 num++;
                 // 计算图标的位置
                 Rect iconRect = new Rect(args.rowRect);
-                iconRect.x += (230+(num*20)); // 10是图标和行末尾的间距
+                iconRect.x += (230 + (num * 20)); // 10是图标和行末尾的间距
                 iconRect.width = 15; //icon.width;
                 iconRect.height = 15; //icon.height;
                 // 绘制图标
@@ -121,7 +123,6 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
 
             TreeViewItem clickedItem = FindItem(id, rootItem);
 
-            Debug.Log();
             if (clickedItem != null)
             {
                 string path = GetGameObjectNameFromTreeViewItem(clickedItem);
@@ -138,7 +139,8 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
 
                 Component[] components = target.GetComponents<Component>();
 
-                FormWindowData.UpdateNodeComponentsList(components.ToList());
+                FormWindowData.m_nowClikComponent = components[0];
+                FormWindowData.m_UpdateNodeComponentsList(components.ToList());
             }
         }
 
@@ -169,6 +171,5 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
             string gameObjectName = string.Join("/", path);
             return gameObjectName;
         }
-        
     }
 }

@@ -20,6 +20,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Scripts
             //初始化
             AssetBundleLoaderMgr.instance.Init();
             InitViewPanels();
+           
         }
 
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using _3Plugins.QToolsKit.UIFramework.Editor.Utils;
 using _3Plugins.QToolsKit.UIFramework.Editor.Window.Data;
 using _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView;
 using UnityEditor;
@@ -16,6 +17,10 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
         private Vector2 leftScrollPosition;
         private Vector2 treeviewScrollPosition;
         private Vector2 rightScrollPosition;
+        private Vector2 rightEventScrollPosition;
+
+       
+        private bool isSelect;
 
         private string searchQuery = "";
         /*
@@ -29,16 +34,13 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
         [MenuItem("项目工具/UI编辑器 %&Q")]
         static void ShowWindow()
         {
-            // Get existing open window or if none, make a new one:
             var window = GetWindow<PrefabTreeViewWindow>();
-            window.titleContent = new GUIContent("My Window");
+            window.titleContent = new GUIContent("UI编辑器");
             window.Show();
         }
 
         void OnEnable()
         {
-            // Check whether there is already a serialized view state (state 
-            // that survived assembly reloading)
             if (m_TreeViewState == null)
                 m_TreeViewState = new TreeViewState();
 
@@ -48,18 +50,79 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
 
         private void OnGUI()
         {
+            //顶部按钮
+            DrawTopMenuBtnsGUI();
             EditorGUILayout.BeginHorizontal();
-
             // 左侧窗口
-            EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox], GUILayout.Width(position.width / 3));
-            // leftScrollPosition = EditorGUILayout.BeginScrollView(leftScrollPosition);
-            // EditorGUILayout.ObjectField()
-            if (GUILayout.Button("定位", GUILayout.Height(20)))
+            DrawLeftTreeViewWindowGUI();
+            // 右侧窗口
+            EditorGUILayout.BeginVertical();
+            DrawDrawRightWindow_ComponentsGUI();
+            DrawDrawRightWindow_EventGUI();
+            EditorGUILayout.EndVertical();
+            EditorGUILayout.EndHorizontal();
+        }
+
+        /// <summary>
+        /// 右侧组件列表
+        /// </summary>
+        private void DrawDrawRightWindow_ComponentsGUI()
+        {
+            EditorGUILayout.LabelField("组件绑定列表");
+            EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox],
+                GUILayout.Width(position.width - (position.width / 3)));
+            rightScrollPosition = EditorGUILayout.BeginScrollView(rightScrollPosition);
+            //渲染所有组件
+            RendererComponents();
+
+            EditorGUILayout.EndScrollView();
+            EditorGUILayout.EndVertical();
+        }
+        private void DrawDrawRightWindow_EventGUI()
+        {
+            EditorGUILayout.LabelField("事件绑定列表");
+            EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox],
+                GUILayout.Width(position.width - (position.width / 3)));
+            rightEventScrollPosition = EditorGUILayout.BeginScrollView(rightEventScrollPosition);
+
+            //渲染对应组件事件
+            RendererComponentEvents();
+
+            EditorGUILayout.EndScrollView();
+            EditorGUILayout.EndVertical();
+        }
+        /// <summary>
+        /// 顶部按钮
+        /// </summary>
+        private void DrawTopMenuBtnsGUI()
+        {
+            EditorGUILayout.BeginHorizontal();
+            if (GUILayout.Button("基础配置", GUILayout.Height(23)))
             {
                 Debug.Log("Button 1 clicked");
             }
 
-            EditorGUILayout.LabelField("Search Field Example", EditorStyles.boldLabel);
+            if (GUILayout.Button("预制件配置", GUILayout.Height(23)))
+            {
+                Debug.Log("Button 1 clicked");
+            }
+
+            EditorGUILayout.EndHorizontal();
+        }
+
+        /// <summary>
+        /// 左侧目录树
+        /// </summary>
+        private void DrawLeftTreeViewWindowGUI()
+        {
+            // 左侧窗口
+            EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox], GUILayout.Width(position.width / 3));
+            if (GUILayout.Button("导出为C#代码", GUILayout.Height(30)))
+            {
+                Debug.Log("Button 1 clicked");
+            }
+
+            FormWindowData.m_targetPrefab = (GameObject)EditorGUILayout.ObjectField("目录树", FormWindowData.m_targetPrefab, typeof(GameObject));
 
             // 绘制搜索框
             // searchQuery = EditorGUILayout.ToolbarSearchField(searchQuery);
@@ -67,7 +130,6 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
             // 绘制搜索框
             // searchQuery = EditorGUI.SearchField(new Rect(100,100,100,100), searchQuery);
             // 显示搜索结果
-
 
             EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox], GUILayout.Width(position.width / 3));
             treeviewScrollPosition = EditorGUILayout.BeginScrollView(leftScrollPosition);
@@ -81,37 +143,50 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
             EditorGUILayout.EndVertical();
             EditorGUILayout.EndScrollView();
             EditorGUILayout.EndVertical();
-
-
-            // 右侧窗口
-            EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox],
-                GUILayout.Width(position.width - (position.width / 3)));
-            rightScrollPosition = EditorGUILayout.BeginScrollView(rightScrollPosition);
-            // 在这里渲染按钮和文本区域
-            EditorGUILayout.LabelField("控件&事件绑定");
-
-            //渲染所有组件
-            RendererComponents();
-
-            EditorGUILayout.EndScrollView();
-            EditorGUILayout.EndVertical();
-
-            EditorGUILayout.EndHorizontal();
         }
 
-        private bool isSelect;
 
+        private void RendererComponentEvents()
+        {
+            if(FormWindowData.m_nowClikComponent is null)return;
+            EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox]);
+            EditorGUILayout.BeginHorizontal(GUILayout.ExpandWidth(true));
+            if (FormWindowData.m_nowClikComponent is RectTransform)
+            {
+                EditorGUILayout.LabelField("Transfrom");
+                EditorGUILayout.TextField("Transfrom_rf");
+                EditorGUILayout.Toggle(true);
+            }
+            else if (FormWindowData.m_nowClikComponent is Text)
+            {
+                EditorGUILayout.LabelField("RectTransfrom");
+                EditorGUILayout.TextField("Transfrom_rf");
+                EditorGUILayout.Toggle(true);
+            }else if (FormWindowData.m_nowClikComponent is Image)
+            {
+                EditorGUILayout.LabelField("RectTransfrom");
+                EditorGUILayout.TextField("Transfrom_rf");
+                EditorGUILayout.Toggle(true);
+            }else if (FormWindowData.m_nowClikComponent is Button)
+            {
+                EditorGUILayout.LabelField("RectTransfrom");
+                EditorGUILayout.TextField("Transfrom_rf");
+                EditorGUILayout.Toggle(true);
+            }
+            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.EndVertical();
+        }
+
+        /// <summary>
+        /// 渲染组件列表
+        /// </summary>
         private void RendererComponents()
         {
-            for (int i = 0; i < FormWindowData.currentNodeComponents.Count; i++)
+            for (int i = 0; i < FormWindowData.m_currentNodeComponents.Count; i++)
             {
-                Component _type = FormWindowData.currentNodeComponents[i];
+                Component _type = FormWindowData.m_currentNodeComponents[i];
                 string componmentName = String.Empty;
-                if (_type is RectTransform)
-                {
-                    componmentName = "RectTransform";
-                }
-                else if (_type is Image)
+                 if (_type is Image)
                 {
                     componmentName = "Image";
                 }
@@ -134,26 +209,21 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                 else if (_type is Slider)
                 {
                     componmentName = "Slider";
-                } else if (_type is InputField)
+                }
+                else if (_type is InputField)
                 {
                     componmentName = "InputField";
                 }
 
                 if (!string.IsNullOrEmpty(componmentName))
                 {
-                    GUI.backgroundColor = Color.yellow;
                     EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox]);
                     EditorGUILayout.BeginHorizontal(GUILayout.ExpandWidth(true));
 
-// LabelField
-                    EditorGUILayout.LabelField(componmentName, GUILayout.ExpandWidth(true));
-
-// TextField    
-                    EditorGUILayout.TextField("Btn_rf", GUILayout.ExpandWidth(true));
-
-// Toggle
-                    GUI.backgroundColor = Color.yellow;
-                    isSelect = EditorGUILayout.Toggle(isSelect);
+                    if (GUILayout.Button(componmentName,GUILayout.Width(120)))
+                    {
+                        FormWindowData.m_nowClikComponent = _type;
+                    }
                     EditorGUILayout.EndHorizontal();
                     EditorGUILayout.EndVertical();
                 }

@@ -3,16 +3,25 @@ using UnityEngine;
 
 namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
 {
-    public  class FormWindowData
+    public static class FormWindowData
     {
-        [Header("生成UIFrom代码的存放父级目录")]
-        public string generateParentDirectoryPath;
-        public static List<Component> currentNodeComponents = new List<Component>();
-
-        public static void UpdateNodeComponentsList(List<Component> components)
+        //临时变量
+        public static GameObject m_targetPrefab;
+        public static Component m_nowClikComponent;
+        public static List<Component> m_currentNodeComponents = new List<Component>();
+        
+        public static void m_UpdateNodeComponentsList(List<Component> components)
         {
-            currentNodeComponents.Clear();
-            currentNodeComponents = components;
+            m_currentNodeComponents.Clear();
+            m_currentNodeComponents = components;
         }
+        
+        
+        
+        
+        //持久化数据
+        public static PrefabCacheData PrefabData { get; set; }
+        public static GlobalUIWindowData WindowData { get; set; }
+
     }
 }
