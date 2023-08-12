@@ -1,0 +1,2304 @@
+Index: Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/TreeView/PrefabTreeView.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using System.Collections.Generic;\r\nusing System.Linq;\r\nusing _3Plugins.QToolsKit.UIFramework.Editor.Window.Data;\r\nusing UnityEditor;\r\nusing UnityEditor.IMGUI.Controls;\r\nusing UnityEngine;\r\nusing UnityEngine.UI;\r\n\r\nnamespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView\r\n{\r\n    public class PrefabTreeView : UnityEditor.IMGUI.Controls.TreeView\r\n    {\r\n        public GameObject Prefab { get; set; }\r\n\r\n        public PrefabTreeView(TreeViewState treeViewState, GameObject prefab)\r\n            : base(treeViewState)\r\n        {\r\n            Prefab = prefab;\r\n            Reload();\r\n        }\r\n\r\n        protected override TreeViewItem BuildRoot()\r\n        {\r\n            var root = new TreeViewItem { id = 0, depth = -1, displayName = \"Root\" };\r\n            List<TreeViewItem> allItems = new List<TreeViewItem> { root };\r\n\r\n            if (Prefab != null)\r\n            {\r\n                var topLevelNode = new TreeViewItem { id = 1, depth = 0, displayName = Prefab.name, parent = root };\r\n                root.children = new List<TreeViewItem> { topLevelNode };\r\n                allItems.Add(topLevelNode);\r\n\r\n                int id = 2;\r\n                TraverseTransform(Prefab.transform, 1, ref allItems, ref id, topLevelNode);\r\n            }\r\n            else\r\n            {\r\n                allItems.Add(new TreeViewItem { id = 1, depth = 0, displayName = \"No Prefab Selected\" });\r\n            }\r\n\r\n            return root;\r\n        }\r\n\r\n        private void TraverseTransform(Transform parent, int depth, ref List<TreeViewItem> items, ref int id,\r\n            TreeViewItem parentNode = null)\r\n        {\r\n            foreach (Transform child in parent)\r\n            {\r\n                var item = new TreeViewItem { id = id++, depth = depth, displayName = child.name, parent = parentNode };\r\n                items.Add(item);\r\n                if (parentNode != null)\r\n                {\r\n                    parentNode.children = parentNode.children ?? new List<TreeViewItem>();\r\n                    parentNode.children.Add(item);\r\n                }\r\n\r\n                TraverseTransform(child, depth + 1, ref items, ref id, item);\r\n            }\r\n        }\r\n\r\n        protected override void RowGUI(RowGUIArgs args)\r\n        {\r\n            base.RowGUI(args);\r\n\r\n            // 获取你想要显示的图标\r\n            Texture2D icon = AssetDatabase.LoadAssetAtPath<Texture2D>(\"Assets/3Plugins/LanguageLocalizationHelper/Editor/Textures/text.jpg\");\r\n\r\n            if (icon != null)\r\n            {\r\n                // 计算图标的位置\r\n                Rect iconRect = new Rect(args.rowRect);\r\n                iconRect.x+=250; // 10是图标和行末尾的间距\r\n                iconRect.width = 15;//icon.width;\r\n                iconRect.height = 15;//icon.height;\r\n                // 绘制图标\r\n                GUI.DrawTexture(iconRect, icon);\r\n            }\r\n        }\r\n\r\n        /// <summary>\r\n        /// 点击子叶节点事件\r\n        /// </summary>\r\n        /// <param name=\"id\"></param>\r\n        protected override void SingleClickedItem(int id)\r\n        {\r\n            GameObject target = null;\r\n            base.SingleClickedItem(id);\r\n\r\n            TreeViewItem clickedItem = FindItem(id, rootItem);\r\n\r\n            if (clickedItem != null)\r\n            {\r\n                string path = GetGameObjectNameFromTreeViewItem(clickedItem);\r\n                string rootName = Prefab.name;\r\n                if (path.Equals(rootName))\r\n                {\r\n                    target = Prefab.gameObject;\r\n                }else\r\n                {\r\n                    //第二节点\r\n                    target= Prefab.transform.Find(path).gameObject;\r\n                }\r\n                \r\n                Component[] components =  target.GetComponents<Component>();\r\n\r\n                FormWindowData.UpdateNodeComponentsList(components.ToList());\r\n            }\r\n        }\r\n\r\n        \r\n        /// <summary>\r\n        /// 获取点击节点名称根据id\r\n        /// </summary>\r\n        /// <param name=\"item\"></param>\r\n        /// <returns></returns>\r\n        private string GetGameObjectNameFromTreeViewItem(TreeViewItem item)\r\n        {\r\n            if (item.depth == 0) // Top-level item\r\n            {\r\n                return item.displayName; // This is the prefab's root GameObject\r\n            }\r\n\r\n            // Traverse up the tree to find the root GameObject's children\r\n            List<string> path = new List<string>();\r\n            TreeViewItem currentItem = item;\r\n            while (currentItem.depth > 0)\r\n            {\r\n                path.Insert(0, currentItem.displayName);\r\n                currentItem = currentItem.parent;\r\n            }\r\n\r\n            // Now you have the path from the root to the clicked GameObject\r\n            // Build the full GameObject name using the path\r\n            string gameObjectName = string.Join(\"/\", path);\r\n            return gameObjectName;\r\n        }\r\n     \r\n\r\n        \r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/TreeView/PrefabTreeView.cs b/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/TreeView/PrefabTreeView.cs
+--- a/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/TreeView/PrefabTreeView.cs	(revision 0163e7fca090dffcb866f9caa3accedf9adc74f7)
++++ b/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/TreeView/PrefabTreeView.cs	(date 1691765037413)
+@@ -63,15 +63,17 @@
+             base.RowGUI(args);
+ 
+             // 获取你想要显示的图标
+-            Texture2D icon = AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/3Plugins/LanguageLocalizationHelper/Editor/Textures/text.jpg");
++            Texture2D icon =
++                AssetDatabase.LoadAssetAtPath<Texture2D>(
++                    "Assets/3Plugins/LanguageLocalizationHelper/Editor/Textures/text.jpg");
+ 
+             if (icon != null)
+             {
+                 // 计算图标的位置
+                 Rect iconRect = new Rect(args.rowRect);
+-                iconRect.x+=250; // 10是图标和行末尾的间距
+-                iconRect.width = 15;//icon.width;
+-                iconRect.height = 15;//icon.height;
++                iconRect.x += 250; // 10是图标和行末尾的间距
++                iconRect.width = 15; //icon.width;
++                iconRect.height = 15; //icon.height;
+                 // 绘制图标
+                 GUI.DrawTexture(iconRect, icon);
+             }
+@@ -95,19 +97,20 @@
+                 if (path.Equals(rootName))
+                 {
+                     target = Prefab.gameObject;
+-                }else
++                }
++                else
+                 {
+                     //第二节点
+-                    target= Prefab.transform.Find(path).gameObject;
++                    target = Prefab.transform.Find(path).gameObject;
+                 }
+-                
+-                Component[] components =  target.GetComponents<Component>();
++
++                Component[] components = target.GetComponents<Component>();
+ 
+                 FormWindowData.UpdateNodeComponentsList(components.ToList());
+             }
+         }
+ 
+-        
++
+         /// <summary>
+         /// 获取点击节点名称根据id
+         /// </summary>
+@@ -134,8 +137,5 @@
+             string gameObjectName = string.Join("/", path);
+             return gameObjectName;
+         }
+-     
+-
+-        
+     }
+ }
+\ No newline at end of file
+Index: .idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_3_19_21_[Changes]1/shelved.patch
+===================================================================
+diff --git a/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_3_19_21_[Changes]1/shelved.patch b/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_3_19_21_[Changes]1/shelved.patch
+deleted file mode 100644
+--- a/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_3_19_21_[Changes]1/shelved.patch	(revision 0163e7fca090dffcb866f9caa3accedf9adc74f7)
++++ /dev/null	(revision 0163e7fca090dffcb866f9caa3accedf9adc74f7)
+@@ -1,1334 +0,0 @@
+-Index: Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs b/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs
+---- a/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs	
+-+++ b/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs	
+-@@ -1,17 +1,30 @@
+-+using QToolsKit.Loader;
+- using UnityEngine;
+- 
+- namespace QToolsKit.UIFramework.Scripts
+- {
+-     public class UIManager : MonoBehaviour
+-     {
+--        // Start is called before the first frame update
+-+        private GameObject m_maincitypanel;
+-+        private GameObject m_sampleview;
+-+
+-         void Start()
+-         {
+-+            AssetBundleLoaderMgr.instance.Init();
+-+            
+-+            m_maincitypanel =
+-+                AssetBundleLoaderMgr.instance.LoadAsset<GameObject>("ui/prefabs/maincitypanel", "MainCityView");
+-+            m_sampleview = AssetBundleLoaderMgr.instance.LoadAsset<GameObject>("ui/prefabs/sampleview", "SampleView");
+-         }
+- 
+--        // Update is called once per frame
+-         void Update()
+-         {
+-+            if (Input.GetKeyDown(KeyCode.Space))
+-+            {
+-+                
+-+                Instantiate(m_maincitypanel,transform);
+-+                Instantiate(m_sampleview,transform);
+-+            }
+-         }
+-     }
+- }
+-\ No newline at end of file
+-Index: Assets/3Plugins/QToolsKit/UIFramework/Sample.meta
+-===================================================================
+-diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Sample.meta b/Assets/3Plugins/QToolsKit/UIFramework/Sample.meta
+-deleted file mode 100644
+---- a/Assets/3Plugins/QToolsKit/UIFramework/Sample.meta	
+-+++ /dev/null	
+-@@ -1,8 +0,0 @@
+--fileFormatVersion: 2
+--guid: 6772dd0cb7ee380449e77fbf4a03b2fe
+--folderAsset: yes
+--DefaultImporter:
+--  externalObjects: {}
+--  userData: 
+--  assetBundleName: 
+--  assetBundleVariant: 
+-Index: Assets/3Plugins/QToolsKit/UIFramework/Sample/MVC.controller.meta
+-===================================================================
+-diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Sample/MVC.controller.meta b/Assets/3Plugins/QToolsKit/UIFramework/Sample/MVC.controller.meta
+-deleted file mode 100644
+---- a/Assets/3Plugins/QToolsKit/UIFramework/Sample/MVC.controller.meta	
+-+++ /dev/null	
+-@@ -1,8 +0,0 @@
+--fileFormatVersion: 2
+--guid: 7e70936ca59aaef48881984f9ab98429
+--NativeFormatImporter:
+--  externalObjects: {}
+--  mainObjectFileID: 9100000
+--  userData: 
+--  assetBundleName: 
+--  assetBundleVariant: 
+-Index: Assets/3Plugins/QToolsKit/UIFramework/Sample/MVC.controller
+-===================================================================
+-diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Sample/MVC.controller b/Assets/3Plugins/QToolsKit/UIFramework/Sample/MVC.controller
+-deleted file mode 100644
+---- a/Assets/3Plugins/QToolsKit/UIFramework/Sample/MVC.controller	
+-+++ /dev/null	
+-@@ -1,569 +0,0 @@
+--%YAML 1.1
+--%TAG !u! tag:unity3d.com,2011:
+----- !u!1107 &-8795837362626662239
+--AnimatorStateMachine:
+--  serializedVersion: 6
+--  m_ObjectHideFlags: 1
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_Name: Base Layer
+--  m_ChildStates:
+--  - serializedVersion: 1
+--    m_State: {fileID: 8420894434480740639}
+--    m_Position: {x: 570, y: 110, z: 0}
+--  - serializedVersion: 1
+--    m_State: {fileID: -2052755189362895440}
+--    m_Position: {x: 570, y: 40, z: 0}
+--  - serializedVersion: 1
+--    m_State: {fileID: -4195992164825356161}
+--    m_Position: {x: 640, y: -120, z: 0}
+--  - serializedVersion: 1
+--    m_State: {fileID: -2201882443815614672}
+--    m_Position: {x: 790, y: 40, z: 0}
+--  - serializedVersion: 1
+--    m_State: {fileID: 6058607449972098200}
+--    m_Position: {x: 790, y: 110, z: 0}
+--  - serializedVersion: 1
+--    m_State: {fileID: -3816342312526296632}
+--    m_Position: {x: 640, y: -40, z: 0}
+--  - serializedVersion: 1
+--    m_State: {fileID: 3680737640414294406}
+--    m_Position: {x: 510, y: -240, z: 0}
+--  - serializedVersion: 1
+--    m_State: {fileID: 4788830024762688842}
+--    m_Position: {x: 180, y: -240, z: 0}
+--  - serializedVersion: 1
+--    m_State: {fileID: 7509575021630200436}
+--    m_Position: {x: 50, y: -120, z: 0}
+--  - serializedVersion: 1
+--    m_State: {fileID: -7746623802306680792}
+--    m_Position: {x: 300, y: -120, z: 0}
+--  - serializedVersion: 1
+--    m_State: {fileID: 1431859071352589660}
+--    m_Position: {x: 180, y: -70, z: 0}
+--  m_ChildStateMachines: []
+--  m_AnyStateTransitions: []
+--  m_EntryTransitions: []
+--  m_StateMachineTransitions: {}
+--  m_StateMachineBehaviours: []
+--  m_AnyStatePosition: {x: -110, y: 40, z: 0}
+--  m_EntryPosition: {x: -110, y: 140, z: 0}
+--  m_ExitPosition: {x: -110, y: -50, z: 0}
+--  m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
+--  m_DefaultState: {fileID: 3680737640414294406}
+----- !u!1101 &-8266677868109728353
+--AnimatorStateTransition:
+--  m_ObjectHideFlags: 1
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_Name: 
+--  m_Conditions: []
+--  m_DstStateMachine: {fileID: 0}
+--  m_DstState: {fileID: -2052755189362895440}
+--  m_Solo: 0
+--  m_Mute: 0
+--  m_IsExit: 0
+--  serializedVersion: 3
+--  m_TransitionDuration: 0.25
+--  m_TransitionOffset: 0
+--  m_ExitTime: 0.75
+--  m_HasExitTime: 1
+--  m_HasFixedDuration: 1
+--  m_InterruptionSource: 0
+--  m_OrderedInterruption: 1
+--  m_CanTransitionToSelf: 1
+----- !u!1101 &-8151208077249912940
+--AnimatorStateTransition:
+--  m_ObjectHideFlags: 1
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_Name: 
+--  m_Conditions: []
+--  m_DstStateMachine: {fileID: 0}
+--  m_DstState: {fileID: 7509575021630200436}
+--  m_Solo: 0
+--  m_Mute: 0
+--  m_IsExit: 0
+--  serializedVersion: 3
+--  m_TransitionDuration: 0.25
+--  m_TransitionOffset: 0
+--  m_ExitTime: 0.75
+--  m_HasExitTime: 1
+--  m_HasFixedDuration: 1
+--  m_InterruptionSource: 0
+--  m_OrderedInterruption: 1
+--  m_CanTransitionToSelf: 1
+----- !u!1102 &-7746623802306680792
+--AnimatorState:
+--  serializedVersion: 6
+--  m_ObjectHideFlags: 1
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_Name: UserModel
+--  m_Speed: 1
+--  m_CycleOffset: 0
+--  m_Transitions: []
+--  m_StateMachineBehaviours: []
+--  m_Position: {x: 50, y: 50, z: 0}
+--  m_IKOnFeet: 0
+--  m_WriteDefaultValues: 1
+--  m_Mirror: 0
+--  m_SpeedParameterActive: 0
+--  m_MirrorParameterActive: 0
+--  m_CycleOffsetParameterActive: 0
+--  m_TimeParameterActive: 0
+--  m_Motion: {fileID: 0}
+--  m_Tag: 
+--  m_SpeedParameter: 
+--  m_MirrorParameter: 
+--  m_CycleOffsetParameter: 
+--  m_TimeParameter: 
+----- !u!1101 &-7444550344447843467
+--AnimatorStateTransition:
+--  m_ObjectHideFlags: 1
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_Name: 
+--  m_Conditions: []
+--  m_DstStateMachine: {fileID: 0}
+--  m_DstState: {fileID: -2201882443815614672}
+--  m_Solo: 0
+--  m_Mute: 0
+--  m_IsExit: 0
+--  serializedVersion: 3
+--  m_TransitionDuration: 0.25
+--  m_TransitionOffset: 0
+--  m_ExitTime: 0.75
+--  m_HasExitTime: 1
+--  m_HasFixedDuration: 1
+--  m_InterruptionSource: 0
+--  m_OrderedInterruption: 1
+--  m_CanTransitionToSelf: 1
+----- !u!1101 &-5934747522839080699
+--AnimatorStateTransition:
+--  m_ObjectHideFlags: 1
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_Name: 
+--  m_Conditions: []
+--  m_DstStateMachine: {fileID: 0}
+--  m_DstState: {fileID: 1431859071352589660}
+--  m_Solo: 0
+--  m_Mute: 0
+--  m_IsExit: 0
+--  serializedVersion: 3
+--  m_TransitionDuration: 0.25
+--  m_TransitionOffset: 0
+--  m_ExitTime: 0.75
+--  m_HasExitTime: 1
+--  m_HasFixedDuration: 1
+--  m_InterruptionSource: 0
+--  m_OrderedInterruption: 1
+--  m_CanTransitionToSelf: 1
+----- !u!1102 &-4195992164825356161
+--AnimatorState:
+--  serializedVersion: 6
+--  m_ObjectHideFlags: 1
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_Name: UIManager
+--  m_Speed: 1
+--  m_CycleOffset: 0
+--  m_Transitions:
+--  - {fileID: 4628062963148423621}
+--  m_StateMachineBehaviours: []
+--  m_Position: {x: 50, y: 50, z: 0}
+--  m_IKOnFeet: 0
+--  m_WriteDefaultValues: 1
+--  m_Mirror: 0
+--  m_SpeedParameterActive: 0
+--  m_MirrorParameterActive: 0
+--  m_CycleOffsetParameterActive: 0
+--  m_TimeParameterActive: 0
+--  m_Motion: {fileID: 0}
+--  m_Tag: 
+--  m_SpeedParameter: 
+--  m_MirrorParameter: 
+--  m_CycleOffsetParameter: 
+--  m_TimeParameter: 
+----- !u!1102 &-3816342312526296632
+--AnimatorState:
+--  serializedVersion: 6
+--  m_ObjectHideFlags: 1
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_Name: ViewCache
+--  m_Speed: 1
+--  m_CycleOffset: 0
+--  m_Transitions:
+--  - {fileID: 5807247491529380867}
+--  m_StateMachineBehaviours: []
+--  m_Position: {x: 50, y: 50, z: 0}
+--  m_IKOnFeet: 0
+--  m_WriteDefaultValues: 1
+--  m_Mirror: 0
+--  m_SpeedParameterActive: 0
+--  m_MirrorParameterActive: 0
+--  m_CycleOffsetParameterActive: 0
+--  m_TimeParameterActive: 0
+--  m_Motion: {fileID: 0}
+--  m_Tag: 
+--  m_SpeedParameter: 
+--  m_MirrorParameter: 
+--  m_CycleOffsetParameter: 
+--  m_TimeParameter: 
+----- !u!1101 &-2360786905990336385
+--AnimatorStateTransition:
+--  m_ObjectHideFlags: 1
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_Name: 
+--  m_Conditions: []
+--  m_DstStateMachine: {fileID: 0}
+--  m_DstState: {fileID: -3816342312526296632}
+--  m_Solo: 0
+--  m_Mute: 0
+--  m_IsExit: 0
+--  serializedVersion: 3
+--  m_TransitionDuration: 0.25
+--  m_TransitionOffset: 0
+--  m_ExitTime: 0.75
+--  m_HasExitTime: 1
+--  m_HasFixedDuration: 1
+--  m_InterruptionSource: 0
+--  m_OrderedInterruption: 1
+--  m_CanTransitionToSelf: 1
+----- !u!1102 &-2201882443815614672
+--AnimatorState:
+--  serializedVersion: 6
+--  m_ObjectHideFlags: 1
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_Name: View0(Controller)
+--  m_Speed: 1
+--  m_CycleOffset: 0
+--  m_Transitions:
+--  - {fileID: -2360786905990336385}
+--  m_StateMachineBehaviours: []
+--  m_Position: {x: 50, y: 50, z: 0}
+--  m_IKOnFeet: 0
+--  m_WriteDefaultValues: 1
+--  m_Mirror: 0
+--  m_SpeedParameterActive: 0
+--  m_MirrorParameterActive: 0
+--  m_CycleOffsetParameterActive: 0
+--  m_TimeParameterActive: 0
+--  m_Motion: {fileID: 0}
+--  m_Tag: 
+--  m_SpeedParameter: 
+--  m_MirrorParameter: 
+--  m_CycleOffsetParameter: 
+--  m_TimeParameter: 
+----- !u!1102 &-2052755189362895440
+--AnimatorState:
+--  serializedVersion: 6
+--  m_ObjectHideFlags: 1
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_Name: View(Controller)
+--  m_Speed: 1
+--  m_CycleOffset: 0
+--  m_Transitions:
+--  - {fileID: 373627910303820953}
+--  m_StateMachineBehaviours: []
+--  m_Position: {x: 50, y: 50, z: 0}
+--  m_IKOnFeet: 0
+--  m_WriteDefaultValues: 1
+--  m_Mirror: 0
+--  m_SpeedParameterActive: 0
+--  m_MirrorParameterActive: 0
+--  m_CycleOffsetParameterActive: 0
+--  m_TimeParameterActive: 0
+--  m_Motion: {fileID: 0}
+--  m_Tag: 
+--  m_SpeedParameter: 
+--  m_MirrorParameter: 
+--  m_CycleOffsetParameter: 
+--  m_TimeParameter: 
+----- !u!91 &9100000
+--AnimatorController:
+--  m_ObjectHideFlags: 0
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_Name: MVC
+--  serializedVersion: 5
+--  m_AnimatorParameters: []
+--  m_AnimatorLayers:
+--  - serializedVersion: 5
+--    m_Name: Base Layer
+--    m_StateMachine: {fileID: -8795837362626662239}
+--    m_Mask: {fileID: 0}
+--    m_Motions: []
+--    m_Behaviours: []
+--    m_BlendingMode: 0
+--    m_SyncedLayerIndex: -1
+--    m_DefaultWeight: 0
+--    m_IKPass: 0
+--    m_SyncedLayerAffectsTiming: 0
+--    m_Controller: {fileID: 9100000}
+----- !u!1101 &373627910303820953
+--AnimatorStateTransition:
+--  m_ObjectHideFlags: 1
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_Name: 
+--  m_Conditions: []
+--  m_DstStateMachine: {fileID: 0}
+--  m_DstState: {fileID: -3816342312526296632}
+--  m_Solo: 0
+--  m_Mute: 0
+--  m_IsExit: 0
+--  serializedVersion: 3
+--  m_TransitionDuration: 0.25
+--  m_TransitionOffset: 0
+--  m_ExitTime: 0.75
+--  m_HasExitTime: 1
+--  m_HasFixedDuration: 1
+--  m_InterruptionSource: 0
+--  m_OrderedInterruption: 1
+--  m_CanTransitionToSelf: 1
+----- !u!1102 &1431859071352589660
+--AnimatorState:
+--  serializedVersion: 6
+--  m_ObjectHideFlags: 1
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_Name: TaskModel
+--  m_Speed: 1
+--  m_CycleOffset: 0
+--  m_Transitions: []
+--  m_StateMachineBehaviours: []
+--  m_Position: {x: 50, y: 50, z: 0}
+--  m_IKOnFeet: 0
+--  m_WriteDefaultValues: 1
+--  m_Mirror: 0
+--  m_SpeedParameterActive: 0
+--  m_MirrorParameterActive: 0
+--  m_CycleOffsetParameterActive: 0
+--  m_TimeParameterActive: 0
+--  m_Motion: {fileID: 0}
+--  m_Tag: 
+--  m_SpeedParameter: 
+--  m_MirrorParameter: 
+--  m_CycleOffsetParameter: 
+--  m_TimeParameter: 
+----- !u!1102 &3680737640414294406
+--AnimatorState:
+--  serializedVersion: 6
+--  m_ObjectHideFlags: 1
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_Name: GameManager
+--  m_Speed: 1
+--  m_CycleOffset: 0
+--  m_Transitions: []
+--  m_StateMachineBehaviours: []
+--  m_Position: {x: 50, y: 50, z: 0}
+--  m_IKOnFeet: 0
+--  m_WriteDefaultValues: 1
+--  m_Mirror: 0
+--  m_SpeedParameterActive: 0
+--  m_MirrorParameterActive: 0
+--  m_CycleOffsetParameterActive: 0
+--  m_TimeParameterActive: 0
+--  m_Motion: {fileID: 0}
+--  m_Tag: 
+--  m_SpeedParameter: 
+--  m_MirrorParameter: 
+--  m_CycleOffsetParameter: 
+--  m_TimeParameter: 
+----- !u!1101 &4628062963148423621
+--AnimatorStateTransition:
+--  m_ObjectHideFlags: 1
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_Name: 
+--  m_Conditions: []
+--  m_DstStateMachine: {fileID: 0}
+--  m_DstState: {fileID: 3680737640414294406}
+--  m_Solo: 0
+--  m_Mute: 0
+--  m_IsExit: 0
+--  serializedVersion: 3
+--  m_TransitionDuration: 0.25
+--  m_TransitionOffset: 0
+--  m_ExitTime: 0.75
+--  m_HasExitTime: 1
+--  m_HasFixedDuration: 1
+--  m_InterruptionSource: 0
+--  m_OrderedInterruption: 1
+--  m_CanTransitionToSelf: 1
+----- !u!1102 &4788830024762688842
+--AnimatorState:
+--  serializedVersion: 6
+--  m_ObjectHideFlags: 1
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_Name: ModelFactory
+--  m_Speed: 1
+--  m_CycleOffset: 0
+--  m_Transitions:
+--  - {fileID: -8151208077249912940}
+--  - {fileID: 4876283143883902062}
+--  - {fileID: -5934747522839080699}
+--  m_StateMachineBehaviours: []
+--  m_Position: {x: 50, y: 50, z: 0}
+--  m_IKOnFeet: 0
+--  m_WriteDefaultValues: 1
+--  m_Mirror: 0
+--  m_SpeedParameterActive: 0
+--  m_MirrorParameterActive: 0
+--  m_CycleOffsetParameterActive: 0
+--  m_TimeParameterActive: 0
+--  m_Motion: {fileID: 0}
+--  m_Tag: 
+--  m_SpeedParameter: 
+--  m_MirrorParameter: 
+--  m_CycleOffsetParameter: 
+--  m_TimeParameter: 
+----- !u!1101 &4876283143883902062
+--AnimatorStateTransition:
+--  m_ObjectHideFlags: 1
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_Name: 
+--  m_Conditions: []
+--  m_DstStateMachine: {fileID: 0}
+--  m_DstState: {fileID: -7746623802306680792}
+--  m_Solo: 0
+--  m_Mute: 0
+--  m_IsExit: 0
+--  serializedVersion: 3
+--  m_TransitionDuration: 0.25
+--  m_TransitionOffset: 0
+--  m_ExitTime: 0.75
+--  m_HasExitTime: 1
+--  m_HasFixedDuration: 1
+--  m_InterruptionSource: 0
+--  m_OrderedInterruption: 1
+--  m_CanTransitionToSelf: 1
+----- !u!1101 &5807247491529380867
+--AnimatorStateTransition:
+--  m_ObjectHideFlags: 1
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_Name: 
+--  m_Conditions: []
+--  m_DstStateMachine: {fileID: 0}
+--  m_DstState: {fileID: -4195992164825356161}
+--  m_Solo: 0
+--  m_Mute: 0
+--  m_IsExit: 0
+--  serializedVersion: 3
+--  m_TransitionDuration: 0.25
+--  m_TransitionOffset: 0
+--  m_ExitTime: 0.75
+--  m_HasExitTime: 1
+--  m_HasFixedDuration: 1
+--  m_InterruptionSource: 0
+--  m_OrderedInterruption: 1
+--  m_CanTransitionToSelf: 1
+----- !u!1102 &6058607449972098200
+--AnimatorState:
+--  serializedVersion: 6
+--  m_ObjectHideFlags: 1
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_Name: ViewBind 0
+--  m_Speed: 1
+--  m_CycleOffset: 0
+--  m_Transitions:
+--  - {fileID: -7444550344447843467}
+--  m_StateMachineBehaviours: []
+--  m_Position: {x: 50, y: 50, z: 0}
+--  m_IKOnFeet: 0
+--  m_WriteDefaultValues: 1
+--  m_Mirror: 0
+--  m_SpeedParameterActive: 0
+--  m_MirrorParameterActive: 0
+--  m_CycleOffsetParameterActive: 0
+--  m_TimeParameterActive: 0
+--  m_Motion: {fileID: 0}
+--  m_Tag: 
+--  m_SpeedParameter: 
+--  m_MirrorParameter: 
+--  m_CycleOffsetParameter: 
+--  m_TimeParameter: 
+----- !u!1102 &7509575021630200436
+--AnimatorState:
+--  serializedVersion: 6
+--  m_ObjectHideFlags: 1
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_Name: MapModel
+--  m_Speed: 1
+--  m_CycleOffset: 0
+--  m_Transitions: []
+--  m_StateMachineBehaviours: []
+--  m_Position: {x: 50, y: 50, z: 0}
+--  m_IKOnFeet: 0
+--  m_WriteDefaultValues: 1
+--  m_Mirror: 0
+--  m_SpeedParameterActive: 0
+--  m_MirrorParameterActive: 0
+--  m_CycleOffsetParameterActive: 0
+--  m_TimeParameterActive: 0
+--  m_Motion: {fileID: 0}
+--  m_Tag: 
+--  m_SpeedParameter: 
+--  m_MirrorParameter: 
+--  m_CycleOffsetParameter: 
+--  m_TimeParameter: 
+----- !u!1102 &8420894434480740639
+--AnimatorState:
+--  serializedVersion: 6
+--  m_ObjectHideFlags: 1
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_Name: ViewBind
+--  m_Speed: 1
+--  m_CycleOffset: 0
+--  m_Transitions:
+--  - {fileID: -8266677868109728353}
+--  m_StateMachineBehaviours: []
+--  m_Position: {x: 50, y: 50, z: 0}
+--  m_IKOnFeet: 0
+--  m_WriteDefaultValues: 1
+--  m_Mirror: 0
+--  m_SpeedParameterActive: 0
+--  m_MirrorParameterActive: 0
+--  m_CycleOffsetParameterActive: 0
+--  m_TimeParameterActive: 0
+--  m_Motion: {fileID: 0}
+--  m_Tag: 
+--  m_SpeedParameter: 
+--  m_MirrorParameter: 
+--  m_CycleOffsetParameter: 
+--  m_TimeParameter: 
+-Index: ProjectSettings/EditorBuildSettings.asset
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/ProjectSettings/EditorBuildSettings.asset b/ProjectSettings/EditorBuildSettings.asset
+---- a/ProjectSettings/EditorBuildSettings.asset	
+-+++ b/ProjectSettings/EditorBuildSettings.asset	
+-@@ -6,6 +6,7 @@
+-   serializedVersion: 2
+-   m_Scenes:
+-   - enabled: 1
+-+    path: Assets/QTools/UIFramework/Scenes/SampleScene.unity
+-     path: Assets/3Plugins/QToolsKit/UIFramework/Scenes/SampleScene.unity
+-     guid: 2cda990e2423bbf4892e6590ba056729
+-   m_configObjects: {}
+-Index: Assets/StreamingAssets/StandaloneWindows.manifest
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/Assets/StreamingAssets/StandaloneWindows.manifest b/Assets/StreamingAssets/StandaloneWindows.manifest
+---- a/Assets/StreamingAssets/StandaloneWindows.manifest	
+-+++ b/Assets/StreamingAssets/StandaloneWindows.manifest	
+-@@ -1,14 +1,18 @@
+- ManifestFileVersion: 0
+--CRC: 453344864
+-+CRC: 703480208
+- AssetBundleManifest:
+-   AssetBundleInfos:
+-     Info_0:
+-+      Name: ui/prefabs/maincitypanel
+-+      Dependencies:
+-+        Dependency_0: ui/sprites/shoorscreen1
+-+    Info_1:
+-       Name: ui/sprites/shootscreen0
+-       Dependencies: {}
+--    Info_1:
+-+    Info_2:
+-       Name: ui/sprites/shoorscreen1
+-       Dependencies: {}
+--    Info_2:
+--      Name: ui/prefabs/maincitypanel
+-+    Info_3:
+-+      Name: ui/prefabs/sampleview
+-       Dependencies:
+--        Dependency_0: ui/sprites/shoorscreen1
+-+        Dependency_0: ui/sprites/shootscreen0
+-Index: Assets/StreamingAssets/ui/prefabs/maincitypanel.manifest
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/Assets/StreamingAssets/ui/prefabs/maincitypanel.manifest b/Assets/StreamingAssets/ui/prefabs/maincitypanel.manifest
+---- a/Assets/StreamingAssets/ui/prefabs/maincitypanel.manifest	
+-+++ b/Assets/StreamingAssets/ui/prefabs/maincitypanel.manifest	
+-@@ -1,12 +1,12 @@
+- ManifestFileVersion: 0
+--CRC: 2611424959
+-+CRC: 3995524569
+- Hashes:
+-   AssetFileHash:
+-     serializedVersion: 2
+--    Hash: e0023c851ee23d93c1ca707b7321e08a
+-+    Hash: e3339284b6c805d4c9931c3ff5627ada
+-   TypeTreeHash:
+-     serializedVersion: 2
+--    Hash: d4059a469b34e2330fa35b7fae774d00
+-+    Hash: 02a883afd44dee8698695e16d1f5f3f7
+- HashAppended: 0
+- ClassTypes:
+- - Class: 1
+-@@ -45,6 +45,6 @@
+- - AssemblyName: UnityEngine.UI
+-   ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+- Assets:
+--- Assets/Prefabs/UI/MainCityPanel.prefab
+-+- Assets/Prefabs/UI/MainCityView.prefab
+- Dependencies:
+- - E:/WorkSpace/QTools/AssetBundles/StandaloneWindows/ui/sprites/shoorscreen1
+-Index: .idea/.idea.QTools/.idea/workspace.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/.idea.QTools/.idea/workspace.xml b/.idea/.idea.QTools/.idea/workspace.xml
+---- a/.idea/.idea.QTools/.idea/workspace.xml	
+-+++ b/.idea/.idea.QTools/.idea/workspace.xml	
+-@@ -1,74 +1,71 @@
+- <?xml version="1.0" encoding="UTF-8"?>
+- <project version="4">
+-   <component name="ChangeListManager">
+--    <list default="true" id="ebb0ebae-187f-42f0-bae6-eabc873a3dba" name="Changes" comment="">
+-+    <list default="true" id="229941c3-f990-41a7-b0e7-99e04f7089e7" name="Changes" comment="">
+-+      <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" afterDir="false" />
+-       <change beforePath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/StandaloneWindows" beforeDir="false" afterPath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/StandaloneWindows" afterDir="false" />
+-       <change beforePath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/StandaloneWindows.manifest" beforeDir="false" afterPath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/StandaloneWindows.manifest" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/Assets/QToolsKit.meta" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/Assets/QToolsKit/3Plugins.meta" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/Assets/QToolsKit/Loader.meta" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/Assets/QToolsKit/Loader/AssetBundleLoaderMgr.cs" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/Assets/QToolsKit/Loader/AssetBundleLoaderMgr.cs.meta" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/Assets/QToolsKit/UIFramework.meta" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/Assets/QToolsKit/UIFramework/Sample.meta" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/Assets/QToolsKit/UIFramework/Sample/MVC.controller" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/Assets/QToolsKit/UIFramework/Sample/MVC.controller.meta" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/Assets/QToolsKit/UIFramework/Scenes.meta" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/Assets/QToolsKit/UIFramework/Scenes/SampleScene.unity" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/Assets/QToolsKit/UIFramework/Scenes/SampleScene.unity.meta" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/Assets/QToolsKit/UIFramework/Scripts.meta" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/Assets/QToolsKit/UIFramework/Scripts/UIManager.cs" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/Assets/QToolsKit/UIFramework/Scripts/UIManager.cs.meta" beforeDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/prefabs/maincitypanel" beforeDir="false" afterPath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/prefabs/maincitypanel" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/prefabs/maincitypanel.manifest" beforeDir="false" afterPath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/prefabs/maincitypanel.manifest" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/sprites/shoorscreen1" beforeDir="false" afterPath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/sprites/shoorscreen1" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/sprites/shoorscreen1.manifest" beforeDir="false" afterPath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/sprites/shoorscreen1.manifest" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/sprites/shootscreen0" beforeDir="false" afterPath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/sprites/shootscreen0" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/sprites/shootscreen0.manifest" beforeDir="false" afterPath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/sprites/shootscreen0.manifest" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/Protobuf/Sample/proto/DemoSetting.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/Protobuf/Sample/proto/DemoSetting.cs" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/Protobuf/Sample/proto/DemoUser.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/Protobuf/Sample/proto/DemoUser.cs" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework.meta" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Sample.meta" beforeDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Sample/MVC.controller" beforeDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Sample/MVC.controller.meta" beforeDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scenes.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scenes.meta" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scenes/SampleScene.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scenes/SampleScene.unity.meta" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts.meta" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs.meta" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/MainCityView.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/MainCityView.prefab" afterDir="false" />
+-       <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/StandaloneWindows" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/StandaloneWindows" afterDir="false" />
+-       <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/StandaloneWindows.manifest" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/StandaloneWindows.manifest" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/StandaloneWindows.manifest.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/StandaloneWindows.manifest.meta" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/StandaloneWindows.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/StandaloneWindows.meta" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/ui.meta" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/prefabs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/ui/prefabs.meta" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/prefabs/maincitypanel" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/ui/prefabs/maincitypanel" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/prefabs/maincitypanel.manifest" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/ui/prefabs/maincitypanel.manifest" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/prefabs/maincitypanel.manifest.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/ui/prefabs/maincitypanel.manifest.meta" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/prefabs/maincitypanel.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/ui/prefabs/maincitypanel.meta" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites.meta" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shoorscreen1" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shoorscreen1" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shoorscreen1.manifest" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shoorscreen1.manifest" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shoorscreen1.manifest.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shoorscreen1.manifest.meta" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shoorscreen1.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shoorscreen1.meta" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shootscreen0" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shootscreen0" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shootscreen0.manifest" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shootscreen0.manifest" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shootscreen0.manifest.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shootscreen0.manifest.meta" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shootscreen0.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shootscreen0.meta" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+-       <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+-     </list>
+-     <option name="SHOW_DIALOG" value="false" />
+-     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+-     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+-     <option name="LAST_RESOLUTION" value="IGNORE" />
+-   </component>
+--  <component name="HighlightingSettingsPerFile">
+--    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.animation@7.0.11/Editor/SpriteLib/SpriteLibrarySourceAsset/SpriteLibrarySourceAssetImporter.cs" root0="SKIP_HIGHLIGHTING" />
+--    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.animation@7.0.11/Editor/SpriteLib/SpriteLibrarySourceAsset/SpriteLibrarySourceAssetImporterInspector.cs" root0="SKIP_HIGHLIGHTING" />
+--    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.animation@7.0.11/Editor/SpriteSkin/SpriteSkinCompositeDebugWindow.cs" root0="SKIP_HIGHLIGHTING" />
+--    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.animation@7.0.11/IK/Editor/Inspectors/IKManager2DEditor.cs" root0="SKIP_HIGHLIGHTING" />
+--    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.tilemap.extras@2.2.5/Editor/Menu/CustomRuleTileMenu.cs" root0="SKIP_HIGHLIGHTING" />
+--    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/AssetBundleBrowserMain.cs" root0="SKIP_HIGHLIGHTING" />
+--    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/AssetBundleBuildTab.cs" root0="SKIP_HIGHLIGHTING" />
+--    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/AssetBundleDataSource/ABDataSource.cs" root0="SKIP_HIGHLIGHTING" />
+--    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/AssetBundleDataSource/ABDataSourceProvider.cs" root0="SKIP_HIGHLIGHTING" />
+--    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/AssetBundleDataSource/AssetDatabaseABDataSource.cs" root0="SKIP_HIGHLIGHTING" />
+--    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/AssetBundleModel/ABModel.cs" root0="SKIP_HIGHLIGHTING" />
+--    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/AssetBundleModel/ABModelAssetInfo.cs" root0="SKIP_HIGHLIGHTING" />
+--    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/InspectTab/AssetBundleInspectTab.cs" root0="SKIP_HIGHLIGHTING" />
+--    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@2.0.4/Editor/PlasticSCM/PlasticMenuItem.cs" root0="SKIP_HIGHLIGHTING" />
+--    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@2.0.4/Editor/PlasticSCM/UI/RunModal.cs" root0="SKIP_HIGHLIGHTING" />
+--    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@2.0.4/Editor/PlasticSCM/UI/UnityConstants.cs" root0="SKIP_HIGHLIGHTING" />
+--    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting@1.8.0/Editor/VisualScripting.Flow/FlowGraphUnitUISample.cs" root0="SKIP_HIGHLIGHTING" />
+-+  <component name="Git.Settings">
+-+    <option name="UPDATE_TYPE" value="REBASE" />
+-   </component>
+--  <component name="MarkdownSettingsMigration">
+--    <option name="stateVersion" value="1" />
+--  </component>
+--  <component name="ProjectId" id="2TKZ4UJ5XXA3y9nhcXuPdfiQu3C" />
+--  <component name="ProjectViewState">
+--    <option name="hideEmptyMiddlePackages" value="true" />
+--    <option name="showLibraryContents" value="true" />
+-+  <component name="HighlightingSettingsPerFile">
+-+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a2c0aeec54124247bdff1197fabae8146400/d8/03a7045d/AssetBundle.cs" root0="SKIP_HIGHLIGHTING" />
+-+    <setting file="file://$PROJECT_DIR$/Assets/Samples/UIFrameworkExamples/Scripts/UIDemoController.cs" root0="FORCE_HIGHLIGHTING" />
+-+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ide.visualstudio@2.0.18/Editor/VisualStudioIntegration.cs" root0="SKIP_HIGHLIGHTING" />
+-+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMP_ScrollbarEventHandler.cs" root0="SKIP_HIGHLIGHTING" />
+-+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Editor/TestBehaviourBase.cs" root0="SKIP_HIGHLIGHTING" />
+-+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Toggle/ToggleTests.cs" root0="SKIP_HIGHLIGHTING" />
+-+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting@1.8.0/Runtime/VisualScripting.Core/Macros/Macro.cs" root0="SKIP_HIGHLIGHTING" />
+-   </component>
+--  <component name="PropertiesComponent"><![CDATA[{
+--  "keyToString": {
+--    "Discover.Launch.Via.Unity": "true",
+--    "RunOnceActivity.OpenProjectViewOnStart": "true",
+--    "RunOnceActivity.ShowReadmeOnStart": "true",
+--    "WebServerToolWindowFactoryState": "false",
+--    "nodejs_package_manager_path": "npm",
+--    "vue.rearranger.settings.migration": "true"
+--  }
+--}]]></component>
+-+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+-   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+-     <configuration name="UnitTests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
+--      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2021.3.27f1c1\Editor\Unity.exe" />
+-+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2021.3.8f1c1\Editor\Unity.exe" />
+-       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath E:\WorkSpace\QTools -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
+-       <option name="WORKING_DIRECTORY" value="E:\WorkSpace\QTools" />
+-       <option name="PASS_PARENT_ENVS" value="1" />
+-@@ -96,33 +93,10 @@
+-       <method v="2" />
+-     </configuration>
+-   </component>
+--  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+-   <component name="TaskManager">
+--    <task active="true" id="Default" summary="Default task">
+--      <changelist id="ebb0ebae-187f-42f0-bae6-eabc873a3dba" name="Changes" comment="" />
+--      <created>1690793543067</created>
+--      <option name="number" value="Default" />
+--      <option name="presentableId" value="Default" />
+--      <updated>1690793543067</updated>
+--      <workItem from="1690793564514" duration="3906000" />
+--    </task>
+-     <servers />
+-   </component>
+--  <component name="TypeScriptGeneratedFilesManager">
+--    <option name="version" value="3" />
+--  </component>
+--  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+-+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="false" />
+-   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+--  <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+--  <component name="Vcs.Log.Tabs.Properties">
+--    <option name="TAB_STATES">
+--      <map>
+--        <entry key="MAIN">
+--          <value>
+--            <State />
+--          </value>
+--        </entry>
+--      </map>
+--    </option>
+--  </component>
+-+  <component name="UnityUnitTestConfiguration" currentTestLauncher="Both" />
+- </project>
+-\ No newline at end of file
+-Index: Assets/3Plugins/QToolsKit/UIFramework/Scripts.meta
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Scripts.meta b/Assets/3Plugins/QToolsKit/UIFramework/Scripts.meta
+---- a/Assets/3Plugins/QToolsKit/UIFramework/Scripts.meta	
+-+++ b/Assets/3Plugins/QToolsKit/UIFramework/Scripts.meta	
+-@@ -1,5 +1,5 @@
+- fileFormatVersion: 2
+--guid: ffafdb4effa183c429f0d03bdc0ed231
+-+guid: 3a90be1ca1b347743877138706f6179f
+- folderAsset: yes
+- DefaultImporter:
+-   externalObjects: {}
+-Index: ProjectSettings/ProjectVersion.txt
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/ProjectSettings/ProjectVersion.txt b/ProjectSettings/ProjectVersion.txt
+---- a/ProjectSettings/ProjectVersion.txt	
+-+++ b/ProjectSettings/ProjectVersion.txt	
+-@@ -1,2 +1,2 @@
+--m_EditorVersion: 2021.3.27f1c1
+--m_EditorVersionWithRevision: 2021.3.27f1c1 (2776fa9c5d2b)
+-+m_EditorVersion: 2021.3.8f1c1
+-+m_EditorVersionWithRevision: 2021.3.8f1c1 (c20728c1e961)
+-Index: Assets/3Plugins/QToolsKit/UIFramework.meta
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/Assets/3Plugins/QToolsKit/UIFramework.meta b/Assets/3Plugins/QToolsKit/UIFramework.meta
+---- a/Assets/3Plugins/QToolsKit/UIFramework.meta	
+-+++ b/Assets/3Plugins/QToolsKit/UIFramework.meta	
+-@@ -1,5 +1,5 @@
+- fileFormatVersion: 2
+--guid: ada388459887a4a4cae1c706477ff35f
+-+guid: fef52f4bd5559604bbcd39c70c728e9b
+- folderAsset: yes
+- DefaultImporter:
+-   externalObjects: {}
+-Index: AssetBundles/StandaloneWindows/ui/sprites/shootscreen0.manifest
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/AssetBundles/StandaloneWindows/ui/sprites/shootscreen0.manifest b/AssetBundles/StandaloneWindows/ui/sprites/shootscreen0.manifest
+---- a/AssetBundles/StandaloneWindows/ui/sprites/shootscreen0.manifest	
+-+++ b/AssetBundles/StandaloneWindows/ui/sprites/shootscreen0.manifest	
+-@@ -1,9 +1,9 @@
+- ManifestFileVersion: 0
+--CRC: 4147069573
+-+CRC: 4024013009
+- Hashes:
+-   AssetFileHash:
+-     serializedVersion: 2
+--    Hash: 46891a34bc38f7a8a657eecd55c0e9b9
+-+    Hash: c12eaa02490ac038dc9334a6f3947968
+-   TypeTreeHash:
+-     serializedVersion: 2
+-     Hash: f267fd2d8bcb1179236b6179ac5313bc
+-Index: AssetBundles/StandaloneWindows/ui/sprites/shoorscreen1.manifest
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/AssetBundles/StandaloneWindows/ui/sprites/shoorscreen1.manifest b/AssetBundles/StandaloneWindows/ui/sprites/shoorscreen1.manifest
+---- a/AssetBundles/StandaloneWindows/ui/sprites/shoorscreen1.manifest	
+-+++ b/AssetBundles/StandaloneWindows/ui/sprites/shoorscreen1.manifest	
+-@@ -1,9 +1,9 @@
+- ManifestFileVersion: 0
+--CRC: 4060121744
+-+CRC: 7263513
+- Hashes:
+-   AssetFileHash:
+-     serializedVersion: 2
+--    Hash: 96bb0338852e92e8d2afb1602de84baf
+-+    Hash: fdae3ebdad12e7935826982570eb1715
+-   TypeTreeHash:
+-     serializedVersion: 2
+-     Hash: f267fd2d8bcb1179236b6179ac5313bc
+-Index: Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs.meta
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs.meta b/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs.meta
+---- a/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs.meta	
+-+++ b/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs.meta	
+-@@ -1,5 +1,5 @@
+- fileFormatVersion: 2
+--guid: 4acfb9f00c621b140b2e9a7f90768102
+-+guid: 332e00e9fc03da747a5a1355d10f8fae
+- MonoImporter:
+-   externalObjects: {}
+-   serializedVersion: 2
+-Index: Assets/StreamingAssets/ui/sprites/shootscreen0.manifest
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/Assets/StreamingAssets/ui/sprites/shootscreen0.manifest b/Assets/StreamingAssets/ui/sprites/shootscreen0.manifest
+---- a/Assets/StreamingAssets/ui/sprites/shootscreen0.manifest	
+-+++ b/Assets/StreamingAssets/ui/sprites/shootscreen0.manifest	
+-@@ -1,9 +1,9 @@
+- ManifestFileVersion: 0
+--CRC: 4147069573
+-+CRC: 4024013009
+- Hashes:
+-   AssetFileHash:
+-     serializedVersion: 2
+--    Hash: 46891a34bc38f7a8a657eecd55c0e9b9
+-+    Hash: c12eaa02490ac038dc9334a6f3947968
+-   TypeTreeHash:
+-     serializedVersion: 2
+-     Hash: f267fd2d8bcb1179236b6179ac5313bc
+-Index: Assets/StreamingAssets/ui/sprites/shoorscreen1.manifest
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/Assets/StreamingAssets/ui/sprites/shoorscreen1.manifest b/Assets/StreamingAssets/ui/sprites/shoorscreen1.manifest
+---- a/Assets/StreamingAssets/ui/sprites/shoorscreen1.manifest	
+-+++ b/Assets/StreamingAssets/ui/sprites/shoorscreen1.manifest	
+-@@ -1,9 +1,9 @@
+- ManifestFileVersion: 0
+--CRC: 4060121744
+-+CRC: 7263513
+- Hashes:
+-   AssetFileHash:
+-     serializedVersion: 2
+--    Hash: 96bb0338852e92e8d2afb1602de84baf
+-+    Hash: fdae3ebdad12e7935826982570eb1715
+-   TypeTreeHash:
+-     serializedVersion: 2
+-     Hash: f267fd2d8bcb1179236b6179ac5313bc
+-Index: AssetBundles/StandaloneWindows/ui/prefabs/maincitypanel.manifest
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/AssetBundles/StandaloneWindows/ui/prefabs/maincitypanel.manifest b/AssetBundles/StandaloneWindows/ui/prefabs/maincitypanel.manifest
+---- a/AssetBundles/StandaloneWindows/ui/prefabs/maincitypanel.manifest	
+-+++ b/AssetBundles/StandaloneWindows/ui/prefabs/maincitypanel.manifest	
+-@@ -1,12 +1,12 @@
+- ManifestFileVersion: 0
+--CRC: 2611424959
+-+CRC: 3995524569
+- Hashes:
+-   AssetFileHash:
+-     serializedVersion: 2
+--    Hash: e0023c851ee23d93c1ca707b7321e08a
+-+    Hash: e3339284b6c805d4c9931c3ff5627ada
+-   TypeTreeHash:
+-     serializedVersion: 2
+--    Hash: d4059a469b34e2330fa35b7fae774d00
+-+    Hash: 02a883afd44dee8698695e16d1f5f3f7
+- HashAppended: 0
+- ClassTypes:
+- - Class: 1
+-@@ -45,6 +45,6 @@
+- - AssemblyName: UnityEngine.UI
+-   ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+- Assets:
+--- Assets/Prefabs/UI/MainCityPanel.prefab
+-+- Assets/Prefabs/UI/MainCityView.prefab
+- Dependencies:
+- - E:/WorkSpace/QTools/AssetBundles/StandaloneWindows/ui/sprites/shoorscreen1
+-Index: Assets/Prefabs/UI/MainCityView.prefab
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/Assets/Prefabs/UI/MainCityView.prefab b/Assets/Prefabs/UI/MainCityView.prefab
+---- a/Assets/Prefabs/UI/MainCityView.prefab	
+-+++ b/Assets/Prefabs/UI/MainCityView.prefab	
+-@@ -156,6 +156,86 @@
+-     m_VerticalOverflow: 0
+-     m_LineSpacing: 1
+-   m_Text: New Text
+-+--- !u!1 &3790604733993304744
+-+GameObject:
+-+  m_ObjectHideFlags: 0
+-+  m_CorrespondingSourceObject: {fileID: 0}
+-+  m_PrefabInstance: {fileID: 0}
+-+  m_PrefabAsset: {fileID: 0}
+-+  serializedVersion: 6
+-+  m_Component:
+-+  - component: {fileID: 5486567442277259348}
+-+  - component: {fileID: 7649005609127617917}
+-+  - component: {fileID: 2660558948331528949}
+-+  m_Layer: 5
+-+  m_Name: Text (Legacy)
+-+  m_TagString: Untagged
+-+  m_Icon: {fileID: 0}
+-+  m_NavMeshLayer: 0
+-+  m_StaticEditorFlags: 0
+-+  m_IsActive: 1
+-+--- !u!224 &5486567442277259348
+-+RectTransform:
+-+  m_ObjectHideFlags: 0
+-+  m_CorrespondingSourceObject: {fileID: 0}
+-+  m_PrefabInstance: {fileID: 0}
+-+  m_PrefabAsset: {fileID: 0}
+-+  m_GameObject: {fileID: 3790604733993304744}
+-+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+-+  m_LocalPosition: {x: 0, y: 0, z: 0}
+-+  m_LocalScale: {x: 1, y: 1, z: 1}
+-+  m_ConstrainProportionsScale: 0
+-+  m_Children: []
+-+  m_Father: {fileID: 1494037776091062930}
+-+  m_RootOrder: 1
+-+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+-+  m_AnchorMin: {x: 1, y: 0}
+-+  m_AnchorMax: {x: 1, y: 0}
+-+  m_AnchoredPosition: {x: -132.85803, y: 119.51453}
+-+  m_SizeDelta: {x: 265.71606, y: 239.02899}
+-+  m_Pivot: {x: 0.5, y: 0.5}
+-+--- !u!222 &7649005609127617917
+-+CanvasRenderer:
+-+  m_ObjectHideFlags: 0
+-+  m_CorrespondingSourceObject: {fileID: 0}
+-+  m_PrefabInstance: {fileID: 0}
+-+  m_PrefabAsset: {fileID: 0}
+-+  m_GameObject: {fileID: 3790604733993304744}
+-+  m_CullTransparentMesh: 1
+-+--- !u!114 &2660558948331528949
+-+MonoBehaviour:
+-+  m_ObjectHideFlags: 0
+-+  m_CorrespondingSourceObject: {fileID: 0}
+-+  m_PrefabInstance: {fileID: 0}
+-+  m_PrefabAsset: {fileID: 0}
+-+  m_GameObject: {fileID: 3790604733993304744}
+-+  m_Enabled: 1
+-+  m_EditorHideFlags: 0
+-+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+-+  m_Name: 
+-+  m_EditorClassIdentifier: 
+-+  m_Material: {fileID: 0}
+-+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+-+  m_RaycastTarget: 1
+-+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+-+  m_Maskable: 1
+-+  m_OnCullStateChanged:
+-+    m_PersistentCalls:
+-+      m_Calls: []
+-+  m_FontData:
+-+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+-+    m_FontSize: 179
+-+    m_FontStyle: 1
+-+    m_BestFit: 0
+-+    m_MinSize: 10
+-+    m_MaxSize: 179
+-+    m_Alignment: 4
+-+    m_AlignByGeometry: 0
+-+    m_RichText: 1
+-+    m_HorizontalOverflow: 0
+-+    m_VerticalOverflow: 0
+-+    m_LineSpacing: 1
+-+  m_Text: 1
+- --- !u!1 &3808008534291675935
+- GameObject:
+-   m_ObjectHideFlags: 0
+-@@ -215,7 +295,6 @@
+-   - component: {fileID: 5942629869829264015}
+-   - component: {fileID: 6748445357236161240}
+-   - component: {fileID: 2443407039972642713}
+--  - component: {fileID: 1845280448934458117}
+-   m_Layer: 5
+-   m_Name: MainCityView
+-   m_TagString: Untagged
+-@@ -236,6 +315,7 @@
+-   m_ConstrainProportionsScale: 0
+-   m_Children:
+-   - {fileID: 8097171880452233657}
+-+  - {fileID: 5486567442277259348}
+-   m_Father: {fileID: 0}
+-   m_RootOrder: 0
+-   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+-@@ -253,7 +333,7 @@
+-   m_GameObject: {fileID: 5976724693951280815}
+-   m_Enabled: 1
+-   serializedVersion: 3
+--  m_RenderMode: 0
+-+  m_RenderMode: 1
+-   m_Camera: {fileID: 0}
+-   m_PlaneDistance: 100
+-   m_PixelPerfect: 0
+-@@ -305,15 +385,3 @@
+-   m_BlockingMask:
+-     serializedVersion: 2
+-     m_Bits: 4294967295
+----- !u!114 &1845280448934458117
+--MonoBehaviour:
+--  m_ObjectHideFlags: 0
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_GameObject: {fileID: 5976724693951280815}
+--  m_Enabled: 1
+--  m_EditorHideFlags: 0
+--  m_Script: {fileID: 11500000, guid: bce24c47f2962f04ba873034b18cd8a7, type: 3}
+--  m_Name: 
+--  m_EditorClassIdentifier: 
+-Index: AssetBundles/StandaloneWindows/StandaloneWindows.manifest
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/AssetBundles/StandaloneWindows/StandaloneWindows.manifest b/AssetBundles/StandaloneWindows/StandaloneWindows.manifest
+---- a/AssetBundles/StandaloneWindows/StandaloneWindows.manifest	
+-+++ b/AssetBundles/StandaloneWindows/StandaloneWindows.manifest	
+-@@ -1,14 +1,18 @@
+- ManifestFileVersion: 0
+--CRC: 453344864
+-+CRC: 703480208
+- AssetBundleManifest:
+-   AssetBundleInfos:
+-     Info_0:
+-+      Name: ui/prefabs/maincitypanel
+-+      Dependencies:
+-+        Dependency_0: ui/sprites/shoorscreen1
+-+    Info_1:
+-       Name: ui/sprites/shootscreen0
+-       Dependencies: {}
+--    Info_1:
+-+    Info_2:
+-       Name: ui/sprites/shoorscreen1
+-       Dependencies: {}
+--    Info_2:
+--      Name: ui/prefabs/maincitypanel
+-+    Info_3:
+-+      Name: ui/prefabs/sampleview
+-       Dependencies:
+--        Dependency_0: ui/sprites/shoorscreen1
+-+        Dependency_0: ui/sprites/shootscreen0
+-Index: Packages/packages-lock.json
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/Packages/packages-lock.json b/Packages/packages-lock.json
+---- a/Packages/packages-lock.json	
+-+++ b/Packages/packages-lock.json	
+-@@ -1,11 +1,11 @@
+- {
+-   "dependencies": {
+-     "com.unity.2d.animation": {
+--      "version": "7.0.11",
+-+      "version": "7.0.6",
+-       "depth": 1,
+-       "source": "registry",
+-       "dependencies": {
+--        "com.unity.2d.common": "6.0.6",
+-+        "com.unity.2d.common": "6.0.3",
+-         "com.unity.2d.sprite": "1.0.0",
+-         "com.unity.modules.animation": "1.0.0",
+-         "com.unity.modules.uielements": "1.0.0"
+-@@ -13,7 +13,7 @@
+-       "url": "https://packages.unity.cn"
+-     },
+-     "com.unity.2d.common": {
+--      "version": "6.0.6",
+-+      "version": "6.0.3",
+-       "depth": 2,
+-       "source": "registry",
+-       "dependencies": {
+-@@ -32,19 +32,19 @@
+-       "url": "https://packages.unity.cn"
+-     },
+-     "com.unity.2d.pixel-perfect": {
+--      "version": "5.0.3",
+-+      "version": "5.0.1",
+-       "depth": 1,
+-       "source": "registry",
+-       "dependencies": {},
+-       "url": "https://packages.unity.cn"
+-     },
+-     "com.unity.2d.psdimporter": {
+--      "version": "6.0.7",
+-+      "version": "6.0.4",
+-       "depth": 1,
+-       "source": "registry",
+-       "dependencies": {
+--        "com.unity.2d.animation": "7.0.9",
+--        "com.unity.2d.common": "6.0.6",
+-+        "com.unity.2d.animation": "7.0.6",
+-+        "com.unity.2d.common": "6.0.3",
+-         "com.unity.2d.sprite": "1.0.0"
+-       },
+-       "url": "https://packages.unity.cn"
+-@@ -56,12 +56,12 @@
+-       "dependencies": {}
+-     },
+-     "com.unity.2d.spriteshape": {
+--      "version": "7.0.7",
+-+      "version": "7.0.5",
+-       "depth": 1,
+-       "source": "registry",
+-       "dependencies": {
+-         "com.unity.mathematics": "1.1.0",
+--        "com.unity.2d.common": "6.0.6",
+-+        "com.unity.2d.common": "6.0.3",
+-         "com.unity.2d.path": "5.0.2",
+-         "com.unity.modules.physics2d": "1.0.0"
+-       },
+-@@ -74,7 +74,7 @@
+-       "dependencies": {}
+-     },
+-     "com.unity.2d.tilemap.extras": {
+--      "version": "2.2.5",
+-+      "version": "2.2.3",
+-       "depth": 1,
+-       "source": "registry",
+-       "dependencies": {
+-@@ -120,13 +120,13 @@
+-       "depth": 0,
+-       "source": "builtin",
+-       "dependencies": {
+--        "com.unity.2d.animation": "7.0.11",
+--        "com.unity.2d.pixel-perfect": "5.0.3",
+--        "com.unity.2d.psdimporter": "6.0.7",
+-+        "com.unity.2d.animation": "7.0.6",
+-+        "com.unity.2d.pixel-perfect": "5.0.1",
+-+        "com.unity.2d.psdimporter": "6.0.4",
+-         "com.unity.2d.sprite": "1.0.0",
+--        "com.unity.2d.spriteshape": "7.0.7",
+-+        "com.unity.2d.spriteshape": "7.0.5",
+-         "com.unity.2d.tilemap": "1.0.0",
+--        "com.unity.2d.tilemap.extras": "2.2.5"
+-+        "com.unity.2d.tilemap.extras": "2.2.3"
+-       }
+-     },
+-     "com.unity.ide.rider": {
+Index: .idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_2_19_24__Changes_.xml
+===================================================================
+diff --git a/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_2_19_24__Changes_.xml b/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_2_19_24__Changes_.xml
+deleted file mode 100644
+--- a/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_2_19_24__Changes_.xml	(revision 0163e7fca090dffcb866f9caa3accedf9adc74f7)
++++ /dev/null	(revision 0163e7fca090dffcb866f9caa3accedf9adc74f7)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_2023_8_2_19_24_[Changes]" date="1690975471204" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_2_19_24_[Changes]/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2023/8/2 19:24 [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_3_19_21__Changes_1.xml
+===================================================================
+diff --git a/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_3_19_21__Changes_1.xml b/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_3_19_21__Changes_1.xml
+deleted file mode 100644
+--- a/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_3_19_21__Changes_1.xml	(revision 0163e7fca090dffcb866f9caa3accedf9adc74f7)
++++ /dev/null	(revision 0163e7fca090dffcb866f9caa3accedf9adc74f7)
+@@ -1,24 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_2023_8_3_19_21_[Changes]1" date="1691061754444" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_3_19_21_[Changes]1/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2023/8/3 19:21 [Changes]" />
+-  <binary>
+-    <option name="BEFORE_PATH" value="Assets/StreamingAssets/ui/sprites/shoorscreen1" />
+-    <option name="AFTER_PATH" value="Assets/StreamingAssets/ui/sprites/shoorscreen1" />
+-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_3_19_21_[Changes]1/shoorscreen1" />
+-  </binary>
+-  <binary>
+-    <option name="BEFORE_PATH" value="AssetBundles/StandaloneWindows/StandaloneWindows" />
+-    <option name="AFTER_PATH" value="AssetBundles/StandaloneWindows/StandaloneWindows" />
+-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_3_19_21_[Changes]1/StandaloneWindows" />
+-  </binary>
+-  <binary>
+-    <option name="BEFORE_PATH" value="AssetBundles/StandaloneWindows/ui/prefabs/maincitypanel" />
+-    <option name="AFTER_PATH" value="AssetBundles/StandaloneWindows/ui/prefabs/maincitypanel" />
+-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_3_19_21_[Changes]1/maincitypanel" />
+-  </binary>
+-  <binary>
+-    <option name="BEFORE_PATH" value="AssetBundles/StandaloneWindows/ui/sprites/shootscreen0" />
+-    <option name="AFTER_PATH" value="AssetBundles/StandaloneWindows/ui/sprites/shootscreen0" />
+-    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_3_19_21_[Changes]1/shootscreen0" />
+-  </binary>
+-</changelist>
+\ No newline at end of file
+Index: .idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_2_19_24_[Changes]/shelved.patch
+===================================================================
+diff --git a/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_2_19_24_[Changes]/shelved.patch b/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_2_19_24_[Changes]/shelved.patch
+deleted file mode 100644
+--- a/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_2_19_24_[Changes]/shelved.patch	(revision 0163e7fca090dffcb866f9caa3accedf9adc74f7)
++++ /dev/null	(revision 0163e7fca090dffcb866f9caa3accedf9adc74f7)
+@@ -1,426 +0,0 @@
+-Index: Assets/UIFramework/Scripts/UIManager.cs.meta
+-===================================================================
+-diff --git a/Assets/UIFramework/Scripts/UIManager.cs.meta b/Assets/UIFramework/Scripts/UIManager.cs.meta
+-deleted file mode 100644
+---- a/Assets/UIFramework/Scripts/UIManager.cs.meta	(revision 09d15d7dd4fa79bd70a1b173ff0ff16e9d9b1a88)
+-+++ /dev/null	(revision 09d15d7dd4fa79bd70a1b173ff0ff16e9d9b1a88)
+-@@ -1,11 +0,0 @@
+--fileFormatVersion: 2
+--guid: 4acfb9f00c621b140b2e9a7f90768102
+--MonoImporter:
+--  externalObjects: {}
+--  serializedVersion: 2
+--  defaultReferences: []
+--  executionOrder: 0
+--  icon: {instanceID: 0}
+--  userData: 
+--  assetBundleName: 
+--  assetBundleVariant: 
+-Index: Assets/UIFramework/Scenes/SampleScene.unity
+-===================================================================
+-diff --git a/Assets/UIFramework/Scenes/SampleScene.unity b/Assets/UIFramework/Scenes/SampleScene.unity
+-deleted file mode 100644
+---- a/Assets/UIFramework/Scenes/SampleScene.unity	(revision 09d15d7dd4fa79bd70a1b173ff0ff16e9d9b1a88)
+-+++ /dev/null	(revision 09d15d7dd4fa79bd70a1b173ff0ff16e9d9b1a88)
+-@@ -1,208 +0,0 @@
+--%YAML 1.1
+--%TAG !u! tag:unity3d.com,2011:
+----- !u!29 &1
+--OcclusionCullingSettings:
+--  m_ObjectHideFlags: 0
+--  serializedVersion: 2
+--  m_OcclusionBakeSettings:
+--    smallestOccluder: 5
+--    smallestHole: 0.25
+--    backfaceThreshold: 100
+--  m_SceneGUID: 00000000000000000000000000000000
+--  m_OcclusionCullingData: {fileID: 0}
+----- !u!104 &2
+--RenderSettings:
+--  m_ObjectHideFlags: 0
+--  serializedVersion: 9
+--  m_Fog: 0
+--  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+--  m_FogMode: 3
+--  m_FogDensity: 0.01
+--  m_LinearFogStart: 0
+--  m_LinearFogEnd: 300
+--  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+--  m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
+--  m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
+--  m_AmbientIntensity: 1
+--  m_AmbientMode: 3
+--  m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
+--  m_SkyboxMaterial: {fileID: 0}
+--  m_HaloStrength: 0.5
+--  m_FlareStrength: 1
+--  m_FlareFadeSpeed: 3
+--  m_HaloTexture: {fileID: 0}
+--  m_SpotCookie: {fileID: 10001, guid: 0000000000000000e000000000000000, type: 0}
+--  m_DefaultReflectionMode: 0
+--  m_DefaultReflectionResolution: 128
+--  m_ReflectionBounces: 1
+--  m_ReflectionIntensity: 1
+--  m_CustomReflection: {fileID: 0}
+--  m_Sun: {fileID: 0}
+--  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+--  m_UseRadianceAmbientProbe: 0
+----- !u!157 &3
+--LightmapSettings:
+--  m_ObjectHideFlags: 0
+--  serializedVersion: 12
+--  m_GIWorkflowMode: 1
+--  m_GISettings:
+--    serializedVersion: 2
+--    m_BounceScale: 1
+--    m_IndirectOutputScale: 1
+--    m_AlbedoBoost: 1
+--    m_EnvironmentLightingMode: 0
+--    m_EnableBakedLightmaps: 0
+--    m_EnableRealtimeLightmaps: 0
+--  m_LightmapEditorSettings:
+--    serializedVersion: 12
+--    m_Resolution: 2
+--    m_BakeResolution: 40
+--    m_AtlasSize: 1024
+--    m_AO: 0
+--    m_AOMaxDistance: 1
+--    m_CompAOExponent: 1
+--    m_CompAOExponentDirect: 0
+--    m_ExtractAmbientOcclusion: 0
+--    m_Padding: 2
+--    m_LightmapParameters: {fileID: 0}
+--    m_LightmapsBakeMode: 1
+--    m_TextureCompression: 1
+--    m_FinalGather: 0
+--    m_FinalGatherFiltering: 1
+--    m_FinalGatherRayCount: 256
+--    m_ReflectionCompression: 2
+--    m_MixedBakeMode: 2
+--    m_BakeBackend: 0
+--    m_PVRSampling: 1
+--    m_PVRDirectSampleCount: 32
+--    m_PVRSampleCount: 500
+--    m_PVRBounces: 2
+--    m_PVREnvironmentSampleCount: 500
+--    m_PVREnvironmentReferencePointCount: 2048
+--    m_PVRFilteringMode: 2
+--    m_PVRDenoiserTypeDirect: 0
+--    m_PVRDenoiserTypeIndirect: 0
+--    m_PVRDenoiserTypeAO: 0
+--    m_PVRFilterTypeDirect: 0
+--    m_PVRFilterTypeIndirect: 0
+--    m_PVRFilterTypeAO: 0
+--    m_PVREnvironmentMIS: 0
+--    m_PVRCulling: 1
+--    m_PVRFilteringGaussRadiusDirect: 1
+--    m_PVRFilteringGaussRadiusIndirect: 5
+--    m_PVRFilteringGaussRadiusAO: 2
+--    m_PVRFilteringAtrousPositionSigmaDirect: 0.5
+--    m_PVRFilteringAtrousPositionSigmaIndirect: 2
+--    m_PVRFilteringAtrousPositionSigmaAO: 1
+--    m_ExportTrainingData: 0
+--    m_TrainingDataDestination: TrainingData
+--    m_LightProbeSampleCountMultiplier: 4
+--  m_LightingDataAsset: {fileID: 0}
+--  m_LightingSettings: {fileID: 0}
+----- !u!196 &4
+--NavMeshSettings:
+--  serializedVersion: 2
+--  m_ObjectHideFlags: 0
+--  m_BuildSettings:
+--    serializedVersion: 2
+--    agentTypeID: 0
+--    agentRadius: 0.5
+--    agentHeight: 2
+--    agentSlope: 45
+--    agentClimb: 0.4
+--    ledgeDropHeight: 0
+--    maxJumpAcrossDistance: 0
+--    minRegionArea: 2
+--    manualCellSize: 0
+--    cellSize: 0.16666667
+--    manualTileSize: 0
+--    tileSize: 256
+--    accuratePlacement: 0
+--    maxJobWorkers: 0
+--    preserveTilesOutsideBounds: 0
+--    debug:
+--      m_Flags: 0
+--  m_NavMeshData: {fileID: 0}
+----- !u!1 &519420028
+--GameObject:
+--  m_ObjectHideFlags: 0
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  serializedVersion: 6
+--  m_Component:
+--  - component: {fileID: 519420032}
+--  - component: {fileID: 519420031}
+--  - component: {fileID: 519420029}
+--  m_Layer: 0
+--  m_Name: Main Camera
+--  m_TagString: MainCamera
+--  m_Icon: {fileID: 0}
+--  m_NavMeshLayer: 0
+--  m_StaticEditorFlags: 0
+--  m_IsActive: 1
+----- !u!81 &519420029
+--AudioListener:
+--  m_ObjectHideFlags: 0
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_GameObject: {fileID: 519420028}
+--  m_Enabled: 1
+----- !u!20 &519420031
+--Camera:
+--  m_ObjectHideFlags: 0
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_GameObject: {fileID: 519420028}
+--  m_Enabled: 1
+--  serializedVersion: 2
+--  m_ClearFlags: 2
+--  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+--  m_projectionMatrixMode: 1
+--  m_GateFitMode: 2
+--  m_FOVAxisMode: 0
+--  m_SensorSize: {x: 36, y: 24}
+--  m_LensShift: {x: 0, y: 0}
+--  m_FocalLength: 50
+--  m_NormalizedViewPortRect:
+--    serializedVersion: 2
+--    x: 0
+--    y: 0
+--    width: 1
+--    height: 1
+--  near clip plane: 0.3
+--  far clip plane: 1000
+--  field of view: 60
+--  orthographic: 1
+--  orthographic size: 5
+--  m_Depth: -1
+--  m_CullingMask:
+--    serializedVersion: 2
+--    m_Bits: 4294967295
+--  m_RenderingPath: -1
+--  m_TargetTexture: {fileID: 0}
+--  m_TargetDisplay: 0
+--  m_TargetEye: 0
+--  m_HDR: 1
+--  m_AllowMSAA: 0
+--  m_AllowDynamicResolution: 0
+--  m_ForceIntoRT: 0
+--  m_OcclusionCulling: 0
+--  m_StereoConvergence: 10
+--  m_StereoSeparation: 0.022
+----- !u!4 &519420032
+--Transform:
+--  m_ObjectHideFlags: 0
+--  m_CorrespondingSourceObject: {fileID: 0}
+--  m_PrefabInstance: {fileID: 0}
+--  m_PrefabAsset: {fileID: 0}
+--  m_GameObject: {fileID: 519420028}
+--  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+--  m_LocalPosition: {x: 0, y: 0, z: -10}
+--  m_LocalScale: {x: 1, y: 1, z: 1}
+--  m_Children: []
+--  m_Father: {fileID: 0}
+--  m_RootOrder: 0
+--  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+-Index: Assets/UIFramework/Scenes.meta
+-===================================================================
+-diff --git a/Assets/UIFramework/Scenes.meta b/Assets/UIFramework/Scenes.meta
+-deleted file mode 100644
+---- a/Assets/UIFramework/Scenes.meta	(revision 09d15d7dd4fa79bd70a1b173ff0ff16e9d9b1a88)
+-+++ /dev/null	(revision 09d15d7dd4fa79bd70a1b173ff0ff16e9d9b1a88)
+-@@ -1,8 +0,0 @@
+--fileFormatVersion: 2
+--guid: 131a6b21c8605f84396be9f6751fb6e3
+--folderAsset: yes
+--DefaultImporter:
+--  externalObjects: {}
+--  userData: 
+--  assetBundleName: 
+--  assetBundleVariant: 
+-Index: Assets/UIFramework/Scenes/SampleScene.unity.meta
+-===================================================================
+-diff --git a/Assets/UIFramework/Scenes/SampleScene.unity.meta b/Assets/UIFramework/Scenes/SampleScene.unity.meta
+-deleted file mode 100644
+---- a/Assets/UIFramework/Scenes/SampleScene.unity.meta	(revision 09d15d7dd4fa79bd70a1b173ff0ff16e9d9b1a88)
+-+++ /dev/null	(revision 09d15d7dd4fa79bd70a1b173ff0ff16e9d9b1a88)
+-@@ -1,7 +0,0 @@
+--fileFormatVersion: 2
+--guid: 2cda990e2423bbf4892e6590ba056729
+--DefaultImporter:
+--  externalObjects: {}
+--  userData: 
+--  assetBundleName: 
+--  assetBundleVariant: 
+-Index: Assets/UIFramework/Scripts/UIManager.cs
+-===================================================================
+-diff --git a/Assets/UIFramework/Scripts/UIManager.cs b/Assets/UIFramework/Scripts/UIManager.cs
+-deleted file mode 100644
+---- a/Assets/UIFramework/Scripts/UIManager.cs	(revision 09d15d7dd4fa79bd70a1b173ff0ff16e9d9b1a88)
+-+++ /dev/null	(revision 09d15d7dd4fa79bd70a1b173ff0ff16e9d9b1a88)
+-@@ -1,19 +0,0 @@
+--using UnityEngine;
+--
+--namespace UIFramework.Scripts
+--{
+--    public class UIManager : MonoBehaviour
+--    {
+--        // Start is called before the first frame update
+--        void Start()
+--        {
+--        
+--        }
+--
+--        // Update is called once per frame
+--        void Update()
+--        {
+--        
+--        }
+--    }
+--}
+-Index: Assets/UIFramework.meta
+-===================================================================
+-diff --git a/Assets/UIFramework.meta b/Assets/UIFramework.meta
+-deleted file mode 100644
+---- a/Assets/UIFramework.meta	(revision 09d15d7dd4fa79bd70a1b173ff0ff16e9d9b1a88)
+-+++ /dev/null	(revision 09d15d7dd4fa79bd70a1b173ff0ff16e9d9b1a88)
+-@@ -1,8 +0,0 @@
+--fileFormatVersion: 2
+--guid: ada388459887a4a4cae1c706477ff35f
+--folderAsset: yes
+--DefaultImporter:
+--  externalObjects: {}
+--  userData: 
+--  assetBundleName: 
+--  assetBundleVariant: 
+-Index: Assets/UIFramework/Scripts.meta
+-===================================================================
+-diff --git a/Assets/UIFramework/Scripts.meta b/Assets/UIFramework/Scripts.meta
+-deleted file mode 100644
+---- a/Assets/UIFramework/Scripts.meta	(revision 09d15d7dd4fa79bd70a1b173ff0ff16e9d9b1a88)
+-+++ /dev/null	(revision 09d15d7dd4fa79bd70a1b173ff0ff16e9d9b1a88)
+-@@ -1,8 +0,0 @@
+--fileFormatVersion: 2
+--guid: ffafdb4effa183c429f0d03bdc0ed231
+--folderAsset: yes
+--DefaultImporter:
+--  externalObjects: {}
+--  userData: 
+--  assetBundleName: 
+--  assetBundleVariant: 
+-Index: ProjectSettings/EditorBuildSettings.asset
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+>%YAML 1.1\r\n%TAG !u! tag:unity3d.com,2011:\r\n--- !u!1045 &1\r\nEditorBuildSettings:\r\n  m_ObjectHideFlags: 0\r\n  serializedVersion: 2\r\n  m_Scenes:\r\n  - enabled: 1\r\n    path: Assets/UIFramework/Scenes/SampleScene.unity\r\n    guid: 2cda990e2423bbf4892e6590ba056729\r\n  m_configObjects: {}\r\n
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/ProjectSettings/EditorBuildSettings.asset b/ProjectSettings/EditorBuildSettings.asset
+---- a/ProjectSettings/EditorBuildSettings.asset	(revision 09d15d7dd4fa79bd70a1b173ff0ff16e9d9b1a88)
+-+++ b/ProjectSettings/EditorBuildSettings.asset	(date 1690723165983)
+-@@ -6,6 +6,6 @@
+-   serializedVersion: 2
+-   m_Scenes:
+-   - enabled: 1
+--    path: Assets/UIFramework/Scenes/SampleScene.unity
+-+    path: Assets/QTools/UIFramework/Scenes/SampleScene.unity
+-     guid: 2cda990e2423bbf4892e6590ba056729
+-   m_configObjects: {}
+-Index: .idea/.idea.QTools/.idea/workspace.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+-<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"RunManager\" selected=\"Attach to Unity Editor.Attach to Unity Editor\">\r\n    <configuration name=\"UnitTests (batch mode)\" type=\"RunUnityExe\" factoryName=\"Unity Executable\">\r\n      <option name=\"EXE_PATH\" value=\"C:\\Program Files\\Unity\\Hub\\Editor\\2021.3.8f1c1\\Editor\\Unity.exe\" />\r\n      <option name=\"PROGRAM_PARAMETERS\" value=\"-runTests -batchmode -projectPath E:\\WorkSpace\\QTools -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"E:\\WorkSpace\\QTools\" />\r\n      <option name=\"PASS_PARENT_ENVS\" value=\"1\" />\r\n      <option name=\"USE_EXTERNAL_CONSOLE\" value=\"0\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"Attach to Unity Editor &amp; Play\" type=\"UNITY_DEBUG_RUN_CONFIGURATION\" factoryName=\"UNITY_ATTACH_AND_PLAY\" show_console_on_std_err=\"false\" show_console_on_std_out=\"false\" port=\"50000\" address=\"localhost\">\r\n      <option name=\"allowRunningInParallel\" value=\"false\" />\r\n      <option name=\"listenPortForConnections\" value=\"false\" />\r\n      <option name=\"pid\" />\r\n      <option name=\"projectPathOnTarget\" />\r\n      <option name=\"selectedOptions\">\r\n        <list />\r\n      </option>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"Attach to Unity Editor\" type=\"UNITY_DEBUG_RUN_CONFIGURATION\" factoryName=\"Unity Debug\" show_console_on_std_err=\"false\" show_console_on_std_out=\"false\" port=\"50000\" address=\"localhost\">\r\n      <option name=\"allowRunningInParallel\" value=\"false\" />\r\n      <option name=\"listenPortForConnections\" value=\"false\" />\r\n      <option name=\"pid\" />\r\n      <option name=\"projectPathOnTarget\" />\r\n      <option name=\"selectedOptions\">\r\n        <list />\r\n      </option>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n  </component>\r\n</project>
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/.idea.QTools/.idea/workspace.xml b/.idea/.idea.QTools/.idea/workspace.xml
+---- a/.idea/.idea.QTools/.idea/workspace.xml	(revision 09d15d7dd4fa79bd70a1b173ff0ff16e9d9b1a88)
+-+++ b/.idea/.idea.QTools/.idea/workspace.xml	(date 1690724374300)
+-@@ -1,5 +1,41 @@
+- <?xml version="1.0" encoding="UTF-8"?>
+- <project version="4">
+-+  <component name="ChangeListManager">
+-+    <list default="true" id="ce9c88fb-1fce-4eae-b3a6-0a4557eb6037" name="Changes" comment="first commit">
+-+      <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/UIFramework.meta" beforeDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/UIFramework/Scenes.meta" beforeDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/UIFramework/Scenes/SampleScene.unity" beforeDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/UIFramework/Scenes/SampleScene.unity.meta" beforeDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/UIFramework/Scripts.meta" beforeDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/UIFramework/Scripts/UIManager.cs" beforeDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/UIFramework/Scripts/UIManager.cs.meta" beforeDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
+-+    </list>
+-+    <option name="SHOW_DIALOG" value="false" />
+-+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+-+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+-+    <option name="LAST_RESOLUTION" value="IGNORE" />
+-+  </component>
+-+  <component name="MarkdownSettingsMigration">
+-+    <option name="stateVersion" value="1" />
+-+  </component>
+-+  <component name="ProjectId" id="2TI4nSSjOMGGE3KHhxXKpsaLipe" />
+-+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+-+  <component name="ProjectViewState">
+-+    <option name="hideEmptyMiddlePackages" value="true" />
+-+    <option name="showLibraryContents" value="true" />
+-+  </component>
+-+  <component name="PropertiesComponent"><![CDATA[{
+-+  "keyToString": {
+-+    "Discover.Launch.Via.Unity": "true",
+-+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+-+    "RunOnceActivity.ShowReadmeOnStart": "true",
+-+    "WebServerToolWindowFactoryState": "false",
+-+    "nodejs_package_manager_path": "npm",
+-+    "vue.rearranger.settings.migration": "true"
+-+  }
+-+}]]></component>
+-   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+-     <configuration name="UnitTests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
+-       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2021.3.8f1c1\Editor\Unity.exe" />
+-@@ -30,4 +66,36 @@
+-       <method v="2" />
+-     </configuration>
+-   </component>
+-+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+-+  <component name="TaskManager">
+-+    <task active="true" id="Default" summary="Default task">
+-+      <changelist id="ce9c88fb-1fce-4eae-b3a6-0a4557eb6037" name="Changes" comment="" />
+-+      <created>1690717449580</created>
+-+      <option name="number" value="Default" />
+-+      <option name="presentableId" value="Default" />
+-+      <updated>1690717449580</updated>
+-+      <workItem from="1690717477702" duration="2487000" />
+-+    </task>
+-+    <servers />
+-+  </component>
+-+  <component name="TypeScriptGeneratedFilesManager">
+-+    <option name="version" value="3" />
+-+  </component>
+-+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
+-+  <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
+-+  <component name="UnityUnitTestConfiguration" currentTestLauncher="EditMode" />
+-+  <component name="Vcs.Log.Tabs.Properties">
+-+    <option name="TAB_STATES">
+-+      <map>
+-+        <entry key="MAIN">
+-+          <value>
+-+            <State />
+-+          </value>
+-+        </entry>
+-+      </map>
+-+    </option>
+-+  </component>
+-+  <component name="VcsManagerConfiguration">
+-+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+-+  </component>
+- </project>
+-\ No newline at end of file
+Index: .idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_4_9_31__Changes_1.xml
+===================================================================
+diff --git a/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_4_9_31__Changes_1.xml b/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_4_9_31__Changes_1.xml
+deleted file mode 100644
+--- a/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_4_9_31__Changes_1.xml	(revision 0163e7fca090dffcb866f9caa3accedf9adc74f7)
++++ /dev/null	(revision 0163e7fca090dffcb866f9caa3accedf9adc74f7)
+@@ -1,4 +0,0 @@
+-<changelist name="Uncommitted_changes_before_Update_at_2023_8_4_9_31_[Changes]1" date="1691112725313" recycled="true" deleted="true">
+-  <option name="PATH" value="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_4_9_31_[Changes]1/shelved.patch" />
+-  <option name="DESCRIPTION" value="Uncommitted changes before Update at 2023/8/4 9:31 [Changes]" />
+-</changelist>
+\ No newline at end of file
+Index: .idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_4_9_31_[Changes]1/shelved.patch
+===================================================================
+diff --git a/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_4_9_31_[Changes]1/shelved.patch b/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_4_9_31_[Changes]1/shelved.patch
+deleted file mode 100644
+--- a/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_4_9_31_[Changes]1/shelved.patch	(revision 0163e7fca090dffcb866f9caa3accedf9adc74f7)
++++ /dev/null	(revision 0163e7fca090dffcb866f9caa3accedf9adc74f7)
+@@ -1,283 +0,0 @@
+-Index: Assets/3Plugins/QToolsKit/UIFramework/Sample/LoginForm.cs
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Sample/LoginForm.cs b/Assets/3Plugins/QToolsKit/UIFramework/Sample/LoginForm.cs
+---- a/Assets/3Plugins/QToolsKit/UIFramework/Sample/LoginForm.cs	
+-+++ b/Assets/3Plugins/QToolsKit/UIFramework/Sample/LoginForm.cs	
+-@@ -6,6 +6,14 @@
+-     {
+-         public override LoginView View { get; set; }
+-         public override LoginModel Model { get; set; }
+--        
+-+        public override void OnShow()
+-+        {
+-+            
+-+        }
+-+
+-+        public override void OnClose()
+-+        {
+-+            
+-+        }
+-     }
+- }
+-\ No newline at end of file
+-Index: Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs b/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs
+---- a/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs	
+-+++ b/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs	
+-@@ -9,37 +9,14 @@
+- {
+-     public class UIManager : MonoBehaviour
+-     {
+--        private Dictionary<ViewEnum, IForm> _forms = new Dictionary<ViewEnum, IForm>();
+-+        private Dictionary<ViewEnum, UIForm> _forms =
+-+            new Dictionary<ViewEnum, UIForm>();
+- 
+-         private void Start()
+-         {
+-             //初始化
+-             AssetBundleLoaderMgr.instance.Init();
+--            TestInstance();
+--        }
+--
+--        public void LoadUIPrefabs()
+--        {
+-         }
+--
+--
+--        public void TestInstance()
+--        {
+--            Profiler.BeginSample("##################22222222####################");
+--            GameObject prefab =
+--                AssetBundleLoaderMgr.instance.LoadAsset<GameObject>("ui/prefabs/maincitypanel", "MainCityView");
+--            for (int i = 0; i < 100; i++)
+--            {
+--                //实例化预设
+--                GameObject go = Instantiate(prefab, transform);
+--                go.hideFlags = HideFlags.HideInHierarchy;
+--                Destroy(go);
+--            }
+--
+--            Profiler.EndSample();
+--        }
+--
+--
+-         public void InitViewPanels()
+-         {
+-             //加载预设
+-@@ -47,11 +24,12 @@
+-                 AssetBundleLoaderMgr.instance.LoadAsset<GameObject>("ui/prefabs/maincitypanel", "MainCityView");
+-             //实例化预设
+-             GameObject go = Instantiate(prefab, transform);
+--            LoginForm uiForm = go.GetComponent<LoginForm>();
+--            uiForm.Bind(
+-+            UIForm uiForm = go.GetComponent<UIForm>();
+-+            uiForm
+-+                .Bind(
+-                 new LoginView(),
+--                new LoginModel());
+--            uiForm.viewEnum = ViewEnum.LOGIN;
+-+                new LoginModel())
+-+                .viewEnum= ViewEnum.LOGIN;
+-             _forms.Add(ViewEnum.LOGIN, uiForm);
+-         }
+- 
+-Index: Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs
+-===================================================================
+-diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs b/Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs
+-deleted file mode 100644
+---- a/Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs	
+-+++ /dev/null	
+-@@ -1,8 +0,0 @@
+--namespace _3Plugins.QToolsKit.UIFramework.Scripts
+--{
+--    public interface IForm
+--    {
+--       public abstract void OnShow();
+--       public abstract void OnClose();
+--    }
+--}
+-\ No newline at end of file
+-Index: Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs.meta
+-===================================================================
+-diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs.meta b/Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs.meta
+-deleted file mode 100644
+---- a/Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs.meta	
+-+++ /dev/null	
+-@@ -1,3 +0,0 @@
+--fileFormatVersion: 2
+--guid: 62cff164328f4245ac69b02474505df4
+--timeCreated: 1691033731
+-\ No newline at end of file
+-Index: .idea/.idea.QTools/.idea/workspace.xml
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/.idea/.idea.QTools/.idea/workspace.xml b/.idea/.idea.QTools/.idea/workspace.xml
+---- a/.idea/.idea.QTools/.idea/workspace.xml	
+-+++ b/.idea/.idea.QTools/.idea/workspace.xml	
+-@@ -2,13 +2,16 @@
+- <project version="4">
+-   <component name="ChangeListManager">
+-     <list default="true" id="ebb0ebae-187f-42f0-bae6-eabc873a3dba" name="Changes" comment="uiframe1">
+--      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Sample/LoginForm.cs" afterDir="false" />
+--      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Sample/LoginForm.cs.meta" afterDir="false" />
+--      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs" afterDir="false" />
+--      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs.meta" afterDir="false" />
+-+      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Config.meta" afterDir="false" />
+-+      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor.meta" afterDir="false" />
+-+      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/UIFormEditor.cs" afterDir="false" />
+-+      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/UIFormEditor.cs.meta" afterDir="false" />
+-+      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIForm.cs" afterDir="false" />
+-+      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIForm.cs.meta" afterDir="false" />
+-       <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" afterDir="false" />
+--      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/FormUI.cs" beforeDir="false" />
+--      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/FormUI.cs.meta" beforeDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Sample/LoginForm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Sample/LoginForm.cs" afterDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs" beforeDir="false" />
+-+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/IForm.cs.meta" beforeDir="false" />
+-       <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIManager.cs" afterDir="false" />
+-       <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/ViewAbstract.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/ViewAbstract.cs" afterDir="false" />
+-     </list>
+-@@ -17,6 +20,9 @@
+-     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+-     <option name="LAST_RESOLUTION" value="IGNORE" />
+-   </component>
+-+  <component name="Git.Settings">
+-+    <option name="UPDATE_TYPE" value="REBASE" />
+-+  </component>
+-   <component name="HighlightingSettingsPerFile">
+-     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/df0aaee1feac4b8084d0040846eee8d415a400/0f/7c610971/UnityAction.cs" root0="SKIP_HIGHLIGHTING" />
+-     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/df0aaee1feac4b8084d0040846eee8d415a400/2f/01258e9a/GameObject.cs" root0="SKIP_HIGHLIGHTING" />
+-@@ -102,6 +108,7 @@
+-       <updated>1690793543067</updated>
+-       <workItem from="1690793564514" duration="27229000" />
+-       <workItem from="1691032661307" duration="2979000" />
+-+      <workItem from="1691050539590" duration="6132000" />
+-     </task>
+-     <task id="LOCAL-00001" summary="uiframe1.co">
+-       <created>1691028022497</created>
+-Index: Assets/3Plugins/QToolsKit/UIFramework/Editor.meta
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Editor.meta b/Assets/3Plugins/QToolsKit/UIFramework/Editor.meta
+-new file mode 100644
+---- /dev/null	
+-+++ b/Assets/3Plugins/QToolsKit/UIFramework/Editor.meta	
+-@@ -0,0 +1,3 @@
+-+fileFormatVersion: 2
+-+guid: c99a99a90d2249e8b04439b4fbfbc50e
+-+timeCreated: 1691054147
+-\ No newline at end of file
+-Index: Assets/3Plugins/QToolsKit/UIFramework/Config.meta
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Config.meta b/Assets/3Plugins/QToolsKit/UIFramework/Config.meta
+-new file mode 100644
+---- /dev/null	
+-+++ b/Assets/3Plugins/QToolsKit/UIFramework/Config.meta	
+-@@ -0,0 +1,3 @@
+-+fileFormatVersion: 2
+-+guid: 39ccf2cee74c48a9af9c8ff4e5e903c8
+-+timeCreated: 1691054472
+-\ No newline at end of file
+-Index: Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIForm.cs
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIForm.cs b/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIForm.cs
+-new file mode 100644
+---- /dev/null	
+-+++ b/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIForm.cs	
+-@@ -0,0 +1,12 @@
+-+using UnityEngine;
+-+
+-+namespace _3Plugins.QToolsKit.UIFramework.Scripts
+-+{
+-+    /// <summary>
+-+    /// 
+-+    /// </summary>
+-+    public class UIForm: MonoBehaviour
+-+    {
+-+        
+-+    }
+-+}
+-\ No newline at end of file
+-Index: Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIForm.cs.meta
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIForm.cs.meta b/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIForm.cs.meta
+-new file mode 100644
+---- /dev/null	
+-+++ b/Assets/3Plugins/QToolsKit/UIFramework/Scripts/UIForm.cs.meta	
+-@@ -0,0 +1,3 @@
+-+fileFormatVersion: 2
+-+guid: e7e8bc8b09124ee9ad94c939fa4b326a
+-+timeCreated: 1691053854
+-\ No newline at end of file
+-Index: Assets/3Plugins/QToolsKit/UIFramework/Editor/UIFormEditor.cs.meta
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Editor/UIFormEditor.cs.meta b/Assets/3Plugins/QToolsKit/UIFramework/Editor/UIFormEditor.cs.meta
+-new file mode 100644
+---- /dev/null	
+-+++ b/Assets/3Plugins/QToolsKit/UIFramework/Editor/UIFormEditor.cs.meta	
+-@@ -0,0 +1,3 @@
+-+fileFormatVersion: 2
+-+guid: b879721d20684fe9bb9c2f13fab83c05
+-+timeCreated: 1691054155
+-\ No newline at end of file
+-Index: Assets/3Plugins/QToolsKit/UIFramework/Editor/UIFormEditor.cs
+-IDEA additional info:
+-Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+-<+>UTF-8
+-===================================================================
+-diff --git a/Assets/3Plugins/QToolsKit/UIFramework/Editor/UIFormEditor.cs b/Assets/3Plugins/QToolsKit/UIFramework/Editor/UIFormEditor.cs
+-new file mode 100644
+---- /dev/null	
+-+++ b/Assets/3Plugins/QToolsKit/UIFramework/Editor/UIFormEditor.cs	
+-@@ -0,0 +1,27 @@
+-+using _3Plugins.QToolsKit.UIFramework.Scripts;
+-+using UnityEditor;
+-+using UnityEngine;
+-+using UnityEngine.Serialization;
+-+
+-+namespace _3Plugins.QToolsKit.UIFramework.Editor
+-+{
+-+    [CustomEditor(typeof(UIForm))]
+-+    public class UIFormEditor : UnityEditor.Editor
+-+    {
+-+        private UIForm _form;
+-+        public override void OnInspectorGUI()
+-+        {
+-+            _form = target as UIForm;
+-+            
+-+            EditorGUILayout.Space(5);
+-+
+-+            EditorGUILayout.BeginVertical();
+-+            if (GUILayout.Button("×", GUILayout.Width(20), GUILayout.Height(20)))
+-+            {
+-+              
+-+            }
+-+
+-+            EditorGUILayout.EndVertical();
+-+        }
+-+    }
+-+}
+-\ No newline at end of file
+Index: ProjectSettings/ProjectVersion.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>m_EditorVersion: 2021.3.27f1c1\r\nm_EditorVersionWithRevision: 2021.3.27f1c1 (2776fa9c5d2b)\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/ProjectSettings/ProjectVersion.txt b/ProjectSettings/ProjectVersion.txt
+--- a/ProjectSettings/ProjectVersion.txt	(revision 0163e7fca090dffcb866f9caa3accedf9adc74f7)
++++ b/ProjectSettings/ProjectVersion.txt	(date 1691763410875)
+@@ -1,2 +1,2 @@
+-m_EditorVersion: 2021.3.27f1c1
+-m_EditorVersionWithRevision: 2021.3.27f1c1 (2776fa9c5d2b)
++m_EditorVersion: 2021.3.8f1c1
++m_EditorVersionWithRevision: 2021.3.8f1c1 (c20728c1e961)
+Index: .idea/.idea.QTools/.idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"ebb0ebae-187f-42f0-bae6-eabc873a3dba\" name=\"Changes\" comment=\"[目录树]修改间隔布局\">\r\n      <change afterPath=\"$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data.meta\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/FormWindowData.cs\" afterDir=\"false\" />\r\n      <change afterPath=\"$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/FormWindowData.cs.meta\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/TreeView/PrefabTreeView.cs\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/TreeView/PrefabTreeView.cs\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"UPDATE_TYPE\" value=\"REBASE\" />\r\n  </component>\r\n  <component name=\"HighlightingSettingsPerFile\">\r\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/e6e14148bf884003a8eed0a878a174f416c00/dd/5213332d/0200000Apdb12.il\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/012ca6023c754e6384f20d14e09f256e5789b8/03/d2ec0e2b/Path.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5456dbfeccf644f7ab5b4d4a01ccf33e814a00/2e/9de80c05/GenericMenu.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5456dbfeccf644f7ab5b4d4a01ccf33e814a00/b3/ae94ec56/AssetDatabase.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5456dbfeccf644f7ab5b4d4a01ccf33e814a00/e8/58525717/TreeView.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5456dbfeccf644f7ab5b4d4a01ccf33e814a00/f9/bd4e9dc2/EditorUtility.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a2c0aeec54124247bdff1197fabae8146400/d8/03a7045d/AssetBundle.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d87da959c26443e0baa9578975afed03157c00/d2/eacd854e/ScriptableObject.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Assets/3Plugins/HierarchyTootip/Editor/HierarchyTootip.cs\" root0=\"FORCE_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Editor/AutoEnumBuildTemplate.cs\" root0=\"FORCE_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/EditorFormWindowTest.cs\" root0=\"FORCE_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs\" root0=\"FORCE_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/TreeView/PrefabTreeView.cs\" root0=\"FORCE_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.path@5.0.2/Editor/EditorTool/PathEditorTool.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/AssetBundleBrowserMain.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/AssetBundleBuildTab.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/AssetBundleDataSource/ABDataSource.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/AssetBundleDataSource/ABDataSourceProvider.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/AssetBundleDataSource/AssetDatabaseABDataSource.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/AssetBundleManageTab.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/AssetBundleModel/ABModel.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/AssetBundleModel/ABModelAssetInfo.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/AssetBundleModel/ABModelBundleInfo.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/AssetBundleTree.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/AssetListTree.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/BundleDetailList.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/InspectTab/AssetBundleInspectTab.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/InspectTab/InspectSingleBundle.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/MessageList.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/MessageSystem.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/Unity.AssetBundleBrowser.Editor.asmdef\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Tests/Editor/ABModelTests.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Tests/Editor/AssetBundleRecordTests.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Tests/Editor/Unity.AssetBundleBrowser.Editor.Tests.asmdef\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Tests/Editor/Util/ABModelUtil.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@2.0.4/Editor/PlasticSCM/PlasticMenuItem.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@2.0.4/Editor/PlasticSCM/UI/RunModal.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.collab-proxy@2.0.4/Editor/PlasticSCM/UI/UnityConstants.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.ide.visualstudio@2.0.18/Editor/VisualStudioInstallation.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.ide.visualstudio@2.0.18/Editor/VisualStudioIntegration.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.textmeshpro@3.0.6/Scripts/Runtime/TMP_ScrollbarEventHandler.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Editor/UI/ImageEditor.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Editor/UI/InputFieldEditor.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Text.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Editor/TestBehaviourBase.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Tests/Runtime/Toggle/ToggleTests.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting@1.8.0/Editor/VisualScripting.Flow/FlowGraphUnitUISample.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n    <setting file=\"file://$PROJECT_DIR$/Library/PackageCache/com.unity.visualscripting@1.8.0/Runtime/VisualScripting.Core/Macros/Macro.cs\" root0=\"SKIP_HIGHLIGHTING\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2TKZ4UJ5XXA3y9nhcXuPdfiQu3C\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\r\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\r\n  </component>\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;Discover.Launch.Via.Unity&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  }\r\n}</component>\r\n  <component name=\"RunManager\" selected=\"Attach to Unity Editor.Attach to Unity Editor\">\r\n    <configuration name=\"UnitTests (batch mode)\" type=\"RunUnityExe\" factoryName=\"Unity Executable\">\r\n      <option name=\"EXE_PATH\" value=\"C:\\Program Files\\Unity\\Hub\\Editor\\2021.3.27f1c1\\Editor\\Unity.exe\" />\r\n      <option name=\"PROGRAM_PARAMETERS\" value=\"-runTests -batchmode -projectPath E:\\WorkSpace\\QTools -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"E:\\WorkSpace\\QTools\" />\r\n      <option name=\"PASS_PARENT_ENVS\" value=\"1\" />\r\n      <option name=\"USE_EXTERNAL_CONSOLE\" value=\"0\" />\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"Attach to Unity Editor &amp; Play\" type=\"UNITY_DEBUG_RUN_CONFIGURATION\" factoryName=\"UNITY_ATTACH_AND_PLAY\" show_console_on_std_err=\"false\" show_console_on_std_out=\"false\" port=\"50000\" address=\"localhost\">\r\n      <option name=\"allowRunningInParallel\" value=\"false\" />\r\n      <option name=\"listenPortForConnections\" value=\"false\" />\r\n      <option name=\"pid\" />\r\n      <option name=\"projectPathOnTarget\" />\r\n      <option name=\"selectedOptions\">\r\n        <list />\r\n      </option>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n    <configuration name=\"Attach to Unity Editor\" type=\"UNITY_DEBUG_RUN_CONFIGURATION\" factoryName=\"Unity Debug\" show_console_on_std_err=\"false\" show_console_on_std_out=\"false\" port=\"50000\" address=\"localhost\" ignored-value-for-modified-check=\"5476\">\r\n      <option name=\"allowRunningInParallel\" value=\"false\" />\r\n      <option name=\"listenPortForConnections\" value=\"false\" />\r\n      <option name=\"pid\" value=\"5476\" />\r\n      <option name=\"projectPathOnTarget\" />\r\n      <option name=\"selectedOptions\">\r\n        <list />\r\n      </option>\r\n      <method v=\"2\" />\r\n    </configuration>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"ebb0ebae-187f-42f0-bae6-eabc873a3dba\" name=\"Changes\" comment=\"\" />\r\n      <created>1690793543067</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1690793543067</updated>\r\n      <workItem from=\"1690793564514\" duration=\"27229000\" />\r\n      <workItem from=\"1691032661307\" duration=\"2979000\" />\r\n      <workItem from=\"1691076075835\" duration=\"2119000\" />\r\n      <workItem from=\"1691201258885\" duration=\"2759000\" />\r\n      <workItem from=\"1691380017312\" duration=\"15008000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"uiframe1.co\">\r\n      <created>1691028022497</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1691028022497</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"ui编辑器\">\r\n      <created>1691071603405</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1691071603405</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"ui编辑器\">\r\n      <created>1691074742433</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1691074742433</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"目录树完成大部分\">\r\n      <created>1691397969523</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1691397969523</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"[目录树]修改间隔布局\">\r\n      <created>1691402447158</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1691402447158</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"[目录树]修改间隔布局\">\r\n      <created>1691421234841</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1691421234841</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"7\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"UnityCheckinConfiguration\" checkUnsavedScenes=\"true\" />\r\n  <component name=\"UnityProjectConfiguration\" hasMinimizedUI=\"true\" />\r\n  <component name=\"UnityUnitTestConfiguration\" currentTestLauncher=\"EditMode\" />\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"uiframe1\" />\r\n    <MESSAGE value=\"ui编辑器\" />\r\n    <MESSAGE value=\"目录树完成大部分\" />\r\n    <MESSAGE value=\"[目录树]修改间隔布局\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"[目录树]修改间隔布局\" />\r\n  </component>\r\n  <component name=\"XSLT-Support.FileAssociations.UIState\">\r\n    <expand />\r\n    <select />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.idea.QTools/.idea/workspace.xml b/.idea/.idea.QTools/.idea/workspace.xml
+--- a/.idea/.idea.QTools/.idea/workspace.xml	(revision 0163e7fca090dffcb866f9caa3accedf9adc74f7)
++++ b/.idea/.idea.QTools/.idea/workspace.xml	(date 1691766796667)
+@@ -1,21 +1,26 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="ebb0ebae-187f-42f0-bae6-eabc873a3dba" name="Changes" comment="[目录树]修改间隔布局">
+-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data.meta" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/FormWindowData.cs" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/FormWindowData.cs.meta" afterDir="false" />
++    <list default="true" id="ebb0ebae-187f-42f0-bae6-eabc873a3dba" name="Changes" comment="[目录树]修改间隔布局222222">
++      <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_2_19_24_[Changes]/shelved.patch" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_2_19_24__Changes_.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_3_19_21_[Changes]1/StandaloneWindows" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_3_19_21_[Changes]1/maincitypanel" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_3_19_21_[Changes]1/shelved.patch" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_3_19_21_[Changes]1/shoorscreen1" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_3_19_21_[Changes]1/shootscreen0" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_3_19_21__Changes_1.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_4_9_31_[Changes]1/shelved.patch" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_4_9_31__Changes_1.xml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_7_23_05__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_7_23_05__Changes_.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/TreeView/PrefabTreeView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/TreeView/PrefabTreeView.cs" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+     <option name="LAST_RESOLUTION" value="IGNORE" />
+-  </component>
+-  <component name="Git.Settings">
+-    <option name="UPDATE_TYPE" value="REBASE" />
+   </component>
+   <component name="HighlightingSettingsPerFile">
+     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/e6e14148bf884003a8eed0a878a174f416c00/dd/5213332d/0200000Apdb12.il" root0="SKIP_HIGHLIGHTING" />
+@@ -91,7 +96,7 @@
+ }</component>
+   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
+     <configuration name="UnitTests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
+-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2021.3.27f1c1\Editor\Unity.exe" />
++      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2021.3.8f1c1\Editor\Unity.exe" />
+       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath E:\WorkSpace\QTools -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
+       <option name="WORKING_DIRECTORY" value="E:\WorkSpace\QTools" />
+       <option name="PASS_PARENT_ENVS" value="1" />
+@@ -108,10 +113,10 @@
+       </option>
+       <method v="2" />
+     </configuration>
+-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="5476">
++    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+       <option name="allowRunningInParallel" value="false" />
+       <option name="listenPortForConnections" value="false" />
+-      <option name="pid" value="5476" />
++      <option name="pid" />
+       <option name="projectPathOnTarget" />
+       <option name="selectedOptions">
+         <list />
+@@ -132,6 +137,7 @@
+       <workItem from="1691076075835" duration="2119000" />
+       <workItem from="1691201258885" duration="2759000" />
+       <workItem from="1691380017312" duration="15008000" />
++      <workItem from="1691763481702" duration="3273000" />
+     </task>
+     <task id="LOCAL-00001" summary="uiframe1.co">
+       <created>1691028022497</created>
+@@ -175,7 +181,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1691421234841</updated>
+     </task>
+-    <option name="localTasksCounter" value="7" />
++    <task id="LOCAL-00007" summary="[目录树]修改间隔布局222222">
++      <created>1691425105589</created>
++      <option name="number" value="00007" />
++      <option name="presentableId" value="LOCAL-00007" />
++      <option name="project" value="LOCAL" />
++      <updated>1691425105589</updated>
++    </task>
++    <option name="localTasksCounter" value="8" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -200,7 +213,8 @@
+     <MESSAGE value="ui编辑器" />
+     <MESSAGE value="目录树完成大部分" />
+     <MESSAGE value="[目录树]修改间隔布局" />
+-    <option name="LAST_COMMIT_MESSAGE" value="[目录树]修改间隔布局" />
++    <MESSAGE value="[目录树]修改间隔布局222222" />
++    <option name="LAST_COMMIT_MESSAGE" value="[目录树]修改间隔布局222222" />
+   </component>
+   <component name="XSLT-Support.FileAssociations.UIState">
+     <expand />

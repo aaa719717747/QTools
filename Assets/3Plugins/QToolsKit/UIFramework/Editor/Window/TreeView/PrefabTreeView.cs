@@ -91,7 +91,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
                 num++;
                 // 计算图标的位置
                 Rect iconRect = new Rect(args.rowRect);
-                iconRect.x += (230 + (num * 20)); // 10是图标和行末尾的间距
+                iconRect.x += (150 + (num * 20)); // 10是图标和行末尾的间距
                 iconRect.width = 15; //icon.width;
                 iconRect.height = 15; //icon.height;
                 // 绘制图标
@@ -103,7 +103,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
                 num++;
                 // 计算图标的位置
                 Rect iconRect = new Rect(args.rowRect);
-                iconRect.x += (230 + (num * 20)); // 10是图标和行末尾的间距
+                iconRect.x += (150 + (num * 20)); // 10是图标和行末尾的间距
                 iconRect.width = 15; //icon.width;
                 iconRect.height = 15; //icon.height;
                 // 绘制图标

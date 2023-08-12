@@ -1,39 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ebb0ebae-187f-42f0-bae6-eabc873a3dba" name="Changes" comment="修改右侧区域">
+    <list default="true" id="ebb0ebae-187f-42f0-bae6-eabc873a3dba" name="Changes" comment="[目录树]修改间隔布局222222">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_7_23_05__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_7_23_05__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_8_10_27__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_8_10_27__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Configs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/TreeView/PrefabTreeView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/TreeView/PrefabTreeView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a89f013b2a0d4e879ff7730358cda98b818c00/3e/2581443e/EditorUtility.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a89f013b2a0d4e879ff7730358cda98b818c00/d1/17526e6a/TreeView.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a89f013b2a0d4e879ff7730358cda98b818c00/f2/8eee688b/TreeViewItem.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/da25edc23f9742c289b17120bd7a363c29200/3b/af4af91a/GUI.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/da25edc23f9742c289b17120bd7a363c29200/9f/253696c2/ScaleMode.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/df0aaee1feac4b8084d0040846eee8d415a400/0f/7c610971/UnityAction.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/df0aaee1feac4b8084d0040846eee8d415a400/2d/8005ceab/RectOffset.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/df0aaee1feac4b8084d0040846eee8d415a400/2f/01258e9a/GameObject.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/df0aaee1feac4b8084d0040846eee8d415a400/41/8a6469a8/Application.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/df0aaee1feac4b8084d0040846eee8d415a400/68/41c189df/UnityEvent.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/df0aaee1feac4b8084d0040846eee8d415a400/d8/27d61301/Object.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/ILViewer/e6e14148bf884003a8eed0a878a174f416c00/dd/5213332d/0200000Apdb12.il" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/012ca6023c754e6384f20d14e09f256e5789b8/03/d2ec0e2b/Path.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5456dbfeccf644f7ab5b4d4a01ccf33e814a00/14/93dd8bcd/EditorWindow.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5456dbfeccf644f7ab5b4d4a01ccf33e814a00/2e/9de80c05/GenericMenu.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5456dbfeccf644f7ab5b4d4a01ccf33e814a00/b3/ae94ec56/AssetDatabase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5456dbfeccf644f7ab5b4d4a01ccf33e814a00/e8/58525717/TreeView.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/5456dbfeccf644f7ab5b4d4a01ccf33e814a00/f9/bd4e9dc2/EditorUtility.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/706af827d57d40d5a17b310f3b1cf8e729200/4c/d085b0f1/GUIContent.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a2c0aeec54124247bdff1197fabae8146400/d8/03a7045d/AssetBundle.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/d87da959c26443e0baa9578975afed03157c00/d2/eacd854e/ScriptableObject.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/HierarchyTootip/Editor/HierarchyTootip.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Editor/AutoEnumBuildTemplate.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/FormWindowData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/GlobalUIWindowData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/TreeView/PrefabTreeView.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.animation@7.0.11/Editor/SpriteLib/SpriteLibrarySourceAsset/SpriteLibrarySourceAssetImporter.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.animation@7.0.11/Editor/SpriteLib/SpriteLibrarySourceAsset/SpriteLibrarySourceAssetImporterInspector.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.animation@7.0.11/Editor/SpriteSkin/SpriteSkinCompositeDebugWindow.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.animation@7.0.11/IK/Editor/Inspectors/IKManager2DEditor.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.path@5.0.2/Editor/EditorTool/PathEditorTool.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.pixel-perfect@5.0.3/Samples~/Scenes and Extras/Extras/Custom Canvas Scaler/CustomCanvasScaler.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.tilemap.extras@2.2.5/Editor/Menu/CustomRuleTileMenu.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.tilemap.extras@2.2.5/Editor/Menu/MenuItemOrder.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/AssetBundleBrowserMain.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/AssetBundleBuildTab.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.assetbundlebrowser@ad2a81ec30/Editor/AssetBundleDataSource/ABDataSource.cs" root0="SKIP_HIGHLIGHTING" />
@@ -93,7 +96,7 @@
 }</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="UnitTests (batch mode)" type="RunUnityExe" factoryName="Unity Executable">
-      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2021.3.27f1c1\Editor\Unity.exe" />
+      <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\2021.3.8f1c1\Editor\Unity.exe" />
       <option name="PROGRAM_PARAMETERS" value="-runTests -batchmode -projectPath E:\WorkSpace\QTools -testResults Logs/results.xml -testPlatform EditMode -debugCodeOptimization" />
       <option name="WORKING_DIRECTORY" value="E:\WorkSpace\QTools" />
       <option name="PASS_PARENT_ENVS" value="1" />
@@ -136,6 +139,7 @@
       <workItem from="1691380017312" duration="15008000" />
       <workItem from="1691723500081" duration="12188000" />
       <workItem from="1691747136934" duration="24000" />
+      <workItem from="1691810877342" duration="6781000" />
     </task>
     <task id="LOCAL-00001" summary="uiframe1.co">
       <created>1691028022497</created>
