@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
 using _3Plugins.QToolsKit.UIFramework.Editor.Window.Enums;
-using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
+namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data.Json
 {
+
     [CreateAssetMenu(fileName = "PrefabCacheData",menuName = "PrefabCacheData(ScriptableObject)")]
     public class PrefabCacheData: ScriptableObject
     {
         public GameObject prefab;
+        public int InstanceId;
         public List<SOTreeViewNodeData> treeViewNodes = new List<SOTreeViewNodeData>();
     }
     /// <summary>

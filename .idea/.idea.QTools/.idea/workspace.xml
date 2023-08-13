@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ebb0ebae-187f-42f0-bae6-eabc873a3dba" name="Changes" comment="[目录树]修改间隔布局222222">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_7_23_05__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_7_23_05__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_8_10_27__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_8_10_27__Changes_.xml" afterDir="false" />
+    <list default="true" id="ebb0ebae-187f-42f0-bae6-eabc873a3dba" name="Changes" comment="修改右侧布局">
+      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Utils/JsonUtils.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Utils/JsonUtils.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Configs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Enums/WindowArea.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Enums/WindowArea.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Configs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Configs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Configs/Scripts.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Configs/Scripts/UIFormEditorConfig.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Configs/Scripts/UIFormEditorConfig.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Configs/UIFormEditorConfig.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Configs/UIFormEditorConfig.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Utils/EditorUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Utils/EditorUtils.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/FormWindowData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/FormWindowData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/GlobalUIWindowData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/GlobalUIWindowData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/GlobalUIWindowData.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/GlobalUIWindowData.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/PrefabCacheData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/PrefabCacheData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/PrefabCacheData.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/PrefabCacheData.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/TreeView/PrefabTreeView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/TreeView/PrefabTreeView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/LoginForm.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/LoginForm.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/RegisterForm.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/RegisterForm.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/sample.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/sample.unity" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +48,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/HierarchyTootip/Editor/HierarchyTootip.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Editor/AutoEnumBuildTemplate.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/FormWindowData.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/GlobalUIWindowData.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/GlobalUIWindowData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/TreeView/PrefabTreeView.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.path@5.0.2/Editor/EditorTool/PathEditorTool.cs" root0="SKIP_HIGHLIGHTING" />
@@ -139,7 +154,8 @@
       <workItem from="1691380017312" duration="15008000" />
       <workItem from="1691723500081" duration="12188000" />
       <workItem from="1691747136934" duration="24000" />
-      <workItem from="1691810877342" duration="6781000" />
+      <workItem from="1691810877342" duration="9261000" />
+      <workItem from="1691902274886" duration="3522000" />
     </task>
     <task id="LOCAL-00001" summary="uiframe1.co">
       <created>1691028022497</created>
@@ -197,7 +213,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691746153711</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="修改右侧布局">
+      <created>1691850156704</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1691850156704</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -224,7 +247,8 @@
     <MESSAGE value="[目录树]修改间隔布局" />
     <MESSAGE value="[目录树]修改间隔布局23" />
     <MESSAGE value="修改右侧区域" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改右侧区域" />
+    <MESSAGE value="修改右侧布局" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改右侧布局" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

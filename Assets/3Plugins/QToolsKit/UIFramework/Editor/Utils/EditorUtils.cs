@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using _3Plugins.QToolsKit.UIFramework.Editor.Configs.Scripts;
+﻿using System.IO;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,7 +10,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Utils
         /// <summary>
         /// 生成新的Form模块
         /// </summary>
-        public static void GenerateNewForm(string formName, UIFormEditorConfig config)
+        public static void GenerateNewForm(string formName)
         {
             //应该先检查删除原文件夹
             //加载模板

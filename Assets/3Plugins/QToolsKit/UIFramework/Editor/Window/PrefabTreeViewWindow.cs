@@ -22,7 +22,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
 
         private Vector2 centerEventScrollPosition;
 
-
+        
         private bool isSelect;
 
         private string searchQuery = "";
@@ -37,6 +37,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
         [MenuItem("项目工具/UI编辑器 %&Q")]
         static void ShowWindow()
         {
+            
             var window = GetWindow<PrefabTreeViewWindow>();
             window.titleContent = new GUIContent("UI编辑器");
             window.Show();
@@ -44,6 +45,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
 
         void OnEnable()
         {
+
             if (m_TreeViewState == null)
                 m_TreeViewState = new TreeViewState();
 
@@ -55,6 +57,9 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
         {
             //顶部按钮
             DrawTopMenuBtnsGUI();
+            //==========================基础配置=========================
+            
+            //==========================预制件配置=========================
             EditorGUILayout.BeginHorizontal();
             // 左侧窗口
             DrawLeftTreeViewWindowGUI();

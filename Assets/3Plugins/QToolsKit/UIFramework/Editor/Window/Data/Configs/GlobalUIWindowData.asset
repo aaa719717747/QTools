@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e39225516c2040fe9d6b370c4ddcdda1, type: 3}
-  m_Name: UIFormEditorConfig
+  m_Script: {fileID: 11500000, guid: c2661dfe7d774484b20bcd10fc623a03, type: 3}
+  m_Name: GlobalUIWindowData
   m_EditorClassIdentifier: 
   generateParentDirectoryPath: 
+  AllPrefabCacheDatas:
+  - {fileID: 11400000, guid: f347ffd53a51f9144b02fe0e2c832fe1, type: 2}

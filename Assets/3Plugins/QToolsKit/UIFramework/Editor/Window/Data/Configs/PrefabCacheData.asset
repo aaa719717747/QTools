@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c69135f146f04905bdca4c6a4fb9443d, type: 3}
+  m_Name: PrefabCacheData
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 1934640846228004915, guid: f609ff0ac7bac6545b918cc90d03bcc5, type: 3}
+  InstanceId: 0
+  treeViewNodes:
+  - soComponents:
+    - isSetup: 0
+      instanceId: 0
+      componentType: 0
+      soEvents:
+      - isSetup: 0
+        instanceId: 0
+        type: 0
+      - isSetup: 0
+        instanceId: 0
+        type: 0
