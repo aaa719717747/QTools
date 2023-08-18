@@ -2,15 +2,21 @@
 using System.Linq;
 using _3Plugins.QToolsKit.UIFramework.Editor.Utils;
 using _3Plugins.QToolsKit.UIFramework.Editor.Window.Data;
+using _3Plugins.QToolsKit.UIFramework.Scripts;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
 {
     public class PrefabTreeView : UnityEditor.IMGUI.Controls.TreeView
     {
+        public Component m_nowClikComponent;
+        public List<Component> m_nowComponentsList;
+
         public GameObject Prefab { get; set; }
+        public List<TreeViewItem> AllItems { get; set; }
 
         public PrefabTreeView(TreeViewState treeViewState, GameObject prefab)
             : base(treeViewState)
@@ -22,22 +28,22 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
         protected override TreeViewItem BuildRoot()
         {
             var root = new TreeViewItem { id = 0, depth = -1, displayName = "Root" };
-            List<TreeViewItem> allItems = new List<TreeViewItem> { root };
-
+            List<TreeViewItem> treeViewItems = new List<TreeViewItem> { root };
             if (Prefab != null)
             {
                 var topLevelNode = new TreeViewItem { id = 1, depth = 0, displayName = Prefab.name, parent = root };
                 root.children = new List<TreeViewItem> { topLevelNode };
-                allItems.Add(topLevelNode);
+                treeViewItems.Add(topLevelNode);
 
                 int id = 2;
-                TraverseTransform(Prefab.transform, 1, ref allItems, ref id, topLevelNode);
+                TraverseTransform(Prefab.transform, 1, ref treeViewItems, ref id, topLevelNode);
             }
             else
             {
-                allItems.Add(new TreeViewItem { id = 1, depth = 0, displayName = "No Prefab Selected" });
+                treeViewItems.Add(new TreeViewItem { id = 1, depth = 0, displayName = "No Prefab Selected" });
             }
 
+            AllItems = treeViewItems;
             return root;
         }
 
@@ -87,7 +93,6 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
             int num = 0;
             if (EditorUtils.IsHavaTypeImageComponent(components))
             {
-               
                 num++;
                 // 计算图标的位置
                 Rect iconRect = new Rect(args.rowRect);
@@ -138,12 +143,61 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
                 }
 
                 Component[] components = target.GetComponents<Component>();
-
-                FormWindowData.m_nowClikComponent = components[0];
-                FormWindowData.m_UpdateNodeComponentsList(components.ToList());
+                List<Component> legalComps = FiterComponent(components);
+                m_nowClikComponent = legalComps[0];
+                m_nowComponentsList = legalComps;
             }
         }
 
+        private List<Component> FiterComponent(Component[] components)
+        {
+            List<Component> coms = new List<Component>();
+            for (int i = 0; i < components.Length; i++)
+            {
+                if (components[i] is Image ||
+                    components[i] is Button ||
+                    components[i] is Text ||
+                    components[i] is RawImage ||
+                    components[i] is Slider ||
+                    components[i] is QUIForm ||
+                    components[i] is Toggle
+                   )
+                {
+                    coms.Add(components[i]);
+                }
+            }
+
+            return coms;
+        }
+
+        public Component[] ReturnSingleClickedItem(int id)
+        {
+            GameObject target = null;
+            base.SingleClickedItem(id);
+
+            TreeViewItem clickedItem = FindItem(id, rootItem);
+
+            if (clickedItem != null)
+            {
+                string path = GetGameObjectNameFromTreeViewItem(clickedItem);
+                string rootName = Prefab.name;
+                if (path.Equals(rootName))
+                {
+                    target = Prefab.gameObject;
+                }
+                else
+                {
+                    //第二节点
+                    target = Prefab.transform.Find(path).gameObject;
+                }
+
+                Component[] components = target.GetComponents<Component>();
+
+                return components;
+            }
+
+            return null;
+        }
 
         /// <summary>
         /// 获取点击节点名称根据id

@@ -18,14 +18,14 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Utils
         }
         public static void Write<T>(T t)
         {
-            if (t is PrefabCacheData)
-            {
-                JsonConvert.SerializeObject(FormWindowData.PrefabData);
-            }
-            if (t is GlobalUIWindowData)
-            {
-                JsonConvert.SerializeObject(FormWindowData.WindowData);
-            }
+            // if (t is PrefabCacheData)
+            // {
+            //     JsonConvert.SerializeObject(FormWindowData.PrefabData);
+            // }
+            // if (t is GlobalUIWindowData)
+            // {
+            //     JsonConvert.SerializeObject(FormWindowData.WindowData);
+            // }
         }
     }
 }

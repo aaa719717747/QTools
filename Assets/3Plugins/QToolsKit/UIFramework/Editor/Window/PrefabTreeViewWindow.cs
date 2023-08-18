@@ -1,6 +1,7 @@
 ﻿using System;
 using _3Plugins.QToolsKit.UIFramework.Editor.Utils;
 using _3Plugins.QToolsKit.UIFramework.Editor.Window.Data;
+using _3Plugins.QToolsKit.UIFramework.Editor.Window.Data.Json;
 using _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
@@ -11,21 +12,14 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
 {
     public class PrefabTreeViewWindow : EditorWindow
     {
-        [SerializeField] TreeViewState m_TreeViewState;
-
-        PrefabTreeView m_SimpleTreeView;
         private Vector2 treeviewScrollPosition;
-
         private Vector2 rightScrollPosition;
         private Vector2 leftScrollPosition;
         private Vector2 centerScrollPosition;
-
         private Vector2 centerEventScrollPosition;
+        private GameObject m_targetPrefab;
 
-        
-        private bool isSelect;
-
-        private string searchQuery = "";
+        private PrefabCacheData m_cacheData;
         /*
              * 快捷键的写法：
                 # 代表 shift  
@@ -37,28 +31,20 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
         [MenuItem("项目工具/UI编辑器 %&Q")]
         static void ShowWindow()
         {
-            
+            FormWindowData.Init();
             var window = GetWindow<PrefabTreeViewWindow>();
             window.titleContent = new GUIContent("UI编辑器");
+            nowInstanceId = 0;
             window.Show();
         }
 
-        void OnEnable()
-        {
-
-            if (m_TreeViewState == null)
-                m_TreeViewState = new TreeViewState();
-
-            GameObject preab = AssetDatabase.LoadAssetAtPath<GameObject>("Assets/Prefabs/UI/RegisterForm.prefab");
-            m_SimpleTreeView = new PrefabTreeView(m_TreeViewState, preab);
-        }
 
         private void OnGUI()
         {
             //顶部按钮
             DrawTopMenuBtnsGUI();
             //==========================基础配置=========================
-            
+
             //==========================预制件配置=========================
             EditorGUILayout.BeginHorizontal();
             // 左侧窗口
@@ -68,6 +54,8 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
             EditorGUILayout.EndHorizontal();
         }
 
+        private static int nowInstanceId;
+
         /// <summary>
         /// 左侧目录树
         /// </summary>
@@ -75,21 +63,37 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
         {
             // 左侧窗口
             EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox]);
+            EditorGUILayout.BeginHorizontal();
             if (GUILayout.Button("导出为C#代码", GUILayout.Height(30)))
             {
                 Debug.Log("Button 1 clicked");
             }
-
-            FormWindowData.m_targetPrefab =
-                (GameObject)EditorGUILayout.ObjectField(FormWindowData.m_targetPrefab, typeof(GameObject),
+            if (GUILayout.Button("导出为Lua代码", GUILayout.Height(30)))
+            {
+                Debug.Log("Button 1 clicked");
+            }
+            EditorGUILayout.EndHorizontal();
+            
+            m_targetPrefab =
+                (GameObject)EditorGUILayout.ObjectField(m_targetPrefab, typeof(GameObject),
                     GUILayout.ExpandWidth(true));
+
+            if (m_targetPrefab != null && nowInstanceId != m_targetPrefab.GetInstanceID())
+            {
+                nowInstanceId = m_targetPrefab.GetInstanceID();
+                m_cacheData = FormWindowData.QueryPrefabData(m_targetPrefab);
+                if (m_cacheData is null)
+                {
+                    m_targetPrefab = null;
+                }
+            }
 
             EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox]);
             leftScrollPosition = EditorGUILayout.BeginScrollView(leftScrollPosition);
             // 在这里渲染目录树
-            if (m_SimpleTreeView != null)
+            if (FormWindowData.CurrentTreeView != null && m_targetPrefab != null)
             {
-                m_SimpleTreeView.OnGUI(new Rect(0, 0, position.width, position.height));
+                FormWindowData.CurrentTreeView.OnGUI(new Rect(0, 0, position.width, position.height));
             }
 
             EditorGUILayout.EndVertical();
@@ -103,47 +107,56 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
         private void DrawDrawRightWindow_ComponentsGUI()
         {
             EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox], GUILayout.ExpandWidth(true));
-            if (GUILayout.Button("   组件&事件配置",this[LayoutStyle.Title], GUILayout.Height(20)))
+            if (GUILayout.Button("   组件&事件配置", this[LayoutStyle.Title], GUILayout.Height(20)))
             {
                 Debug.Log("Button 1 clicked");
             }
             // EditorGUILayout.LabelField("组件&事件配置",GUILayout.Height(20),GUILayout.ExpandWidth(true));
 
-
-            EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox], GUILayout.ExpandWidth(true));
-
-            for (int i = 0; i < 3; i++)
+            if (m_targetPrefab != null)
             {
-                if (GUILayout.Button("RectTransform", GUILayout.Height(23)))
-                {
-                    Debug.Log("Button 1 clicked");
-                }
-            }
+                EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox], GUILayout.ExpandWidth(true));
 
-            EditorGUILayout.EndVertical();
-            //======================================================
-            centerEventScrollPosition = EditorGUILayout.BeginScrollView(centerEventScrollPosition);
-            EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox], GUILayout.ExpandWidth(true),
-                GUILayout.ExpandHeight(true));
-            for (int i = 0; i < 8; i++)
-            {
-                
-                EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
-                EditorGUILayout.LabelField("OnPointerClik", GUILayout.Height(12), GUILayout.Width(100));
-                EditorGUILayout.TextField("Btn_rf", GUILayout.Width(150));
-                if (GUILayout.Button("设置"))
+                for (int i = 0; i < 3; i++)
                 {
+                    if (GUILayout.Button("RectTransform", GUILayout.Height(23)))
+                    {
+                        Debug.Log("Button 1 clicked");
+                    }
                 }
 
+                EditorGUILayout.EndVertical();
+                //======================================================
+                centerEventScrollPosition = EditorGUILayout.BeginScrollView(centerEventScrollPosition);
+                EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox], GUILayout.ExpandWidth(true),
+                    GUILayout.ExpandHeight(true));
+                for (int i = 0; i < 8; i++)
+                {
+                    EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
+                    EditorGUILayout.LabelField("OnPointerClik", GUILayout.Height(12), GUILayout.Width(100));
+                    EditorGUILayout.TextField("Btn_rf", GUILayout.Width(150));
+                    if (GUILayout.Button("取消设置"))
+                    {
+                    }
 
-                EditorGUILayout.EndHorizontal();
+                    EditorGUILayout.EndHorizontal();
+                }
+
+                EditorGUILayout.EndVertical();
+                EditorGUILayout.EndScrollView(); 
             }
 
-            EditorGUILayout.EndVertical();
-            EditorGUILayout.EndScrollView();
+            
             EditorGUILayout.EndVertical();
         }
 
+        /// <summary>
+        /// 点击组件
+        /// </summary>
+        private void OnClikComponent(int id)
+        {
+            //更新事件列表
+        }
 
         /// <summary>
         /// 顶部按钮
@@ -165,48 +178,14 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
         }
 
 
-        private void RendererComponentEvents()
-        {
-            if (FormWindowData.m_nowClikComponent is null) return;
-            EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox]);
-            EditorGUILayout.BeginHorizontal(GUILayout.ExpandWidth(true));
-            if (FormWindowData.m_nowClikComponent is RectTransform)
-            {
-                EditorGUILayout.LabelField("Transfrom");
-                EditorGUILayout.TextField("Transfrom_rf");
-                EditorGUILayout.Toggle(true);
-            }
-            else if (FormWindowData.m_nowClikComponent is Text)
-            {
-                EditorGUILayout.LabelField("RectTransfrom");
-                EditorGUILayout.TextField("Transfrom_rf");
-                EditorGUILayout.Toggle(true);
-            }
-            else if (FormWindowData.m_nowClikComponent is Image)
-            {
-                EditorGUILayout.LabelField("RectTransfrom");
-                EditorGUILayout.TextField("Transfrom_rf");
-                EditorGUILayout.Toggle(true);
-            }
-            else if (FormWindowData.m_nowClikComponent is Button)
-            {
-                EditorGUILayout.LabelField("RectTransfrom");
-                EditorGUILayout.TextField("Transfrom_rf");
-                EditorGUILayout.Toggle(true);
-            }
-
-            EditorGUILayout.EndHorizontal();
-            EditorGUILayout.EndVertical();
-        }
-
         /// <summary>
         /// 渲染组件列表
         /// </summary>
         private void RendererComponents()
         {
-            for (int i = 0; i < FormWindowData.m_currentNodeComponents.Count; i++)
+            for (int i = 0; i < FormWindowData.CurrentTreeView.m_nowComponentsList.Length; i++)
             {
-                Component _type = FormWindowData.m_currentNodeComponents[i];
+                Component _type = FormWindowData.CurrentTreeView.m_nowComponentsList[i];
                 string componmentName = String.Empty;
                 if (_type is Image)
                 {
@@ -248,7 +227,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
 
                     if (GUILayout.Button(componmentName, GUILayout.Width(120)))
                     {
-                        FormWindowData.m_nowClikComponent = _type;
+                        FormWindowData.CurrentTreeView.m_nowClikComponent = _type;
                     }
 
                     EditorGUILayout.EndHorizontal();

@@ -42,12 +42,13 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Utils
         /// </summary>
         /// <param name="pathView"></param>
         /// <typeparam name="T"></typeparam>
-        public static void CreateScriptableObject<T>(string pathView) where T : ScriptableObject
+        public static T CreateScriptableObject<T>(string pathView) where T : ScriptableObject
         {
             var exampleAsset = ScriptableObject.CreateInstance<T>();
             AssetDatabase.CreateAsset(exampleAsset, pathView);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
+            return exampleAsset;
         }
 
         public static bool IsHavaTypeImageComponent(Component[] components)

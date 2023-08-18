@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   generateParentDirectoryPath: 
   AllPrefabCacheDatas:
-  - {fileID: 11400000, guid: f347ffd53a51f9144b02fe0e2c832fe1, type: 2}
+  - {fileID: 11400000, guid: 16a3199414eba92448ff935fae964b99, type: 2}
