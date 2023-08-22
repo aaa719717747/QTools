@@ -1,29 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ebb0ebae-187f-42f0-bae6-eabc873a3dba" name="Changes" comment="修改右侧布局">
-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/QUIForm.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/QUIForm.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_11_23_17__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_11_23_17__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_8_10_27_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/shelf/Uncommitted_changes_before_Update_at_2023_8_8_10_27__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Utils/EditorUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Utils/EditorUtils.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Utils/JsonUtils.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Utils/JsonUtils.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Configs/GlobalUIWindowData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Configs/GlobalUIWindowData.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Configs/GlobalUIWindowData.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Configs/GlobalUIWindowData.asset.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Configs/PrefabCacheData.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Configs/PrefabCacheData.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/FormWindowData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/FormWindowData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/PrefabCacheData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/PrefabCacheData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/TreeView/PrefabTreeView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/TreeView/PrefabTreeView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/LoginForm.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/LoginForm.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/RegisterForm.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/RegisterForm.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/sample.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/sample.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
-    </list>
+    <list default="true" id="ebb0ebae-187f-42f0-bae6-eabc873a3dba" name="Changes" comment="修改右侧布局12233112" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -46,6 +24,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/df0aaee1feac4b8084d0040846eee8d415a400/d8/27d61301/Object.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/HierarchyTootip/Editor/HierarchyTootip.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Editor/AutoEnumBuildTemplate.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/WorkSpace/QTools/Assets/3Plugins/QToolsKit/UIFramework/Editor/Utils/EditorUtils.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/FormWindowData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/GlobalUIWindowData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" root0="FORCE_HIGHLIGHTING" />
@@ -164,6 +143,7 @@
       <workItem from="1691810877342" duration="9261000" />
       <workItem from="1691902274886" duration="3522000" />
       <workItem from="1692253468834" duration="9271000" />
+      <workItem from="1692353321063" duration="636000" />
     </task>
     <task id="LOCAL-00001" summary="uiframe1.co">
       <created>1691028022497</created>
@@ -228,7 +208,14 @@
       <option name="project" value="LOCAL" />
       <updated>1691850156704</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="修改右侧布局12233112">
+      <created>1692353348635</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1692353348635</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -256,7 +243,8 @@
     <MESSAGE value="[目录树]修改间隔布局23" />
     <MESSAGE value="修改右侧区域" />
     <MESSAGE value="修改右侧布局" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改右侧布局" />
+    <MESSAGE value="修改右侧布局12233112" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改右侧布局12233112" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
