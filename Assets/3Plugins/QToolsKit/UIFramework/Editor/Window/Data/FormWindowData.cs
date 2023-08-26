@@ -75,10 +75,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
 
             Debug.Log("创建文件====");
             //绘制树
-
-
-           
-
+            
             data.New(prefab, CurrentTreeView.AllItems, CurrentTreeView);
             EditorUtility.SetDirty(WindowData);
             AssetDatabase.SaveAssets();

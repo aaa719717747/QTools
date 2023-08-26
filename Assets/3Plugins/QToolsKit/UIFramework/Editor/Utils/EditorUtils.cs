@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using _3Plugins.QToolsKit.UIFramework.Scripts;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,6 +38,45 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Utils
         }
 
 
+        public static string GetComponentNameByType(Component component)
+        {
+            string comName = String.Empty;
+            if (component is Button)
+            {
+                comName = "Button";
+            }
+            else if (component is Text)
+            {
+                comName = "Text";
+            }
+            else if (component is Canvas)
+            {
+                comName = "Canvas";
+            }
+            else if (component is Image)
+            {
+                comName = "Image";
+            }
+            else if (component is ScrollRect)
+            {
+                comName = "ScrollRect";
+            }
+            else if (component is Slider)
+            {
+                comName = "Slider";
+            }
+            else if (component is Toggle)
+            {
+                comName = "Toggle";
+            }
+            else if (component is QUIForm)
+            {
+                comName = "QUIForm";
+            }
+
+            return comName;
+        }
+
         /// <summary>
         /// pathView路径仅限于Assets/目录下
         /// 例如:Assets/xxxx.asset
@@ -63,6 +104,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Utils
 
             return false;
         }
+
         public static bool IsHavaTypeTextComponent(Component[] components)
         {
             foreach (Component VARIABLE in components)
@@ -75,6 +117,5 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Utils
 
             return false;
         }
-        
     }
 }

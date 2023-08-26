@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using _3Plugins.QToolsKit.UIFramework.Editor.Utils;
 using _3Plugins.QToolsKit.UIFramework.Editor.Window.Data;
 using _3Plugins.QToolsKit.UIFramework.Editor.Window.Data.Json;
@@ -68,12 +69,14 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
             {
                 Debug.Log("Button 1 clicked");
             }
+
             if (GUILayout.Button("导出为Lua代码", GUILayout.Height(30)))
             {
                 Debug.Log("Button 1 clicked");
             }
+
             EditorGUILayout.EndHorizontal();
-            
+
             m_targetPrefab =
                 (GameObject)EditorGUILayout.ObjectField(m_targetPrefab, typeof(GameObject),
                     GUILayout.ExpandWidth(true));
@@ -116,47 +119,118 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
             if (m_targetPrefab != null)
             {
                 EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox], GUILayout.ExpandWidth(true));
-
-                for (int i = 0; i < 3; i++)
+                if (FormWindowData.CurrentTreeView.m_nowComponentsList != null)
                 {
-                    if (GUILayout.Button("RectTransform", GUILayout.Height(23)))
+                    for (int i = 0; i < FormWindowData.CurrentTreeView.m_nowComponentsList.Count; i++)
                     {
-                        Debug.Log("Button 1 clicked");
+                        string componentName =
+                            EditorUtils.GetComponentNameByType(FormWindowData.CurrentTreeView.m_nowComponentsList[i]);
+                        if (GUILayout.Button(componentName,
+                                GUILayout.Height(23)))
+                        {
+                            OnClikComponent(FormWindowData.CurrentTreeView.m_nowComponentsList[i]);
+                        }
                     }
                 }
+
 
                 EditorGUILayout.EndVertical();
                 //======================================================
                 centerEventScrollPosition = EditorGUILayout.BeginScrollView(centerEventScrollPosition);
                 EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox], GUILayout.ExpandWidth(true),
                     GUILayout.ExpandHeight(true));
-                for (int i = 0; i < 8; i++)
-                {
-                    EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
-                    EditorGUILayout.LabelField("OnPointerClik", GUILayout.Height(12), GUILayout.Width(100));
-                    EditorGUILayout.TextField("Btn_rf", GUILayout.Width(150));
-                    if (GUILayout.Button("取消设置"))
-                    {
-                    }
 
-                    EditorGUILayout.EndHorizontal();
+                if (FormWindowData.CurrentTreeView.m_nowClikComponent != null)
+                {
+                    Component ompenent = FormWindowData.CurrentTreeView.m_nowClikComponent;
+                    DrawEventList(ompenent);
                 }
 
                 EditorGUILayout.EndVertical();
-                EditorGUILayout.EndScrollView(); 
+                EditorGUILayout.EndScrollView();
             }
-
-            
             EditorGUILayout.EndVertical();
         }
 
         /// <summary>
-        /// 点击组件
+        /// 点击组件,更新事件列表
         /// </summary>
-        private void OnClikComponent(int id)
+        private void OnClikComponent(Component component)
         {
             //更新事件列表
+            FormWindowData.CurrentTreeView.m_nowClikComponent = component;
         }
+
+        /// <summary>
+        /// 绘制事件列表
+        /// </summary>
+        /// <param name="id"></param>
+        private void DrawEventList(Component component)
+        {
+            EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox], GUILayout.ExpandWidth(true),
+                GUILayout.ExpandHeight(true));
+
+           
+           
+            //RectTransform
+            EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
+            EditorGUILayout.LabelField("RectTransform", GUILayout.Height(12), GUILayout.Width(100));
+            EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_rf", GUILayout.Width(150));
+            if (GUILayout.Button("设置"))
+            {
+            }
+            EditorGUILayout.EndHorizontal();
+            //Button
+            
+            if (component is Button)
+            {
+                EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
+                EditorGUILayout.LabelField("[1] PointerClick", GUILayout.Height(12), GUILayout.Width(100));
+                EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_Btn", GUILayout.Width(150));
+                if (GUILayout.Button("取消设置"))
+                {
+                }
+                EditorGUILayout.EndHorizontal();
+                
+                EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
+                EditorGUILayout.LabelField("[2] PointerDown", GUILayout.Height(12), GUILayout.Width(100));
+                EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_Btn", GUILayout.Width(150));
+                if (GUILayout.Button("取消设置"))
+                {
+                }
+                EditorGUILayout.EndHorizontal();
+                
+                EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
+                EditorGUILayout.LabelField("[3] PointerUp", GUILayout.Height(12), GUILayout.Width(100));
+                EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_Btn", GUILayout.Width(150));
+                if (GUILayout.Button("取消设置"))
+                {
+                }
+                EditorGUILayout.EndHorizontal();
+                
+                EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
+                EditorGUILayout.LabelField("[4] PointerEnter", GUILayout.Height(12), GUILayout.Width(100));
+                EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_Btn", GUILayout.Width(150));
+                if (GUILayout.Button("取消设置"))
+                {
+                }
+                EditorGUILayout.EndHorizontal();
+                
+                EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
+                EditorGUILayout.LabelField("[5] PointerExit", GUILayout.Height(12), GUILayout.Width(100));
+                EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_Btn", GUILayout.Width(150));
+                if (GUILayout.Button("取消设置"))
+                {
+                }
+                EditorGUILayout.EndHorizontal();
+            }
+            
+            
+            
+            
+            EditorGUILayout.EndVertical();
+        }
+
 
         /// <summary>
         /// 顶部按钮
@@ -178,63 +252,6 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
         }
 
 
-        /// <summary>
-        /// 渲染组件列表
-        /// </summary>
-        private void RendererComponents()
-        {
-            for (int i = 0; i < FormWindowData.CurrentTreeView.m_nowComponentsList.Length; i++)
-            {
-                Component _type = FormWindowData.CurrentTreeView.m_nowComponentsList[i];
-                string componmentName = String.Empty;
-                if (_type is Image)
-                {
-                    componmentName = "Image";
-                }
-                else if (_type is Button)
-                {
-                    componmentName = "Button";
-                }
-                else if (_type is Text)
-                {
-                    componmentName = "Text";
-                }
-                else if (_type is Toggle)
-                {
-                    componmentName = "Toggle";
-                }
-                else if (_type is ScrollRect)
-                {
-                    componmentName = "ScrollRect";
-                }
-                else if (_type is Slider)
-                {
-                    componmentName = "Slider";
-                }
-                else if (_type is InputField)
-                {
-                    componmentName = "InputField";
-                }
-                else if (_type is RectTransform)
-                {
-                    componmentName = "RectTransform";
-                }
-
-                if (!string.IsNullOrEmpty(componmentName))
-                {
-                    EditorGUILayout.BeginVertical();
-                    EditorGUILayout.BeginHorizontal(GUILayout.ExpandWidth(true));
-
-                    if (GUILayout.Button(componmentName, GUILayout.Width(120)))
-                    {
-                        FormWindowData.CurrentTreeView.m_nowClikComponent = _type;
-                    }
-
-                    EditorGUILayout.EndHorizontal();
-                    EditorGUILayout.EndVertical();
-                }
-            }
-        }
         // private void DrawGenerateNewForm()
         // {
         //     if (!string.IsNullOrEmpty(FormEditorConfig.generateParentDirectoryPath))

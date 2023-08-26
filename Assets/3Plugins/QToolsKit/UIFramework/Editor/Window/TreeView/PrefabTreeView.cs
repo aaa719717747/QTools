@@ -12,6 +12,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
 {
     public class PrefabTreeView : UnityEditor.IMGUI.Controls.TreeView
     {
+        public GameObject m_nowClikNodeObj;
         public Component m_nowClikComponent;
         public List<Component> m_nowComponentsList;
 
@@ -44,6 +45,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
             }
 
             AllItems = treeViewItems;
+            SingleClickedItem(0);
             return root;
         }
 
@@ -122,7 +124,6 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
         /// <param name="id"></param>
         protected override void SingleClickedItem(int id)
         {
-            Debug.Log(id);
             GameObject target = null;
             base.SingleClickedItem(id);
 
@@ -144,8 +145,9 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
 
                 Component[] components = target.GetComponents<Component>();
                 List<Component> legalComps = FiterComponent(components);
-                m_nowClikComponent = legalComps[0];
+                m_nowClikComponent =legalComps.Count>0?legalComps[0]:null;
                 m_nowComponentsList = legalComps;
+                m_nowClikNodeObj = target;
             }
         }
 
@@ -159,7 +161,9 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
                     components[i] is Text ||
                     components[i] is RawImage ||
                     components[i] is Slider ||
+                    components[i] is Canvas ||
                     components[i] is QUIForm ||
+                    components[i] is ScrollRect ||
                     components[i] is Toggle
                    )
                 {

@@ -15,20 +15,22 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data.Json
         public GameObject prefab;
         public List<SOTreeViewNodeData> treeViewNodes = new List<SOTreeViewNodeData>();
 
-        public void New(GameObject prefab, List<TreeViewItem> AllItems,PrefabTreeView CurrentTreeView)
+        public void New(GameObject prefab, List<TreeViewItem> AllItems, PrefabTreeView CurrentTreeView)
         {
             this.prefab = prefab;
             foreach (var VARIABLE in AllItems)
             {
                 SOTreeViewNodeData treeViewNode = new SOTreeViewNodeData();
                 treeViewNode.treeNodeId = VARIABLE.id;
-                List<Component> comps= CurrentTreeView.ReturnSingleClickedItem(VARIABLE.id).ToList();
+                List<Component> comps = CurrentTreeView.ReturnSingleClickedItem(VARIABLE.id).ToList();
                 foreach (var VARIABLE2 in comps)
                 {
                     treeViewNode.soComponents.Add(ToSoComponent(VARIABLE2));
                 }
+
                 treeViewNodes.Add(treeViewNode);
             }
+
             EditorUtility.SetDirty(this);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
@@ -59,6 +61,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data.Json
     public class SOComponent
     {
         public bool isSetup;
+
         // public SOComponentType componentType;
         [FormerlySerializedAs("SoEvents")] public List<SOEvent> soEvents = new List<SOEvent>();
     }
