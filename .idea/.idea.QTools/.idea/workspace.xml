@@ -2,10 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ebb0ebae-187f-42f0-bae6-eabc873a3dba" name="Changes" comment="修改右侧布局12233112">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Configs/Prefab/RegisterForm_CacheData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Configs/Prefab/RegisterForm_CacheData.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/sample.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/sample.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/shootscreen0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/shootscreen0.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/shootscreen1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/shootscreen1.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/企业微信截图_16909612707235.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/企业微信截图_16909612707235.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/企业微信截图_16913879611741.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/企业微信截图_16913879611741.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/企业微信截图_16920891109421.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/企业微信截图_16920891109421.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/企业微信截图_16930369587463.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/企业微信截图_16930369587463.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/企业微信截图_16932085922672.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/企业微信截图_16932085922672.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/企业微信截图_16932121264085.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/企业微信截图_16932121264085.png.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +44,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/FormWindowData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/GlobalUIWindowData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://E:/WorkSpace/QTools/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/TreeView/PrefabTreeView.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.animation@7.0.11/Editor/SpriteLib/SpriteLibrarySourceAsset/SpriteLibrarySourceAssetImporter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.animation@7.0.11/Editor/SpriteLib/SpriteLibrarySourceAsset/SpriteLibrarySourceAssetImporterInspector.cs" root0="SKIP_HIGHLIGHTING" />
@@ -150,7 +163,7 @@
       <workItem from="1692353321063" duration="636000" />
       <workItem from="1692690992702" duration="7666000" />
       <workItem from="1693036644467" duration="5520000" />
-      <workItem from="1693206331450" duration="7514000" />
+      <workItem from="1693206331450" duration="7556000" />
     </task>
     <task id="LOCAL-00001" summary="uiframe1.co">
       <created>1691028022497</created>
@@ -236,7 +249,14 @@
       <option name="project" value="LOCAL" />
       <updated>1693042314551</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="修改右侧布局12233112">
+      <created>1693217225745</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1693217225745</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
