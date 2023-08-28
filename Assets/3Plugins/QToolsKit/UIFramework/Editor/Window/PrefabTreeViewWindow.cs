@@ -123,13 +123,22 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                 {
                     for (int i = 0; i < FormWindowData.CurrentTreeView.m_nowComponentsList.Count; i++)
                     {
+                        Component elementComp = FormWindowData.CurrentTreeView.m_nowComponentsList[i];
                         string componentName =
-                            EditorUtils.GetComponentNameByType(FormWindowData.CurrentTreeView.m_nowComponentsList[i]);
+                            EditorUtils.GetComponentNameByType(elementComp);
+
+                        Color color = FormWindowData.CurrentTreeView.m_nowClikComponent.GetType() ==
+                                      elementComp.GetType()
+                            ? Color.green
+                            : Color.white;
+                        GUI.backgroundColor = color;
                         if (GUILayout.Button(componentName,
                                 GUILayout.Height(23)))
                         {
                             OnClikComponent(FormWindowData.CurrentTreeView.m_nowComponentsList[i]);
                         }
+
+                        GUI.backgroundColor = Color.white;
                     }
                 }
 
@@ -149,6 +158,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                 EditorGUILayout.EndVertical();
                 EditorGUILayout.EndScrollView();
             }
+
             EditorGUILayout.EndVertical();
         }
 
@@ -170,68 +180,165 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
             EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox], GUILayout.ExpandWidth(true),
                 GUILayout.ExpandHeight(true));
 
-           
-           
+            //Title
+            EditorGUILayout.BeginHorizontal();
+            GUI.backgroundColor=Color.yellow;
+            if (GUILayout.Button("   事件类型", this[LayoutStyle.Title], GUILayout.Height(20)))
+            {
+                Debug.Log("Button 1 clicked");
+            }
+            if (GUILayout.Button("   函数/字段别名", this[LayoutStyle.Title], GUILayout.Height(20)))
+            {
+                Debug.Log("Button 1 clicked");
+            }
+            if (GUILayout.Button("    设置事件", this[LayoutStyle.Title], GUILayout.Height(20)))
+            {
+                Debug.Log("Button 1 clicked");
+            }
+            GUI.backgroundColor=Color.white;
+            EditorGUILayout.EndHorizontal();
+            
+            GUILayout.Space(20);
             //RectTransform
-            EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
-            EditorGUILayout.LabelField("RectTransform", GUILayout.Height(12), GUILayout.Width(100));
-            EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_rf", GUILayout.Width(150));
-            if (GUILayout.Button("设置"))
+            EditorGUILayout.BeginHorizontal(this[LayoutStyle.Title]);
+            GUILayout.Space(8);
+            EditorGUILayout.LabelField("[0] RectTransform", GUILayout.Height(12),GUILayout.ExpandHeight(true));
+            GUILayout.Space(8);
+            EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_rf",GUILayout.ExpandHeight(true));
+            if (GUILayout.Button("设置",GUILayout.ExpandHeight(true)))
             {
             }
             EditorGUILayout.EndHorizontal();
-            //Button
-            
-            if (component is Button)
-            {
-                EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
-                EditorGUILayout.LabelField("[1] PointerClick", GUILayout.Height(12), GUILayout.Width(100));
-                EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_Btn", GUILayout.Width(150));
-                if (GUILayout.Button("取消设置"))
-                {
-                }
-                EditorGUILayout.EndHorizontal();
-                
-                EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
-                EditorGUILayout.LabelField("[2] PointerDown", GUILayout.Height(12), GUILayout.Width(100));
-                EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_Btn", GUILayout.Width(150));
-                if (GUILayout.Button("取消设置"))
-                {
-                }
-                EditorGUILayout.EndHorizontal();
-                
-                EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
-                EditorGUILayout.LabelField("[3] PointerUp", GUILayout.Height(12), GUILayout.Width(100));
-                EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_Btn", GUILayout.Width(150));
-                if (GUILayout.Button("取消设置"))
-                {
-                }
-                EditorGUILayout.EndHorizontal();
-                
-                EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
-                EditorGUILayout.LabelField("[4] PointerEnter", GUILayout.Height(12), GUILayout.Width(100));
-                EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_Btn", GUILayout.Width(150));
-                if (GUILayout.Button("取消设置"))
-                {
-                }
-                EditorGUILayout.EndHorizontal();
-                
-                EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
-                EditorGUILayout.LabelField("[5] PointerExit", GUILayout.Height(12), GUILayout.Width(100));
-                EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_Btn", GUILayout.Width(150));
-                if (GUILayout.Button("取消设置"))
-                {
-                }
-                EditorGUILayout.EndHorizontal();
-            }
             
             
             
             
+            
+            GUILayout.Space(5);
+            EditorGUILayout.BeginHorizontal(this[LayoutStyle.Title]);
+            
+            EditorGUILayout.EndHorizontal();
+            // //Button
+            // if (component is Button)
+            // {
+            //     EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
+            //     EditorGUILayout.LabelField("[1] PointerClick", GUILayout.Height(12), GUILayout.Width(100));
+            //     EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_PointerClick",
+            //         GUILayout.Width(150));
+            //     if (GUILayout.Button("取消设置"))
+            //     {
+            //     }
+            //
+            //     EditorGUILayout.EndHorizontal();
+            //
+            //     EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
+            //     EditorGUILayout.LabelField("[2] PointerDown", GUILayout.Height(12), GUILayout.Width(100));
+            //     EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_PointerDown",
+            //         GUILayout.Width(150));
+            //     if (GUILayout.Button("取消设置"))
+            //     {
+            //     }
+            //
+            //     EditorGUILayout.EndHorizontal();
+            //
+            //     EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
+            //     EditorGUILayout.LabelField("[3] PointerUp", GUILayout.Height(12), GUILayout.Width(100));
+            //     EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_PointerUp",
+            //         GUILayout.Width(150));
+            //     if (GUILayout.Button("取消设置"))
+            //     {
+            //     }
+            //
+            //     EditorGUILayout.EndHorizontal();
+            //
+            //     EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
+            //     EditorGUILayout.LabelField("[4] PointerEnter", GUILayout.Height(12), GUILayout.Width(100));
+            //     EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_PointerEnter",
+            //         GUILayout.Width(150));
+            //     if (GUILayout.Button("取消设置"))
+            //     {
+            //     }
+            //
+            //     EditorGUILayout.EndHorizontal();
+            //
+            //     EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
+            //     EditorGUILayout.LabelField("[5] PointerExit", GUILayout.Height(12), GUILayout.Width(100));
+            //     EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_PointerExit",
+            //         GUILayout.Width(150));
+            //     if (GUILayout.Button("取消设置"))
+            //     {
+            //     }
+            //
+            //     EditorGUILayout.EndHorizontal();
+            // }
+            //
+            // //Image
+            // if (component is Image)
+            // {
+            //     EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
+            //     EditorGUILayout.LabelField("[1] Image", GUILayout.Height(12), GUILayout.Width(100));
+            //     EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_img",
+            //         GUILayout.Width(150));
+            //     if (GUILayout.Button("设置"))
+            //     {
+            //     }
+            //
+            //     EditorGUILayout.EndHorizontal();
+            //     
+            //     
+            //     EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
+            //     EditorGUILayout.LabelField("[2] PointerEnter", GUILayout.Height(12), GUILayout.Width(100));
+            //     EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_PointerEnter",
+            //         GUILayout.Width(150));
+            //     if (GUILayout.Button("取消设置"))
+            //     {
+            //     }
+            //
+            //     EditorGUILayout.EndHorizontal();
+            //
+            //     EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
+            //     EditorGUILayout.LabelField("[3] PointerExit", GUILayout.Height(12), GUILayout.Width(100));
+            //     EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_PointerExit",
+            //         GUILayout.Width(150));
+            //     if (GUILayout.Button("取消设置"))
+            //     {
+            //     }
+            //
+            //     EditorGUILayout.EndHorizontal();
+            // }
+            //
+            // //Text
+            // if (component is Text)
+            // {
+            //     EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
+            //     EditorGUILayout.LabelField("Text", GUILayout.Height(12), GUILayout.Width(100));
+            //     EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_txt",
+            //         GUILayout.Width(150));
+            //     if (GUILayout.Button("设置"))
+            //     {
+            //     }
+            //
+            //     EditorGUILayout.EndHorizontal();
+            // }
+            //
+            // //Slider
+            // if (component is Slider)
+            // {
+            //     EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
+            //     EditorGUILayout.LabelField("OnValueChanged", GUILayout.Height(12), GUILayout.Width(100));
+            //     EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_OnValueChanged",
+            //         GUILayout.Width(150));
+            //     if (GUILayout.Button("设置"))
+            //     {
+            //     }
+            //
+            //     EditorGUILayout.EndHorizontal();
+            // }
+
+
             EditorGUILayout.EndVertical();
         }
-
-
+        
         /// <summary>
         /// 顶部按钮
         /// </summary>
