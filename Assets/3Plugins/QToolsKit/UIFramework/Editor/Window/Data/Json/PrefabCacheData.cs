@@ -39,7 +39,6 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data.Json
         private SOComponent ToSoComponent(Component component)
         {
             SOComponent soComponent = new SOComponent();
-            soComponent.isSetup = false;
             return soComponent;
         }
     }
@@ -60,16 +59,14 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data.Json
     [System.Serializable]
     public class SOComponent
     {
-        public bool isSetup;
-
-        // public SOComponentType componentType;
         [FormerlySerializedAs("SoEvents")] public List<SOEvent> soEvents = new List<SOEvent>();
     }
 
     [System.Serializable]
-    public struct SOEvent
+    public struct SOEvent   
     {
         public bool isSetup;
-        public SOEventType type;
+        public string typeName;
+        public string mehtodName;
     }
 }
