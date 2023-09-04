@@ -10,5 +10,8 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data.Json
         public string generateParentDirectoryPath;
 
         public List<PrefabCacheData> AllPrefabCacheDatas = new List<PrefabCacheData>();
+        
+        
+        
     }
 }

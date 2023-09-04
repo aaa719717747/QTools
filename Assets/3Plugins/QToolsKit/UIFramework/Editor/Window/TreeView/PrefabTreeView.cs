@@ -124,6 +124,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
         /// <param name="id"></param>
         protected override void SingleClickedItem(int id)
         {
+            FormWindowData.CurrentClikNodeId = id;
             GameObject target = null;
             base.SingleClickedItem(id);
 
@@ -202,7 +203,31 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
 
             return null;
         }
+        public GameObject ReturnSingleClickeGameObject(int id)
+        {
+            GameObject target = null;
+            base.SingleClickedItem(id);
 
+            TreeViewItem clickedItem = FindItem(id, rootItem);
+
+            if (clickedItem != null)
+            {
+                string path = GetGameObjectNameFromTreeViewItem(clickedItem);
+                string rootName = Prefab.name;
+                if (path.Equals(rootName))
+                {
+                    target = Prefab.gameObject;
+                }
+                else
+                {
+                    //第二节点
+                    target = Prefab.transform.Find(path).gameObject;
+                }
+                return target;
+            }
+
+            return null;
+        }
         /// <summary>
         /// 获取点击节点名称根据id
         /// </summary>

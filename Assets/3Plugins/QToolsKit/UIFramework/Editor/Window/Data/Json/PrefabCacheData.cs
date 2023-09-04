@@ -23,9 +23,13 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data.Json
                 SOTreeViewNodeData treeViewNode = new SOTreeViewNodeData();
                 treeViewNode.treeNodeId = VARIABLE.id;
                 List<Component> comps = CurrentTreeView.ReturnSingleClickedItem(VARIABLE.id).ToList();
+                GameObject clikGameObject = CurrentTreeView.ReturnSingleClickeGameObject(VARIABLE.id);
+                CurrentTreeView.m_nowClikNodeObj = clikGameObject;
                 foreach (var VARIABLE2 in comps)
                 {
-                    treeViewNode.soComponents.Add(ToSoComponent(VARIABLE2));
+                    var soComp = FormWindowData.CheckCompData(VARIABLE2,treeViewNode);
+                    treeViewNode.soComponents.Add(soComp);
+                    soComp.soEvents = FormWindowData.GetNewEventsByComponent(clikGameObject, VARIABLE2);
                 }
 
                 treeViewNodes.Add(treeViewNode);
@@ -34,12 +38,6 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data.Json
             EditorUtility.SetDirty(this);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-        }
-
-        private SOComponent ToSoComponent(Component component)
-        {
-            SOComponent soComponent = new SOComponent();
-            return soComponent;
         }
     }
 
@@ -59,14 +57,15 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data.Json
     [System.Serializable]
     public class SOComponent
     {
+        [FormerlySerializedAs("InstanceId")] public int instanceId;
         [FormerlySerializedAs("SoEvents")] public List<SOEvent> soEvents = new List<SOEvent>();
     }
 
     [System.Serializable]
-    public struct SOEvent   
+    public struct SOEvent
     {
         public bool isSetup;
-        public string typeName;
+        public SoEventEnum eventEnum;
         public string mehtodName;
     }
 }

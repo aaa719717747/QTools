@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ebb0ebae-187f-42f0-bae6-eabc873a3dba" name="Changes" comment="修改右侧布局12233112">
+    <list default="true" id="ebb0ebae-187f-42f0-bae6-eabc873a3dba" name="Changes" comment="修改右侧布局">
+      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Enums/SoEventEnum.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Configs/Prefab/LoginForm_CacheData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Configs/Prefab/LoginForm_CacheData.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Configs/Prefab/RegisterForm_CacheData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Configs/Prefab/RegisterForm_CacheData.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/FormWindowData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/FormWindowData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/GlobalUIWindowData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/GlobalUIWindowData.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/PrefabCacheData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/PrefabCacheData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Enums/SOEventType.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Enums/SOEventType.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Enums/SOComponentType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Enums/SoEventEnum.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Enums/SOComponentType.cs.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/sample.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/sample.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/TreeView/PrefabTreeView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/TreeView/PrefabTreeView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/LoginForm.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/LoginForm.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/RegisterForm.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/RegisterForm.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/QualitySettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +27,7 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a89f013b2a0d4e879ff7730358cda98b818c00/3e/2581443e/EditorUtility.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a89f013b2a0d4e879ff7730358cda98b818c00/af/5f702841/TreeViewState.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a89f013b2a0d4e879ff7730358cda98b818c00/d1/17526e6a/TreeView.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/a89f013b2a0d4e879ff7730358cda98b818c00/f2/8eee688b/TreeViewItem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/da25edc23f9742c289b17120bd7a363c29200/3b/af4af91a/GUI.cs" root0="SKIP_HIGHLIGHTING" />
@@ -34,7 +43,6 @@
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/FormWindowData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/GlobalUIWindowData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="mock://E:/WorkSpace/QTools/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/TreeView/PrefabTreeView.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.animation@7.0.11/Editor/SpriteLib/SpriteLibrarySourceAsset/SpriteLibrarySourceAssetImporter.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.animation@7.0.11/Editor/SpriteLib/SpriteLibrarySourceAsset/SpriteLibrarySourceAssetImporterInspector.cs" root0="SKIP_HIGHLIGHTING" />
@@ -122,10 +130,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="23372">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="23372" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -154,7 +162,10 @@
       <workItem from="1692353321063" duration="636000" />
       <workItem from="1692690992702" duration="7666000" />
       <workItem from="1693036644467" duration="5520000" />
-      <workItem from="1693206331450" duration="14071000" />
+      <workItem from="1693206331450" duration="14694000" />
+      <workItem from="1693793656689" duration="1184000" />
+      <workItem from="1693794877175" duration="40000" />
+      <workItem from="1693794944939" duration="11442000" />
     </task>
     <task id="LOCAL-00001" summary="uiframe1.co">
       <created>1691028022497</created>
@@ -261,7 +272,14 @@
       <option name="project" value="LOCAL" />
       <updated>1693217264820</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="修改右侧布局">
+      <created>1693303364411</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1693303364411</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -288,9 +306,9 @@
     <MESSAGE value="[目录树]修改间隔布局" />
     <MESSAGE value="[目录树]修改间隔布局23" />
     <MESSAGE value="修改右侧区域" />
-    <MESSAGE value="修改右侧布局" />
     <MESSAGE value="修改右侧布局12233112" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改右侧布局12233112" />
+    <MESSAGE value="修改右侧布局" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改右侧布局" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
