@@ -62,7 +62,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data.Json
     }
 
     [System.Serializable]
-    public struct SOEvent
+    public class SOEvent
     {
         public bool isSetup;
         public SoEventEnum eventEnum;

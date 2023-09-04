@@ -111,58 +111,63 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
         /// </summary>
         private void DrawDrawRightWindow_ComponentsGUI()
         {
+            if (m_targetPrefab == null) return;
+            if (FormWindowData.CurrentTreeView.m_nowComponentsList == null) return;
+
             EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox], GUILayout.ExpandWidth(true));
+
+            EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox], GUILayout.ExpandWidth(true));
+            EditorGUILayout.BeginHorizontal();
+            EditorGUILayout.TextField("UIClassName:", "UILoginFrom");
+            if (GUILayout.Button("定位", GUILayout.Width(50), GUILayout.Height(20)))
+            {
+            }
+
+            EditorGUILayout.EndHorizontal();
+            EditorGUILayout.EndVertical();
             if (GUILayout.Button("   组件&事件配置", this[LayoutStyle.Title], GUILayout.Height(20)))
             {
                 Debug.Log("Button 1 clicked");
             }
-            // EditorGUILayout.LabelField("组件&事件配置",GUILayout.Height(20),GUILayout.ExpandWidth(true));
 
-            if (m_targetPrefab != null)
+
+            EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox], GUILayout.ExpandWidth(true));
+            for (int i = 0; i < FormWindowData.CurrentTreeView.m_nowComponentsList.Count; i++)
             {
-                EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox], GUILayout.ExpandWidth(true));
-                if (FormWindowData.CurrentTreeView.m_nowComponentsList != null)
+                Component elementComp = FormWindowData.CurrentTreeView.m_nowComponentsList[i];
+                string componentName =
+                    EditorUtils.GetComponentNameByType(elementComp);
+
+                Color color = FormWindowData.CurrentTreeView.m_nowClikComponent.GetType() ==
+                              elementComp.GetType()
+                    ? Color.green
+                    : Color.white;
+                GUI.backgroundColor = color;
+                int mInstanceId = FormWindowData.CurrentTreeView.m_nowComponentsList[i].GetInstanceID();
+                string strComp = $"{componentName}-{mInstanceId}";
+                if (GUILayout.Button(strComp,
+                        GUILayout.Height(23)))
                 {
-                    for (int i = 0; i < FormWindowData.CurrentTreeView.m_nowComponentsList.Count; i++)
-                    {
-                        Component elementComp = FormWindowData.CurrentTreeView.m_nowComponentsList[i];
-                        string componentName =
-                            EditorUtils.GetComponentNameByType(elementComp);
-
-                        Color color = FormWindowData.CurrentTreeView.m_nowClikComponent.GetType() ==
-                                      elementComp.GetType()
-                            ? Color.green
-                            : Color.white;
-                        GUI.backgroundColor = color;
-                        int mInstanceId = FormWindowData.CurrentTreeView.m_nowComponentsList[i].GetInstanceID();
-                        string strComp = $"{componentName}-{mInstanceId}";
-                        if (GUILayout.Button(strComp,
-                                GUILayout.Height(23)))
-                        {
-                            OnClikComponent(FormWindowData.CurrentTreeView.m_nowComponentsList[i]);
-                        }
-
-                        GUI.backgroundColor = Color.white;
-                    }
+                    OnClikComponent(FormWindowData.CurrentTreeView.m_nowComponentsList[i]);
                 }
 
-
-                EditorGUILayout.EndVertical();
-                //======================================================
-                centerEventScrollPosition = EditorGUILayout.BeginScrollView(centerEventScrollPosition);
-                EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox], GUILayout.ExpandWidth(true),
-                    GUILayout.ExpandHeight(true));
-
-                if (FormWindowData.CurrentTreeView.m_nowClikComponent != null)
-                {
-                    Component ompenent = FormWindowData.CurrentTreeView.m_nowClikComponent;
-                    DrawEventList(ompenent);
-                }
-
-                EditorGUILayout.EndVertical();
-                EditorGUILayout.EndScrollView();
+                GUI.backgroundColor = Color.white;
             }
 
+            EditorGUILayout.EndVertical();
+            //======================================================
+            centerEventScrollPosition = EditorGUILayout.BeginScrollView(centerEventScrollPosition);
+            EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox], GUILayout.ExpandWidth(true),
+                GUILayout.ExpandHeight(true));
+
+            if (FormWindowData.CurrentTreeView.m_nowClikComponent != null)
+            {
+                Component ompenent = FormWindowData.CurrentTreeView.m_nowClikComponent;
+                DrawEventList(ompenent);
+            }
+
+            EditorGUILayout.EndVertical();
+            EditorGUILayout.EndScrollView();
             EditorGUILayout.EndVertical();
         }
 
@@ -219,7 +224,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                 switch (eSoEvent.eventEnum)
                 {
                     case SoEventEnum.RectTransform: //RectTransform
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.BeginHorizontal(this[LayoutStyle.Title]);
                         GUILayout.Space(8);
                         EditorGUILayout.LabelField("[0] RectTransform",
@@ -228,19 +233,20 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                         GUILayout.Space(8);
                         EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_rf",
                             GUILayout.ExpandHeight(true));
-                        GUI.backgroundColor =eSoEvent.isSetup?Color.red:Color.green;
-                        if (GUILayout.Button( eSoEvent.isSetup?"取消设置":"设置", GUILayout.ExpandHeight(true)))
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
+                        if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
                         {
+                            eSoEvent.isSetup = !eSoEvent.isSetup;
                         }
 
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.EndHorizontal();
                         GUI.backgroundColor = Color.white;
                         //=============================================================================================
                         break;
                     case SoEventEnum.Button: //=============================Button================================
                         GUILayout.Space(mlimit);
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.BeginHorizontal(this[LayoutStyle.Title]);
                         GUILayout.Space(8);
                         EditorGUILayout.LabelField("[1] Button",
@@ -249,12 +255,13 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                         GUILayout.Space(8);
                         EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_btn",
                             GUILayout.ExpandHeight(true));
-                        GUI.backgroundColor =eSoEvent.isSetup?Color.red:Color.green;
-                        if (GUILayout.Button( eSoEvent.isSetup?"取消设置":"设置", GUILayout.ExpandHeight(true)))
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
+                        if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
                         {
+                            eSoEvent.isSetup = !eSoEvent.isSetup;
                         }
 
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.EndHorizontal();
                         GUI.backgroundColor = Color.white;
 
@@ -262,7 +269,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                         break;
                     case SoEventEnum.Text: //=============================Text================================
                         GUILayout.Space(mlimit);
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.BeginHorizontal(this[LayoutStyle.Title]);
                         GUILayout.Space(8);
                         EditorGUILayout.LabelField("[1] Text",
@@ -271,18 +278,19 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                         GUILayout.Space(8);
                         EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_txt",
                             GUILayout.ExpandHeight(true));
-                        GUI.backgroundColor =eSoEvent.isSetup?Color.red:Color.green;
-                        if (GUILayout.Button( eSoEvent.isSetup?"取消设置":"设置", GUILayout.ExpandHeight(true)))
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
+                        if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
                         {
+                            eSoEvent.isSetup = !eSoEvent.isSetup;
                         }
 
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.EndHorizontal();
                         GUI.backgroundColor = Color.white;
                         break;
                     case SoEventEnum.Image: //=============================Image================================
                         GUILayout.Space(mlimit);
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.BeginHorizontal(this[LayoutStyle.Title]);
                         GUILayout.Space(8);
                         EditorGUILayout.LabelField("[1] Image",
@@ -291,18 +299,19 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                         GUILayout.Space(8);
                         EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_img",
                             GUILayout.ExpandHeight(true));
-                        GUI.backgroundColor =eSoEvent.isSetup?Color.red:Color.green;
-                        if (GUILayout.Button( eSoEvent.isSetup?"取消设置":"设置", GUILayout.ExpandHeight(true)))
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
+                        if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
                         {
+                            eSoEvent.isSetup = !eSoEvent.isSetup;
                         }
 
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.EndHorizontal();
                         GUI.backgroundColor = Color.white;
                         break;
                     case SoEventEnum.Slider: //=============================Slider================================
                         GUILayout.Space(mlimit);
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.BeginHorizontal(this[LayoutStyle.Title]);
                         GUILayout.Space(8);
                         EditorGUILayout.LabelField("[1] Slider",
@@ -311,19 +320,20 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                         GUILayout.Space(8);
                         EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_slider",
                             GUILayout.ExpandHeight(true));
-                        GUI.backgroundColor =eSoEvent.isSetup?Color.red:Color.green;
-                        if (GUILayout.Button( eSoEvent.isSetup?"取消设置":"设置", GUILayout.ExpandHeight(true)))
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
+                        if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
                         {
+                            eSoEvent.isSetup = !eSoEvent.isSetup;
                         }
 
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.EndHorizontal();
                         GUI.backgroundColor = Color.white;
 
                         break;
                     case SoEventEnum.Toggle: //=============================Toggle================================
                         GUILayout.Space(mlimit);
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.BeginHorizontal(this[LayoutStyle.Title]);
                         GUILayout.Space(8);
                         EditorGUILayout.LabelField("[1] Toggle",
@@ -332,12 +342,13 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                         GUILayout.Space(8);
                         EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_toggle",
                             GUILayout.ExpandHeight(true));
-                        GUI.backgroundColor =eSoEvent.isSetup?Color.red:Color.green;
-                        if (GUILayout.Button( eSoEvent.isSetup?"取消设置":"设置", GUILayout.ExpandHeight(true)))
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
+                        if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
                         {
+                            eSoEvent.isSetup = !eSoEvent.isSetup;
                         }
 
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.EndHorizontal();
                         GUI.backgroundColor = Color.white;
 
@@ -345,7 +356,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                     case SoEventEnum.PointerClick
                         : //=============================PointerClick================================
                         GUILayout.Space(mlimit);
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.BeginHorizontal(this[LayoutStyle.Title]);
                         GUILayout.Space(8);
                         EditorGUILayout.LabelField("[2] PointerClick",
@@ -355,12 +366,13 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                         EditorGUILayout.TextField(
                             $"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_OnPointerClick",
                             GUILayout.ExpandHeight(true));
-                        GUI.backgroundColor =eSoEvent.isSetup?Color.red:Color.green;
-                        if (GUILayout.Button( eSoEvent.isSetup?"取消设置":"设置", GUILayout.ExpandHeight(true)))
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
+                        if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
                         {
+                            eSoEvent.isSetup = !eSoEvent.isSetup;
                         }
 
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.EndHorizontal();
                         GUI.backgroundColor = Color.white;
 
@@ -368,7 +380,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                     case SoEventEnum.PointerDown
                         : //=============================PointerDown================================
                         GUILayout.Space(mlimit);
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.BeginHorizontal(this[LayoutStyle.Title]);
                         GUILayout.Space(8);
                         EditorGUILayout.LabelField("[3] PointerDown",
@@ -378,18 +390,19 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                         EditorGUILayout.TextField(
                             $"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_OnPointerDown",
                             GUILayout.ExpandHeight(true));
-                        GUI.backgroundColor =eSoEvent.isSetup?Color.red:Color.green;
-                        if (GUILayout.Button( eSoEvent.isSetup?"取消设置":"设置", GUILayout.ExpandHeight(true)))
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
+                        if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
                         {
+                            eSoEvent.isSetup = !eSoEvent.isSetup;
                         }
 
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.EndHorizontal();
                         GUI.backgroundColor = Color.white;
                         break;
                     case SoEventEnum.PointerUp: //=============================PointerUp================================
                         GUILayout.Space(mlimit);
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.BeginHorizontal(this[LayoutStyle.Title]);
                         GUILayout.Space(8);
                         EditorGUILayout.LabelField("[4] PointerUp",
@@ -398,19 +411,20 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                         GUILayout.Space(8);
                         EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_OnPointerUp",
                             GUILayout.ExpandHeight(true));
-                        GUI.backgroundColor =eSoEvent.isSetup?Color.red:Color.green;
-                                               if (GUILayout.Button( eSoEvent.isSetup?"取消设置":"设置", GUILayout.ExpandHeight(true)))
-                                               {
-                                               }
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
+                        if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
+                        {
+                            eSoEvent.isSetup = !eSoEvent.isSetup;
+                        }
 
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.EndHorizontal();
                         GUI.backgroundColor = Color.white;
                         break;
                     case SoEventEnum.PointerEnter
                         : //=============================PointerEnter================================
                         GUILayout.Space(mlimit);
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.BeginHorizontal(this[LayoutStyle.Title]);
                         GUILayout.Space(8);
                         EditorGUILayout.LabelField("[5] PointerEnter",
@@ -420,19 +434,20 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                         EditorGUILayout.TextField(
                             $"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_OnPointerEnter",
                             GUILayout.ExpandHeight(true));
-                        GUI.backgroundColor =eSoEvent.isSetup?Color.red:Color.green;
-                        if (GUILayout.Button( eSoEvent.isSetup?"取消设置":"设置", GUILayout.ExpandHeight(true)))
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
+                        if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
                         {
+                            eSoEvent.isSetup = !eSoEvent.isSetup;
                         }
 
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.EndHorizontal();
                         GUI.backgroundColor = Color.white;
                         break;
                     case SoEventEnum.PointerExit
                         : //=============================PointerExit================================
                         GUILayout.Space(mlimit);
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.BeginHorizontal(this[LayoutStyle.Title]);
                         GUILayout.Space(8);
                         EditorGUILayout.LabelField("[6] PointerExit",
@@ -442,19 +457,20 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                         EditorGUILayout.TextField(
                             $"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_OnPointerExit",
                             GUILayout.ExpandHeight(true));
-                        GUI.backgroundColor =eSoEvent.isSetup?Color.red:Color.green;
-                        if (GUILayout.Button( eSoEvent.isSetup?"取消设置":"设置", GUILayout.ExpandHeight(true)))
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
+                        if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
                         {
+                            eSoEvent.isSetup = !eSoEvent.isSetup;
                         }
 
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.EndHorizontal();
                         GUI.backgroundColor = Color.white;
                         break;
                     case SoEventEnum.SliderOnValueChanged
                         : //=============================OnValueChanged================================
                         GUILayout.Space(mlimit);
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.BeginHorizontal(this[LayoutStyle.Title]);
                         GUILayout.Space(8);
                         EditorGUILayout.LabelField("[2] OnValueChanged",
@@ -464,19 +480,20 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                         EditorGUILayout.TextField(
                             $"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_OnValueChanged",
                             GUILayout.ExpandHeight(true));
-                        GUI.backgroundColor =eSoEvent.isSetup?Color.red:Color.green;
-                        if (GUILayout.Button( eSoEvent.isSetup?"取消设置":"设置", GUILayout.ExpandHeight(true)))
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
+                        if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
                         {
+                            eSoEvent.isSetup = !eSoEvent.isSetup;
                         }
 
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.EndHorizontal();
                         GUI.backgroundColor = Color.white;
                         break;
                     case SoEventEnum.ToggleOnValueChanged
                         : //=============================OnValueChanged================================
                         GUILayout.Space(mlimit);
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.BeginHorizontal(this[LayoutStyle.Title]);
                         GUILayout.Space(8);
                         EditorGUILayout.LabelField("[2] OnValueChanged",
@@ -486,12 +503,13 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                         EditorGUILayout.TextField(
                             $"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_OnValueChanged",
                             GUILayout.ExpandHeight(true));
-                        GUI.backgroundColor =eSoEvent.isSetup?Color.red:Color.green;
-                        if (GUILayout.Button( eSoEvent.isSetup?"取消设置":"设置", GUILayout.ExpandHeight(true)))
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
+                        if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
                         {
+                            eSoEvent.isSetup = !eSoEvent.isSetup;
                         }
 
-                        GUI.backgroundColor = eSoEvent.isSetup?Color.green:Color.white;
+                        GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
                         EditorGUILayout.EndHorizontal();
                         GUI.backgroundColor = Color.white;
                         break;

@@ -116,6 +116,21 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
                 // 绘制图标
                 GUI.DrawTexture(iconRect, iconText);
             }
+
+            //测试
+            int numTest = 0;
+            Rect txtRect = new Rect(args.rowRect);
+            txtRect.x += (330 + (numTest * 20)); // 10是图标和行末尾的间距
+            txtRect.width = 23; //icon.width;
+            txtRect.height = 15; //icon.height;
+            GUI.TextField(txtRect,args.item.id.ToString());
+            //测试
+            int numTestInstance = 0;
+            Rect txtInstanceIdRect = new Rect(args.rowRect);
+            txtInstanceIdRect.x += (200 + (numTestInstance * 20)); // 10是图标和行末尾的间距
+            txtInstanceIdRect.width = 60; //icon.width;
+            txtInstanceIdRect.height = 15; //icon.height;
+            GUI.TextField(txtInstanceIdRect,target.GetInstanceID().ToString());
         }
 
         /// <summary>

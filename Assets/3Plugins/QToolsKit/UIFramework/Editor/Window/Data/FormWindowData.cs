@@ -18,9 +18,9 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
         public static PrefabTreeView CurrentTreeView { get; set; }
         public static TreeViewState CurrentTreeViewState { get; set; }
 
-        public static PrefabCacheData CurrentPrefabCacheData{ get; set; }
+        public static PrefabCacheData CurrentPrefabCacheData { get; set; }
 
-        public static int CurrentClikNodeId{ get; set; }
+        public static int CurrentClikNodeId { get; set; }
         public static WindowArea windowArea = WindowArea.Base;
 
         public static void Init()
@@ -40,7 +40,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
 
             CheckWindowData();
         }
-        
+
         /// <summary>
         /// 查询预制件数据
         /// </summary>
@@ -49,19 +49,21 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
         {
             if (prefab is null) return null;
 
-           
+
             if (!IsLeagalComp(prefab))
             {
                 EditorUtility.DisplayDialog("警告", $"{prefab.name} 不是一个有效的UIForm预制件！",
                     "确定");
                 return null;
             }
+
             if (!IsLeagalPrefabName(prefab))
             {
                 EditorUtility.DisplayDialog("警告", $"{prefab.name} 预制件命名不符合规则，请以Form结尾! 示例:LoginForm",
                     "确定");
                 return null;
             }
+
             CheckWindowData();
             CurrentTreeView = new PrefabTreeView(CurrentTreeViewState, prefab);
             foreach (var VARIABLE in WindowData.AllPrefabCacheDatas)
@@ -79,7 +81,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
 
             Debug.Log("创建文件====");
             //绘制树
-            
+
             data.New(prefab, CurrentTreeView.AllItems, CurrentTreeView);
             EditorUtility.SetDirty(WindowData);
             AssetDatabase.SaveAssets();
@@ -88,7 +90,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
             return data;
         }
 
-        public static List<SOEvent> GetNewEventsByComponent(GameObject target,Component component)
+        public static List<SOEvent> GetNewEventsByComponent(GameObject target, Component component)
         {
             if (component is RectTransform)
             {
@@ -129,19 +131,20 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
                         isSetup = false,
                         eventEnum = SoEventEnum.PointerDown,
                         mehtodName = $"{target.name}_OnPointerDown"
-                    },new SOEvent
+                    },
+                    new SOEvent
                     {
                         isSetup = false,
                         eventEnum = SoEventEnum.PointerUp,
                         mehtodName = $"{target.name}_OnPointerUp"
-                    }
-                    ,new SOEvent
+                    },
+                    new SOEvent
                     {
                         isSetup = false,
                         eventEnum = SoEventEnum.PointerEnter,
                         mehtodName = $"{target.name}_OnPointerEnter"
-                    }
-                    ,new SOEvent
+                    },
+                    new SOEvent
                     {
                         isSetup = false,
                         eventEnum = SoEventEnum.PointerExit,
@@ -200,7 +203,8 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
                         isSetup = false,
                         eventEnum = SoEventEnum.Slider,
                         mehtodName = $"{target.name}_img"
-                    },new SOEvent
+                    },
+                    new SOEvent
                     {
                         isSetup = false,
                         eventEnum = SoEventEnum.SliderOnValueChanged,
@@ -223,25 +227,16 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
                         isSetup = false,
                         eventEnum = SoEventEnum.Toggle,
                         mehtodName = $"{target.name}_toggle"
-                    },new SOEvent
+                    },
+                    new SOEvent
                     {
                         isSetup = false,
                         eventEnum = SoEventEnum.ToggleOnValueChanged,
                         mehtodName = $"{target.name}_OnValueChanged"
                     },
                 };
-            }else if (component is QUIForm)
-            {
-                return new List<SOEvent>
-                {
-                    new SOEvent
-                    {
-                        isSetup = false,
-                        eventEnum = SoEventEnum.RectTransform,
-                        mehtodName = $"{target.name}_rf"
-                    }
-                };
-            }else if (component is Canvas)
+            }
+            else if (component is QUIForm)
             {
                 return new List<SOEvent>
                 {
@@ -253,6 +248,19 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
                     }
                 };
             }
+            else if (component is Canvas)
+            {
+                return new List<SOEvent>
+                {
+                    new SOEvent
+                    {
+                        isSetup = false,
+                        eventEnum = SoEventEnum.RectTransform,
+                        mehtodName = $"{target.name}_rf"
+                    }
+                };
+            }
+
             return null;
         }
 
@@ -261,11 +269,11 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
         /// </summary>
         /// <param name="component"></param>
         /// <returns></returns>
-        public static SOComponent CheckCompData(Component component,SOTreeViewNodeData data)
+        public static SOComponent CheckCompData(Component component, SOTreeViewNodeData data)
         {
             foreach (var variable in data.soComponents)
             {
-                if (variable.instanceId==component.GetInstanceID())
+                if (variable.instanceId == component.GetInstanceID())
                 {
                     return variable;
                 }
@@ -287,24 +295,30 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
         /// <returns></returns>
         public static void CheckNodeChanged()
         {
-            if (CurrentClikNodeId >= CurrentPrefabCacheData.treeViewNodes.Count)
+            if (CurrentPrefabCacheData.treeViewNodes.Count != CurrentTreeView.AllItems.Count)
             {
-                int index = CurrentClikNodeId - (CurrentPrefabCacheData.treeViewNodes.Count - 1);
-                //有新加的节点，需要更新
-                for (int i = 0; i <index ; i++)
+                if (CurrentClikNodeId >= CurrentPrefabCacheData.treeViewNodes.Count)
                 {
-                    SOTreeViewNodeData treeViewNode = new SOTreeViewNodeData();
-                    treeViewNode.treeNodeId =CurrentPrefabCacheData.treeViewNodes.Count;
-                    List<Component> comps = CurrentTreeView.ReturnSingleClickedItem(treeViewNode.treeNodeId).ToList();
-                    GameObject clikGameObject = CurrentTreeView.ReturnSingleClickeGameObject(treeViewNode.treeNodeId);
-                    CurrentTreeView.m_nowClikNodeObj = clikGameObject;
-                    foreach (var VARIABLE2 in comps)
+                    int index = CurrentClikNodeId - (CurrentPrefabCacheData.treeViewNodes.Count - 1);
+                    //有新加的节点，需要更新
+                    for (int i = 0; i < index; i++)
                     {
-                        var soComp = FormWindowData.CheckCompData(VARIABLE2,treeViewNode);
-                        treeViewNode.soComponents.Add(soComp);
-                        soComp.soEvents = FormWindowData.GetNewEventsByComponent(clikGameObject, VARIABLE2);
+                        SOTreeViewNodeData treeViewNode = new SOTreeViewNodeData();
+                        treeViewNode.treeNodeId = CurrentPrefabCacheData.treeViewNodes.Count;
+                        List<Component> comps = CurrentTreeView.ReturnSingleClickedItem(treeViewNode.treeNodeId)
+                            .ToList();
+                        GameObject clikGameObject =
+                            CurrentTreeView.ReturnSingleClickeGameObject(treeViewNode.treeNodeId);
+                        CurrentTreeView.m_nowClikNodeObj = clikGameObject;
+                        foreach (var VARIABLE2 in comps)
+                        {
+                            var soComp = FormWindowData.CheckCompData(VARIABLE2, treeViewNode);
+                            treeViewNode.soComponents.Add(soComp);
+                            soComp.soEvents = FormWindowData.GetNewEventsByComponent(clikGameObject, VARIABLE2);
+                        }
+
+                        CurrentPrefabCacheData.treeViewNodes.Add(treeViewNode);
                     }
-                    CurrentPrefabCacheData.treeViewNodes.Add(treeViewNode);
                 }
             }
         }
@@ -318,6 +332,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
         {
             return prefab.GetComponent<QUIForm>();
         }
+
         /// <summary>
         /// 检查传入的prefab是否合法?
         /// </summary>
@@ -327,13 +342,15 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
         {
             return prefab.name.Contains("Form");
         }
+
         /// <summary>
         /// 检查windowdata数据，将prefab引用为null的数据删除。
         /// </summary>
         private static void CheckWindowData()
         {
             for (int i = 0; i < WindowData.AllPrefabCacheDatas.Count; i++)
-            {  if (WindowData.AllPrefabCacheDatas[i] is null)
+            {
+                if (WindowData.AllPrefabCacheDatas[i] is null)
                 {
                     Debug.Log("删除miss");
                     WindowData.AllPrefabCacheDatas.Remove(WindowData.AllPrefabCacheDatas[i]);
