@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2661dfe7d774484b20bcd10fc623a03, type: 3}
   m_Name: GlobalUIWindowData
   m_EditorClassIdentifier: 
-  generateParentDirectoryPath: 
+  generateParentDirectoryPath: E:/WorkSpace/QTools/Assets/Scripts
   mPrefabsCacheDatas:
   - mInstanceId: -1262
+    mCacheData: {fileID: 0}
+  - mInstanceId: -1434
+    mCacheData: {fileID: 0}
+  - mInstanceId: -1384
+    mCacheData: {fileID: 11400000, guid: 16a3199414eba92448ff935fae964b99, type: 2}
+  - mInstanceId: -1252
     mCacheData: {fileID: 11400000, guid: 14ad7f8be8dea17429dbaa84bc224366, type: 2}

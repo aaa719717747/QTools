@@ -20,6 +20,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
         private Vector2 leftScrollPosition;
         private Vector2 centerScrollPosition;
         private Vector2 centerEventScrollPosition;
+
         private GameObject m_targetPrefab;
 
         private PrefabCacheData m_cacheData;
@@ -47,12 +48,13 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
             nowInstanceId = 0;
             window.Show();
         }
-        
+
         public static bool IsInPrefabMode()
         {
             var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
             return prefabStage != null;
         }
+
         private void OnGUI()
         {
             if (IsInPrefabMode())
@@ -62,17 +64,27 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                 Close();
                 return;
             }
+
             //顶部按钮
             DrawTopMenuBtnsGUI();
-            //==========================基础配置=========================
 
-            //==========================预制件配置=========================
-            EditorGUILayout.BeginHorizontal();
-            // 左侧窗口
-            DrawLeftTreeViewWindowGUI();
-            // 右侧窗口
-            DrawDrawRightWindow_ComponentsGUI();
-            EditorGUILayout.EndHorizontal();
+
+            switch (FormWindowData.windowArea)
+            {
+                case WindowArea.Base:
+                    //==========================基础配置=========================
+                    DrawDirectory();
+                    break;
+                case WindowArea.Prefab:
+                    //==========================预制件配置=========================
+                    EditorGUILayout.BeginHorizontal();
+                    // 左侧窗口
+                    DrawLeftTreeViewWindowGUI();
+                    // 右侧窗口
+                    DrawDrawRightWindow_ComponentsGUI();
+                    EditorGUILayout.EndHorizontal();
+                    break;
+            }
         }
 
         private static int nowInstanceId;
@@ -246,7 +258,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_rf",
+                        eSoEvent.mehtodName=EditorGUILayout.TextField(eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
                         if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
@@ -268,7 +280,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_btn",
+                        eSoEvent.mehtodName=EditorGUILayout.TextField(eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
                         if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
@@ -291,7 +303,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_txt",
+                        eSoEvent.mehtodName=EditorGUILayout.TextField(eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
                         if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
@@ -312,7 +324,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_img",
+                        eSoEvent.mehtodName=EditorGUILayout.TextField(eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
                         if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
@@ -333,7 +345,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_slider",
+                        eSoEvent.mehtodName=EditorGUILayout.TextField(eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
                         if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
@@ -355,7 +367,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_toggle",
+                        eSoEvent.mehtodName=EditorGUILayout.TextField(eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
                         if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
@@ -378,8 +390,8 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        EditorGUILayout.TextField(
-                            $"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_OnPointerClick",
+                        eSoEvent.mehtodName=EditorGUILayout.TextField(
+                            eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
                         if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
@@ -402,8 +414,8 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        EditorGUILayout.TextField(
-                            $"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_OnPointerDown",
+                        eSoEvent.mehtodName=EditorGUILayout.TextField(
+                            eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
                         if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
@@ -424,7 +436,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        EditorGUILayout.TextField($"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_OnPointerUp",
+                        eSoEvent.mehtodName=EditorGUILayout.TextField(eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
                         if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
@@ -446,8 +458,8 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        EditorGUILayout.TextField(
-                            $"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_OnPointerEnter",
+                        eSoEvent.mehtodName=EditorGUILayout.TextField(
+                            eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
                         if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
@@ -469,8 +481,8 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        EditorGUILayout.TextField(
-                            $"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_OnPointerExit",
+                        eSoEvent.mehtodName=EditorGUILayout.TextField(
+                            eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
                         if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
@@ -492,8 +504,8 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        EditorGUILayout.TextField(
-                            $"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_OnValueChanged",
+                        eSoEvent.mehtodName=EditorGUILayout.TextField(
+                            eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
                         if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
@@ -515,8 +527,8 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        EditorGUILayout.TextField(
-                            $"{FormWindowData.CurrentTreeView.m_nowClikNodeObj.name}_OnValueChanged",
+                        eSoEvent.mehtodName=EditorGUILayout.TextField(
+                            eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
                         if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
@@ -540,79 +552,64 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
         private void DrawTopMenuBtnsGUI()
         {
             EditorGUILayout.BeginHorizontal();
+
+            GUI.backgroundColor = FormWindowData.windowArea == WindowArea.Base ? Color.green : Color.white;
             if (GUILayout.Button("基础配置", GUILayout.Height(23)))
             {
-                Debug.Log("Button 1 clicked");
+                FormWindowData.windowArea = WindowArea.Base;
+               
             }
 
+            GUI.backgroundColor = Color.white;
+            GUI.backgroundColor = FormWindowData.windowArea == WindowArea.Prefab ? Color.green : Color.white;
             if (GUILayout.Button("预制件配置", GUILayout.Height(23)))
             {
-                Debug.Log("Button 1 clicked");
+                FormWindowData.windowArea = WindowArea.Prefab;
+              
             }
 
+            GUI.backgroundColor = Color.white;
             EditorGUILayout.EndHorizontal();
         }
 
+        /// <summary>
+        /// 绘制基本信息界面
+        /// </summary>
+        private void DrawDirectory()
+        {
+            GUILayout.Space(5);
+            GUILayout.Label("当前目录[生成的C# UI代码存放目录]:");
+            EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox]);
+           
 
-        // private void DrawGenerateNewForm()
-        // {
-        //     if (!string.IsNullOrEmpty(FormEditorConfig.generateParentDirectoryPath))
-        //     {
-        //         //检查路径合法?
-        //         if (FormEditorConfig.generateParentDirectoryPath.Contains("Resources") ||
-        //             FormEditorConfig.generateParentDirectoryPath.Contains("StreamingAssets") ||
-        //             FormEditorConfig.generateParentDirectoryPath.Contains("Plugins")
-        //            )
-        //         {
-        //             FormEditorConfig.generateParentDirectoryPath = String.Empty;
-        //             EditorUtility.DisplayDialog("警告", "此路径包含不合法的路径Resources/StreamingAssets/Plugins，请重新选择路径!",
-        //                 "确定");
-        //         }
-        //         else
-        //         {
-        //             GUI.backgroundColor = Color.yellow;
-        //             if (GUILayout.Button("生成C#代码", GUILayout.Height(35)))
-        //             {
-        //                 if (PrefabData.Prefab is null)
-        //                 {
-        //                     EditorUtility.DisplayDialog("警告", "UIPrefab预制件 空引用！请选择UIPrefab预制件！",
-        //                         "确定");
-        //                 }
-        //             }
-        //
-        //             GUI.backgroundColor = Color.white;
-        //         }
-        //     }
-        // }
-        // private void DrawDirectory()
-        // {
-        //     isFoldoutDrawDirectory = EditorGUILayout.Foldout(isFoldoutDrawDirectory, "基础配置");
-        //     if (isFoldoutDrawDirectory)
-        //     {
-        //         EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox]);
-        //         GUILayout.Space(5);
-        //         GUILayout.Label("当前目录[生成的C# UI代码存放目录]:");
-        //         GUILayout.Label(string.IsNullOrEmpty(FormEditorConfig.generateParentDirectoryPath)
-        //             ? "空目录"
-        //             : FormEditorConfig.generateParentDirectoryPath);
-        //
-        //         if (GUILayout.Button("选择目录", GUILayout.Height(20)))
-        //         {
-        //             FormEditorConfig.generateParentDirectoryPath =
-        //                 EditorUtility.OpenFolderPanel("选择目录", Application.dataPath, "");
-        //         }
-        //
-        //
-        //         EditorGUILayout.EndVertical();
-        //     }
-        // }
-        // private void DrawPrefabInfo()
-        // {
-        //     EditorGUILayout.BeginHorizontal(this[LayoutStyle.GroupBox]);
-        //     PrefabData.Prefab =
-        //         (GameObject)EditorGUILayout.ObjectField("UIPrefab预制件:", PrefabData.Prefab, typeof(GameObject));
-        //     EditorGUILayout.EndHorizontal();
-        // }
+            GUILayout.Label(string.IsNullOrEmpty(FormWindowData.WindowData.generateParentDirectoryPath)
+                ? "空目录"
+                : FormWindowData.WindowData.generateParentDirectoryPath);
+
+            if (GUILayout.Button("选择目录", GUILayout.Height(20)))
+            {
+                FormWindowData.WindowData.generateParentDirectoryPath =
+                    EditorUtility.OpenFolderPanel("选择目录", Application.dataPath, "");
+            }
+
+            EditorGUILayout.EndVertical();
+
+            
+            
+            if (!string.IsNullOrEmpty(FormWindowData.WindowData.generateParentDirectoryPath))
+            {
+                //检查路径合法?
+                if (FormWindowData.WindowData.generateParentDirectoryPath.Contains("Resources") ||
+                    FormWindowData.WindowData.generateParentDirectoryPath.Contains("StreamingAssets") ||
+                    FormWindowData.WindowData.generateParentDirectoryPath.Contains("Plugins")
+                   )
+                {
+                    FormWindowData.WindowData.generateParentDirectoryPath = String.Empty;
+                    EditorUtility.DisplayDialog("警告", "此路径包含不合法的路径Resources/StreamingAssets/Plugins，请重新选择路径!",
+                        "确定");
+                }
+            }
+        }
 
         /// <summary>
         /// 模块样式索引
