@@ -26,14 +26,6 @@ MonoBehaviour:
       - isSetup: 0
         eventEnum: 0
         mehtodName: RegisterForm_rf
-    - instanceId: -14044
-      soEvents:
-      - isSetup: 0
-        eventEnum: 0
-        mehtodName: RegisterForm_rf
-      - isSetup: 0
-        eventEnum: 3
-        mehtodName: RegisterForm_img
   - treeNodeInstanceId: -4058
     soComponents:
     - instanceId: -4064

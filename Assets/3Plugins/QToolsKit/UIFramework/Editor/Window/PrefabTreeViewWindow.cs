@@ -7,6 +7,7 @@ using _3Plugins.QToolsKit.UIFramework.Editor.Window.Enums;
 using _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,16 +34,34 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
         [MenuItem("项目工具/UI编辑器 %&Q")]
         static void ShowWindow()
         {
+            if (IsInPrefabMode())
+            {
+                EditorUtility.DisplayDialog("警告", $"预制体编辑模式中不支持使用UI编辑器！请退出预制件编辑模式！",
+                    "确定");
+                return;
+            }
+
             FormWindowData.Init();
             var window = GetWindow<PrefabTreeViewWindow>();
             window.titleContent = new GUIContent("UI编辑器");
             nowInstanceId = 0;
             window.Show();
         }
-
-
+        
+        public static bool IsInPrefabMode()
+        {
+            var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
+            return prefabStage != null;
+        }
         private void OnGUI()
         {
+            if (IsInPrefabMode())
+            {
+                EditorUtility.DisplayDialog("警告", $"预制体编辑模式中不支持使用UI编辑器！请退出预制件编辑模式！",
+                    "确定");
+                Close();
+                return;
+            }
             //顶部按钮
             DrawTopMenuBtnsGUI();
             //==========================基础配置=========================
