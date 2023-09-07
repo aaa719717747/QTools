@@ -186,12 +186,8 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
         /// <param name="id"></param>
         private void DrawEventList(Component component)
         {
-            FormWindowData.CheckNodeChanged();
-            SOTreeViewNodeData data =
-                FormWindowData.CurrentPrefabCacheData.treeViewNodes[FormWindowData.CurrentClikNodeId];
-            SOComponent targetCompData = FormWindowData.CheckCompData(component, data);
-
-
+            SOComponent targetCompData = FormWindowData.CurrentTreeView.GetCurrentClikSoComponentData();
+            if (targetCompData is null) return;
             //判断组件数据是否已经存在，存在则取存在信息，不存在则创建新的
             EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox], GUILayout.ExpandWidth(true),
                 GUILayout.ExpandHeight(true));

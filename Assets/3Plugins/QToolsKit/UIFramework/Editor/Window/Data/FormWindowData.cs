@@ -40,7 +40,13 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
 
             CheckWindowData();
         }
-
+        /// <summary>
+        /// 更新预制件数据
+        /// </summary>
+        public static void Update()
+        {
+            
+        }
         /// <summary>
         /// 查询预制件数据
         /// </summary>
@@ -66,30 +72,39 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
 
             CheckWindowData();
             CurrentTreeView = new PrefabTreeView(CurrentTreeViewState, prefab);
-            foreach (var VARIABLE in WindowData.AllPrefabCacheDatas)
+            //查询预制件数据是否存在？
+            foreach (PrefabData variable in WindowData.mPrefabsCacheDatas)
             {
-                if (VARIABLE.name.Equals($"{prefab.name}_CacheData"))
+                if (variable.mInstanceId==prefab.GetInstanceID())
                 {
                     Debug.Log("找到了");
-                    return VARIABLE;
+                    //更新数据
+                    variable.mCacheData.Update(prefab, CurrentTreeView);
+                    return variable.mCacheData;
                 }
             }
 
-            //这是一个新的预制件
+            //这是一个新的预制件,创建新数据文件
             PrefabCacheData data = EditorUtils.CreateScriptableObject<PrefabCacheData>(
                 $"Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Configs/Prefab/{prefab.name}_CacheData.asset");
-
-            Debug.Log("创建文件====");
-            //绘制树
-
-            data.New(prefab, CurrentTreeView.AllItems, CurrentTreeView);
+            data.New(prefab, CurrentTreeView);
+            WindowData.mPrefabsCacheDatas.Add(new PrefabData
+            {
+                mInstanceId = prefab.GetInstanceID(),
+                mCacheData = data
+            });
             EditorUtility.SetDirty(WindowData);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
-            WindowData.AllPrefabCacheDatas.Add(data);
             return data;
         }
 
+        /// <summary>
+        /// 根据Component类型实例化指定的SoEvents
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="component"></param>
+        /// <returns></returns>
         public static List<SOEvent> GetNewEventsByComponent(GameObject target, Component component)
         {
             if (component is RectTransform)
@@ -265,65 +280,6 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
         }
 
         /// <summary>
-        /// 根据组件找到组件对应的数据
-        /// </summary>
-        /// <param name="component"></param>
-        /// <returns></returns>
-        public static SOComponent CheckCompData(Component component, SOTreeViewNodeData data)
-        {
-            foreach (var variable in data.soComponents)
-            {
-                if (variable.instanceId == component.GetInstanceID())
-                {
-                    return variable;
-                }
-            }
-
-            SOComponent newSoComp = new SOComponent
-            {
-                instanceId = component.GetInstanceID(),
-                soEvents = GetNewEventsByComponent(CurrentTreeView.m_nowClikNodeObj, component)
-            };
-            //新的组件
-            data.soComponents.Add(newSoComp);
-            return newSoComp;
-        }
-
-        /// <summary>
-        /// 检查节点变化
-        /// </summary>
-        /// <returns></returns>
-        public static void CheckNodeChanged()
-        {
-            if (CurrentPrefabCacheData.treeViewNodes.Count != CurrentTreeView.AllItems.Count)
-            {
-                if (CurrentClikNodeId >= CurrentPrefabCacheData.treeViewNodes.Count)
-                {
-                    int index = CurrentClikNodeId - (CurrentPrefabCacheData.treeViewNodes.Count - 1);
-                    //有新加的节点，需要更新
-                    for (int i = 0; i < index; i++)
-                    {
-                        SOTreeViewNodeData treeViewNode = new SOTreeViewNodeData();
-                        treeViewNode.treeNodeId = CurrentPrefabCacheData.treeViewNodes.Count;
-                        List<Component> comps = CurrentTreeView.ReturnSingleClickedItem(treeViewNode.treeNodeId)
-                            .ToList();
-                        GameObject clikGameObject =
-                            CurrentTreeView.ReturnSingleClickeGameObject(treeViewNode.treeNodeId);
-                        CurrentTreeView.m_nowClikNodeObj = clikGameObject;
-                        foreach (var VARIABLE2 in comps)
-                        {
-                            var soComp = FormWindowData.CheckCompData(VARIABLE2, treeViewNode);
-                            treeViewNode.soComponents.Add(soComp);
-                            soComp.soEvents = FormWindowData.GetNewEventsByComponent(clikGameObject, VARIABLE2);
-                        }
-
-                        CurrentPrefabCacheData.treeViewNodes.Add(treeViewNode);
-                    }
-                }
-            }
-        }
-
-        /// <summary>
         /// 检查传入的prefab是否合法?
         /// </summary>
         /// <param name="prefab"></param>
@@ -348,12 +304,12 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
         /// </summary>
         private static void CheckWindowData()
         {
-            for (int i = 0; i < WindowData.AllPrefabCacheDatas.Count; i++)
+            for (int i = 0; i < WindowData.mPrefabsCacheDatas.Count; i++)
             {
-                if (WindowData.AllPrefabCacheDatas[i] is null)
+                if (WindowData.mPrefabsCacheDatas[i].mCacheData == null)
                 {
                     Debug.Log("删除miss");
-                    WindowData.AllPrefabCacheDatas.Remove(WindowData.AllPrefabCacheDatas[i]);
+                    WindowData.mPrefabsCacheDatas.Remove(WindowData.mPrefabsCacheDatas[i]);
                 }
             }
         }

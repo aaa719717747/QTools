@@ -2,6 +2,7 @@
 using System.Linq;
 using _3Plugins.QToolsKit.UIFramework.Editor.Utils;
 using _3Plugins.QToolsKit.UIFramework.Editor.Window.Data;
+using _3Plugins.QToolsKit.UIFramework.Editor.Window.Data.Json;
 using _3Plugins.QToolsKit.UIFramework.Scripts;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
@@ -16,6 +17,9 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
         public Component m_nowClikComponent;
         public List<Component> m_nowComponentsList;
 
+
+       
+
         public GameObject Prefab { get; set; }
         public List<TreeViewItem> AllItems { get; set; }
 
@@ -25,7 +29,26 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
             Prefab = prefab;
             Reload();
         }
+        /// <summary>
+        /// 获取当前点击组件对应数据层的SOComponent数据
+        /// </summary>
+        /// <returns></returns>
+        public SOComponent GetCurrentClikSoComponentData()
+        {
+            if (m_nowClikNodeObj is null)
+            {
+                Debug.LogError($"m_nowClikNodeObj is null");
+                return null;
+            }
+            if (m_nowClikComponent is null)
+            {
+                Debug.LogError($"m_nowClikComponent is null");
+                return null;
+            }
 
+            return FormWindowData.CurrentPrefabCacheData.GetCurrentClikSoComponentData(m_nowClikNodeObj,
+                m_nowClikComponent);
+        }
         protected override TreeViewItem BuildRoot()
         {
             var root = new TreeViewItem { id = 0, depth = -1, displayName = "Root" };
@@ -44,6 +67,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
                 treeViewItems.Add(new TreeViewItem { id = 1, depth = 0, displayName = "No Prefab Selected" });
             }
 
+            treeViewItems.RemoveAt(0);
             AllItems = treeViewItems;
             SingleClickedItem(0);
             return root;
@@ -167,7 +191,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
             }
         }
 
-        private List<Component> FiterComponent(Component[] components)
+        public List<Component> FiterComponent(Component[] components)
         {
             List<Component> coms = new List<Component>();
             for (int i = 0; i < components.Length; i++)
@@ -175,7 +199,6 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
                 if (components[i] is Image ||
                     components[i] is Button ||
                     components[i] is Text ||
-                    components[i] is RawImage ||
                     components[i] is Slider ||
                     components[i] is Canvas ||
                     components[i] is QUIForm ||

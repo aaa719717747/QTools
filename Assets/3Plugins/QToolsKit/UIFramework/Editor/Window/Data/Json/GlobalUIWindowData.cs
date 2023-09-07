@@ -9,9 +9,16 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data.Json
         [Header("生成UIFrom代码的存放父级目录")]
         public string generateParentDirectoryPath;
 
-        public List<PrefabCacheData> AllPrefabCacheDatas = new List<PrefabCacheData>();
+        public List<PrefabData> mPrefabsCacheDatas = new List<PrefabData>();
         
         
         
+    }
+
+    [System.Serializable]
+    public class PrefabData
+    {
+        public int mInstanceId;
+        public PrefabCacheData mCacheData;
     }
 }
