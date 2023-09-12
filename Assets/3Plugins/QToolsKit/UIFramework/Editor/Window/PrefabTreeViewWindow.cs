@@ -258,7 +258,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        eSoEvent.mehtodName=EditorGUILayout.TextField(eSoEvent.mehtodName,
+                        eSoEvent.mehtodName = EditorGUILayout.TextField(eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
                         if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
@@ -280,12 +280,35 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        eSoEvent.mehtodName=EditorGUILayout.TextField(eSoEvent.mehtodName,
+                        eSoEvent.mehtodName = EditorGUILayout.TextField(eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
                         if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
                         {
-                            eSoEvent.isSetup = !eSoEvent.isSetup;
+                            bool isMay = true;
+                            if (eSoEvent.isSetup)
+                            {
+                                foreach (var VARIABLE in targetCompData.soEvents)
+                                {
+                                    if (VARIABLE.eventEnum == SoEventEnum.PointerClick ||
+                                        VARIABLE.eventEnum == SoEventEnum.PointerDown ||
+                                        VARIABLE.eventEnum == SoEventEnum.PointerUp)
+                                    {
+                                        if (VARIABLE.isSetup)
+                                        {
+                                            isMay = false;
+                                            EditorUtility.DisplayDialog("警告",
+                                                $"PointerClick/PointerDown/PointerUp 必须需要Button组件引用!",
+                                                "确定");
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (isMay)
+                            {
+                                eSoEvent.isSetup = !eSoEvent.isSetup;
+                            }
                         }
 
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
@@ -303,7 +326,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        eSoEvent.mehtodName=EditorGUILayout.TextField(eSoEvent.mehtodName,
+                        eSoEvent.mehtodName = EditorGUILayout.TextField(eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
                         if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
@@ -324,7 +347,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        eSoEvent.mehtodName=EditorGUILayout.TextField(eSoEvent.mehtodName,
+                        eSoEvent.mehtodName = EditorGUILayout.TextField(eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
                         if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
@@ -345,12 +368,32 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        eSoEvent.mehtodName=EditorGUILayout.TextField(eSoEvent.mehtodName,
+                        eSoEvent.mehtodName = EditorGUILayout.TextField(eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
                         if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
                         {
-                            eSoEvent.isSetup = !eSoEvent.isSetup;
+                            bool isMay = true;
+                            if (eSoEvent.isSetup)
+                            {
+                                foreach (var VARIABLE in targetCompData.soEvents)
+                                {
+                                    if (VARIABLE.eventEnum == SoEventEnum.SliderOnValueChanged)
+                                    {
+                                        if (VARIABLE.isSetup)
+                                        {
+                                            isMay = false;
+                                            EditorUtility.DisplayDialog("警告", $"OnValueChanged 必须需要Slider组件引用!",
+                                                "确定");
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (isMay)
+                            {
+                                eSoEvent.isSetup = !eSoEvent.isSetup;
+                            }
                         }
 
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
@@ -367,12 +410,32 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        eSoEvent.mehtodName=EditorGUILayout.TextField(eSoEvent.mehtodName,
+                        eSoEvent.mehtodName = EditorGUILayout.TextField(eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
                         if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
                         {
-                            eSoEvent.isSetup = !eSoEvent.isSetup;
+                            bool isMay = true;
+                            if (eSoEvent.isSetup)
+                            {
+                                foreach (var VARIABLE in targetCompData.soEvents)
+                                {
+                                    if (VARIABLE.eventEnum == SoEventEnum.ToggleOnValueChanged)
+                                    {
+                                        if (VARIABLE.isSetup)
+                                        {
+                                            isMay = false;
+                                            EditorUtility.DisplayDialog("警告", $"OnValueChanged 必须需要Toggle组件引用!",
+                                                "确定");
+                                        }
+                                    }
+                                }
+                            }
+
+                            if (isMay)
+                            {
+                                eSoEvent.isSetup = !eSoEvent.isSetup;
+                            }
                         }
 
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
@@ -390,13 +453,23 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        eSoEvent.mehtodName=EditorGUILayout.TextField(
+                        eSoEvent.mehtodName = EditorGUILayout.TextField(
                             eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
                         if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
                         {
                             eSoEvent.isSetup = !eSoEvent.isSetup;
+                            if (eSoEvent.isSetup)
+                            {
+                                foreach (var VARIABLE in targetCompData.soEvents)
+                                {
+                                    if (VARIABLE.eventEnum == SoEventEnum.Button)
+                                    {
+                                        VARIABLE.isSetup = eSoEvent.isSetup;
+                                    }
+                                }
+                            }
                         }
 
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
@@ -414,13 +487,23 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        eSoEvent.mehtodName=EditorGUILayout.TextField(
+                        eSoEvent.mehtodName = EditorGUILayout.TextField(
                             eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
                         if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
                         {
                             eSoEvent.isSetup = !eSoEvent.isSetup;
+                            if (eSoEvent.isSetup)
+                            {
+                                foreach (var VARIABLE in targetCompData.soEvents)
+                                {
+                                    if (VARIABLE.eventEnum == SoEventEnum.Button)
+                                    {
+                                        VARIABLE.isSetup = eSoEvent.isSetup;
+                                    }
+                                }
+                            }
                         }
 
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
@@ -436,12 +519,22 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        eSoEvent.mehtodName=EditorGUILayout.TextField(eSoEvent.mehtodName,
+                        eSoEvent.mehtodName = EditorGUILayout.TextField(eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
                         if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
                         {
                             eSoEvent.isSetup = !eSoEvent.isSetup;
+                            if (eSoEvent.isSetup)
+                            {
+                                foreach (var VARIABLE in targetCompData.soEvents)
+                                {
+                                    if (VARIABLE.eventEnum == SoEventEnum.Button)
+                                    {
+                                        VARIABLE.isSetup = eSoEvent.isSetup;
+                                    }
+                                }
+                            }
                         }
 
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
@@ -458,7 +551,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        eSoEvent.mehtodName=EditorGUILayout.TextField(
+                        eSoEvent.mehtodName = EditorGUILayout.TextField(
                             eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
@@ -481,7 +574,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        eSoEvent.mehtodName=EditorGUILayout.TextField(
+                        eSoEvent.mehtodName = EditorGUILayout.TextField(
                             eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
@@ -504,13 +597,23 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        eSoEvent.mehtodName=EditorGUILayout.TextField(
+                        eSoEvent.mehtodName = EditorGUILayout.TextField(
                             eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
                         if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
                         {
                             eSoEvent.isSetup = !eSoEvent.isSetup;
+                            if (eSoEvent.isSetup)
+                            {
+                                foreach (var VARIABLE in targetCompData.soEvents)
+                                {
+                                    if (VARIABLE.eventEnum == SoEventEnum.Slider)
+                                    {
+                                        VARIABLE.isSetup = eSoEvent.isSetup;
+                                    }
+                                }
+                            }
                         }
 
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
@@ -527,13 +630,23 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                             this[15, FontStyle.Bold, TextAnchor.MiddleLeft, Color.white], GUILayout.Height(12),
                             GUILayout.ExpandHeight(true));
                         GUILayout.Space(8);
-                        eSoEvent.mehtodName=EditorGUILayout.TextField(
+                        eSoEvent.mehtodName = EditorGUILayout.TextField(
                             eSoEvent.mehtodName,
                             GUILayout.ExpandHeight(true));
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.red : Color.green;
                         if (GUILayout.Button(eSoEvent.isSetup ? "取消设置" : "设置", GUILayout.ExpandHeight(true)))
                         {
                             eSoEvent.isSetup = !eSoEvent.isSetup;
+                            if (eSoEvent.isSetup)
+                            {
+                                foreach (var VARIABLE in targetCompData.soEvents)
+                                {
+                                    if (VARIABLE.eventEnum == SoEventEnum.Toggle)
+                                    {
+                                        VARIABLE.isSetup = eSoEvent.isSetup;
+                                    }
+                                }
+                            }
                         }
 
                         GUI.backgroundColor = eSoEvent.isSetup ? Color.green : Color.white;
@@ -544,6 +657,13 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
             }
 
             EditorGUILayout.EndVertical();
+
+            if (GUI.changed)
+            {
+                EditorUtility.SetDirty(m_cacheData);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
+            }
         }
 
         /// <summary>
@@ -557,7 +677,6 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
             if (GUILayout.Button("基础配置", GUILayout.Height(23)))
             {
                 FormWindowData.windowArea = WindowArea.Base;
-               
             }
 
             GUI.backgroundColor = Color.white;
@@ -565,7 +684,6 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
             if (GUILayout.Button("预制件配置", GUILayout.Height(23)))
             {
                 FormWindowData.windowArea = WindowArea.Prefab;
-              
             }
 
             GUI.backgroundColor = Color.white;
@@ -580,7 +698,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
             GUILayout.Space(5);
             GUILayout.Label("当前目录[生成的C# UI代码存放目录]:");
             EditorGUILayout.BeginVertical(this[LayoutStyle.GroupBox]);
-           
+
 
             GUILayout.Label(string.IsNullOrEmpty(FormWindowData.WindowData.generateParentDirectoryPath)
                 ? "空目录"
@@ -594,20 +712,27 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
 
             EditorGUILayout.EndVertical();
 
-            
-            
+
             if (!string.IsNullOrEmpty(FormWindowData.WindowData.generateParentDirectoryPath))
             {
                 //检查路径合法?
                 if (FormWindowData.WindowData.generateParentDirectoryPath.Contains("Resources") ||
                     FormWindowData.WindowData.generateParentDirectoryPath.Contains("StreamingAssets") ||
-                    FormWindowData.WindowData.generateParentDirectoryPath.Contains("Plugins")
+                    FormWindowData.WindowData.generateParentDirectoryPath.Contains("Plugins") ||
+                    FormWindowData.WindowData.generateParentDirectoryPath.Contains("Editor")
                    )
                 {
                     FormWindowData.WindowData.generateParentDirectoryPath = String.Empty;
-                    EditorUtility.DisplayDialog("警告", "此路径包含不合法的路径Resources/StreamingAssets/Plugins，请重新选择路径!",
+                    EditorUtility.DisplayDialog("警告", "此路径包含不合法的路径Resources/StreamingAssets/Plugins/Editor，请重新选择路径!",
                         "确定");
                 }
+            }
+
+            if (GUI.changed)
+            {
+                EditorUtility.SetDirty(FormWindowData.WindowData);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
             }
         }
 
