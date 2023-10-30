@@ -25,10 +25,12 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
 
         public static int CurrentClikNodeId { get; set; }
         public static WindowArea windowArea = WindowArea.Base;
-        private static string savedPath=String.Empty;
+        private static string savedPath = String.Empty;
+
         public static void Init()
         {
-             savedPath = Path.Combine(Application.dataPath, "3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/UIEditorSavedData.bytes");
+            savedPath = Path.Combine(Application.dataPath,
+                "3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/UIEditorSavedData.bytes");
             //json存储
             if (File.Exists(savedPath))
             {
@@ -39,7 +41,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
             {
                 GlobalUIWindowData gwd = new GlobalUIWindowData();
                 string serializeContent = JsonConvert.SerializeObject(gwd);
-                File.WriteAllText(savedPath,serializeContent);
+                File.WriteAllText(savedPath, serializeContent);
                 WindowData = JsonConvert.DeserializeObject<GlobalUIWindowData>(serializeContent);
             }
 
@@ -51,7 +53,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
 
         public static void Saved()
         {
-            File.WriteAllText(savedPath,JsonConvert.SerializeObject(WindowData));
+            File.WriteAllText(savedPath, JsonConvert.SerializeObject(WindowData));
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }
@@ -61,8 +63,8 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
         /// </summary>
         public static void Update()
         {
-            
         }
+
         /// <summary>
         /// 查询预制件数据
         /// </summary>
@@ -91,7 +93,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
             //查询预制件数据是否存在？
             foreach (PrefabData variable in WindowData.mPrefabsCacheDatas)
             {
-                if (variable.mInstanceId==prefab.GetInstanceID())
+                if (variable.mInstanceId == prefab.GetInstanceID())
                 {
                     Debug.Log("找到了");
                     //更新数据
@@ -266,7 +268,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
                     },
                 };
             }
-            else if (component is QUIForm)
+            else if (component is QUIFormScript)
             {
                 return new List<SOEvent>
                 {
@@ -301,7 +303,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
         /// <returns></returns>
         private static bool IsLeagalComp(GameObject prefab)
         {
-            return prefab.GetComponent<QUIForm>();
+            return prefab.GetComponent<QUIFormScript>();
         }
 
         /// <summary>

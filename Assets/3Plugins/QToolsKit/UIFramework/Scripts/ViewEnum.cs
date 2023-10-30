@@ -2,6 +2,7 @@
 {
     public enum ViewEnum
     {
-        LOGIN
+        LoginForm,
+        RegisterForm
     }
 }

@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using _3Plugins.QToolsKit.UIFramework.Sample;
-using JetBrains.Annotations;
 using QToolsKit.Loader;
 using UnityEngine;
-using UnityEngine.Profiling;
 
 namespace _3Plugins.QToolsKit.UIFramework.Scripts
 {
@@ -39,7 +34,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Scripts
 
             //实例化预设
             GameObject go = Instantiate(m_maincitypanel, transform);
-            LoginForm uiForm = go.GetComponent<LoginForm>();
+            QUIFormScript uiForm = go.GetComponent<QUIFormScript>();
             // var ss= uiForm.Bind(
             //     new LoginView(),
             //     new LoginModel());
@@ -65,7 +60,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Scripts
         {
             if (GUILayout.Button("show"))
             {
-                ShowPanel(ViewEnum.LOGIN);
+                ShowPanel(ViewEnum.LoginForm);
             }
         }
     }

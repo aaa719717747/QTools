@@ -201,7 +201,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
                     components[i] is Text ||
                     components[i] is Slider ||
                     components[i] is Canvas ||
-                    components[i] is QUIForm ||
+                    components[i] is QUIFormScript ||
                     components[i] is ScrollRect ||
                     components[i] is Toggle
                    )
