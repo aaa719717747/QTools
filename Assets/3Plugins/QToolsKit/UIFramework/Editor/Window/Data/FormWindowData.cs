@@ -1,10 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using _3Plugins.QToolsKit.UIFramework.Editor.Utils;
 using _3Plugins.QToolsKit.UIFramework.Editor.Window.Data.Json;
 using _3Plugins.QToolsKit.UIFramework.Editor.Window.Enums;
 using _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView;
 using _3Plugins.QToolsKit.UIFramework.Scripts;
+using Unity.Plastic.Newtonsoft.Json;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
@@ -22,17 +25,22 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
 
         public static int CurrentClikNodeId { get; set; }
         public static WindowArea windowArea = WindowArea.Base;
-
+        private static string savedPath=String.Empty;
         public static void Init()
         {
-            WindowData = AssetDatabase.LoadAssetAtPath<GlobalUIWindowData>(
-                "Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Configs/GlobalUIWindowData.asset");
-            if (WindowData is null)
+             savedPath = Path.Combine(Application.dataPath, "3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/UIEditorSavedData.bytes");
+            //json存储
+            if (File.Exists(savedPath))
             {
-                EditorUtils.CreateScriptableObject<GlobalUIWindowData>(
-                    "Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Configs/GlobalUIWindowData.asset");
-                WindowData = AssetDatabase.LoadAssetAtPath<GlobalUIWindowData>(
-                    "Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Configs/GlobalUIWindowData.asset");
+                string fileContent = File.ReadAllText(savedPath);
+                WindowData = JsonConvert.DeserializeObject<GlobalUIWindowData>(fileContent);
+            }
+            else
+            {
+                GlobalUIWindowData gwd = new GlobalUIWindowData();
+                string serializeContent = JsonConvert.SerializeObject(gwd);
+                File.WriteAllText(savedPath,serializeContent);
+                WindowData = JsonConvert.DeserializeObject<GlobalUIWindowData>(serializeContent);
             }
 
             if (CurrentTreeViewState == null)
@@ -40,6 +48,14 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
 
             CheckWindowData();
         }
+
+        public static void Saved()
+        {
+            File.WriteAllText(savedPath,JsonConvert.SerializeObject(WindowData));
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
+        }
+
         /// <summary>
         /// 更新预制件数据
         /// </summary>
@@ -85,15 +101,14 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
             }
 
             //这是一个新的预制件,创建新数据文件
-            PrefabCacheData data = EditorUtils.CreateScriptableObject<PrefabCacheData>(
-                $"Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Configs/Prefab/{prefab.name}_CacheData.asset");
+            PrefabCacheData data = new PrefabCacheData();
             data.New(prefab, CurrentTreeView);
             WindowData.mPrefabsCacheDatas.Add(new PrefabData
             {
                 mInstanceId = prefab.GetInstanceID(),
                 mCacheData = data
             });
-            EditorUtility.SetDirty(WindowData);
+
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
             return data;

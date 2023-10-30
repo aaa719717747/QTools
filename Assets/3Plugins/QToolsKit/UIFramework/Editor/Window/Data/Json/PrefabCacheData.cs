@@ -8,17 +8,17 @@ using UnityEngine.Serialization;
 
 namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data.Json
 {
-    [CreateAssetMenu(fileName = "PrefabCacheData", menuName = "PrefabCacheData(ScriptableObject)")]
-    public class PrefabCacheData : ScriptableObject
+    public class PrefabCacheData
     {
-        public GameObject prefab;
+       
+        // public GameObject prefab;
         public List<SOTreeViewNodeData> treeViewNodes = new List<SOTreeViewNodeData>();
 
 
         public void New(GameObject prefab, PrefabTreeView CurrentTreeView)
         {
 
-            this.prefab = prefab;
+            // this.prefab = prefab;
             Debug.Log(CurrentTreeView.AllItems.Count);
             foreach (TreeViewItem VARIABLE in CurrentTreeView.AllItems)
             {
@@ -37,8 +37,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data.Json
                 
                 treeViewNodes.Add(treeViewNode);
             }
-
-            EditorUtility.SetDirty(this);
+            
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }
@@ -125,7 +124,6 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data.Json
                 }
             }
 
-            EditorUtility.SetDirty(this);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }

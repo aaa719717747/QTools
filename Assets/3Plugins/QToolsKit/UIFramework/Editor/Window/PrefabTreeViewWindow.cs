@@ -49,6 +49,11 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
             window.Show();
         }
 
+        private void OnDisable()
+        {
+            FormWindowData.Saved();
+        }
+
         public static bool IsInPrefabMode()
         {
             var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
@@ -660,7 +665,6 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
 
             if (GUI.changed)
             {
-                EditorUtility.SetDirty(m_cacheData);
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
             }
@@ -730,7 +734,6 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
 
             if (GUI.changed)
             {
-                EditorUtility.SetDirty(FormWindowData.WindowData);
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
             }
