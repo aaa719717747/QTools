@@ -1,22 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ebb0ebae-187f-42f0-bae6-eabc873a3dba" name="Changes" comment="更新check12">
+    <list default="true" id="ebb0ebae-187f-42f0-bae6-eabc873a3dba" name="Changes" comment="[UI编辑器] 存档改为json持久化存档">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Configs/GlobalUIWindowData.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Configs/GlobalUIWindowData.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Configs/Prefab/LoginForm_CacheData.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Configs/Prefab/LoginForm_CacheData.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Configs/Prefab/RegisterForm_CacheData.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Configs/Prefab/RegisterForm_CacheData.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/FormWindowData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/FormWindowData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/GlobalUIWindowData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/GlobalUIWindowData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/PrefabCacheData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/PrefabCacheData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Packages/packages-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/PackageManagerSettings.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/ProjectVersion.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/boot.config" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/HierarchyTootip.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/HierarchyTootip.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/HierarchyTootip/Editor.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/HierarchyTootip/Editor.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/HierarchyTootip/Editor/DKit.ThirdPartyPlugins.HierarchyTootip.Editor.asmdef" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/HierarchyTootip/Editor/DKit.ThirdPartyPlugins.HierarchyTootip.Editor.asmdef.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/HierarchyTootip/Editor/HierarchyTootip.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/HierarchyTootip/Editor/HierarchyTootip.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/HierarchyTootip/Editor/HierarchyTootip.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/HierarchyTootip/Editor/HierarchyTootip.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/HierarchyTootip/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/HierarchyTootip/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/HierarchyTootip/README.md.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/HierarchyTootip/README.md.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/HierarchyTootip/Runtime.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/HierarchyTootip/Runtime.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/HierarchyTootip/Runtime/DKit.ThirdPartyPlugins.HierarchyTootip.Runtime.asmdef" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/HierarchyTootip/Runtime/DKit.ThirdPartyPlugins.HierarchyTootip.Runtime.asmdef.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/HierarchyTootip/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/HierarchyTootip/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/HierarchyTootip/package.json.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/HierarchyTootip/package.json.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Document.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Document.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Editor.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Editor.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Editor/AutoEnumBuildTemplate.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Editor/AutoEnumBuildTemplate.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Editor/AutoEnumBuildTemplate.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Editor/AutoEnumBuildTemplate.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Editor/DKit.ThirdPartyPlugins.LanguageLocalizationHelper.Editor.asmdef" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Editor/DKit.ThirdPartyPlugins.LanguageLocalizationHelper.Editor.asmdef.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Editor/LLImageEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Editor/LLImageEditor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Editor/LLImageEditor.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Editor/LLImageEditor.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Editor/LLTextEditor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Editor/LLTextEditor.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Editor/LLTextEditor.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Editor/LLTextEditor.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Editor/LanguageLocalizationHelperEditorWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Editor/LanguageLocalizationHelperEditorWindow.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Editor/LanguageLocalizationHelperEditorWindow.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Editor/LanguageLocalizationHelperEditorWindow.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Editor/Textures.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Editor/Textures.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Editor/Textures/image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Editor/Textures/image.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Editor/Textures/image.jpg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Editor/Textures/image.jpg.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Editor/Textures/text.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Editor/Textures/text.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Editor/Textures/text.jpg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Editor/Textures/text.jpg.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/REDDME.md" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/REDDME.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/REDDME.md.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/REDDME.md.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Runtime.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Runtime.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Runtime/Core.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Runtime/Core.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Runtime/Core/LLBaseObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Runtime/Core/LLBaseObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Runtime/Core/LLBaseObject.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Runtime/Core/LLBaseObject.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Runtime/Core/LLHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Runtime/Core/LLHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Runtime/Core/LLHelper.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Runtime/Core/LLHelper.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Runtime/Core/LLImage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Runtime/Core/LLImage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Runtime/Core/LLImage.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Runtime/Core/LLImage.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Runtime/Core/LLText.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Runtime/Core/LLText.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Runtime/Core/LLText.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Runtime/Core/LLText.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Runtime/DKit.ThirdPartyPlugins.LanguageLocalizationHelper.Runtime.asmdef" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Runtime/DKit.ThirdPartyPlugins.LanguageLocalizationHelper.Runtime.asmdef.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Runtime/LLHelperData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Runtime/LLHelperData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Runtime/LLHelperData.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Runtime/LLHelperData.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Runtime/LLObject.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Runtime/LLObject.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Runtime/LLObject.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Runtime/LLObject.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Runtime/LLTipEnum.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Runtime/LLTipEnum.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Runtime/LLTipEnum.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Runtime/LLTipEnum.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Runtime/Resources.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Runtime/Resources.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Runtime/Resources/LLHelperData.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Runtime/Resources/LLHelperData.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Runtime/Resources/LLHelperData.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Runtime/Resources/LLHelperData.asset.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Runtime/Resources/UIClass.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Runtime/Resources/UIClass.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Runtime/Resources/UIClass.txt.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Runtime/Resources/UIClass.txt.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Sample.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Sample.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Sample/LLHelper.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Sample/LLHelper.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Sample/LLHelper.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Sample/LLHelper.prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Sample/LLHelperDemo.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Sample/LLHelperDemo.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Sample/LLHelperDemo.unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Sample/LLHelperDemo.unity.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Unity.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Unity.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Unity/Sprites.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Unity/Sprites.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/package.json.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/package.json.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,8 +99,8 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/df0aaee1feac4b8084d0040846eee8d415a400/41/8a6469a8/Application.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/df0aaee1feac4b8084d0040846eee8d415a400/68/41c189df/UnityEvent.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/df0aaee1feac4b8084d0040846eee8d415a400/d8/27d61301/Object.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/3Plugins/HierarchyTootip/Editor/HierarchyTootip.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/3Plugins/LanguageLocalizationHelper/Editor/AutoEnumBuildTemplate.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/HierarchyTootip/Editor/HierarchyTootip.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/LanguageLocalizationHelper/Editor/AutoEnumBuildTemplate.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/FormWindowData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/GlobalUIWindowData.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" root0="FORCE_HIGHLIGHTING" />
@@ -175,7 +226,7 @@
       <workItem from="1694511573425" duration="2060000" />
       <workItem from="1698051994359" duration="1914000" />
       <workItem from="1698636650165" duration="652000" />
-      <workItem from="1698651032618" duration="4527000" />
+      <workItem from="1698651032618" duration="5085000" />
     </task>
     <task id="LOCAL-00001" summary="uiframe1.co">
       <created>1691028022497</created>
@@ -338,7 +389,14 @@
       <option name="project" value="LOCAL" />
       <updated>1698052027997</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="[UI编辑器] 存档改为json持久化存档">
+      <created>1698656154589</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1698656154589</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -374,7 +432,8 @@
     <MESSAGE value="更新答题" />
     <MESSAGE value="更新check" />
     <MESSAGE value="更新check12" />
-    <option name="LAST_COMMIT_MESSAGE" value="更新check12" />
+    <MESSAGE value="[UI编辑器] 存档改为json持久化存档" />
+    <option name="LAST_COMMIT_MESSAGE" value="[UI编辑器] 存档改为json持久化存档" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -1,6 +1,0 @@
-﻿{
-  "name": "DKit.ThirdPartyPlugins.HierarchyTootip.Editor",
-  "references": [
-    "DKit.ThirdPartyPlugins.LanguageLocalizationHelper.Runtime"
-  ]
-}
