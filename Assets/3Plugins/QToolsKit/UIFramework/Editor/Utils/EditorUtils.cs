@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using _3Plugins.QToolsKit.UIFramework.Scripts;
+using _3Plugins.QToolsKit.UIFramework.Scripts.Core;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,9 +42,9 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Utils
             {
                 comName = "Toggle";
             }
-            else if (component is QUIFormScript)
+            else if (component is Form)
             {
-                comName = "QUIForm";
+                comName = "Form";
             }
 
             return comName;

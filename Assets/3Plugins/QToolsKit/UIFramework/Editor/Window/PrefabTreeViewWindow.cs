@@ -5,6 +5,8 @@ using _3Plugins.QToolsKit.UIFramework.Editor.Window.Data;
 using _3Plugins.QToolsKit.UIFramework.Editor.Window.Data.Json;
 using _3Plugins.QToolsKit.UIFramework.Editor.Window.Enums;
 using _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView;
+using _3Plugins.QToolsKit.UIFramework.Scripts.Config;
+using _3Plugins.QToolsKit.UIFramework.Scripts.Core;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using UnityEditor.SceneManagement;
@@ -20,7 +22,8 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
         private Vector2 leftScrollPosition;
         private Vector2 centerScrollPosition;
         private Vector2 centerEventScrollPosition;
-
+        private Vector2 centerReflectionScrollPosition;
+        private bool isFoldout = true;
         private GameObject m_targetPrefab;
 
         private PrefabCacheData m_cacheData;
@@ -79,6 +82,8 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                 case WindowArea.Base:
                     //==========================基础配置=========================
                     DrawDirectory();
+
+                    DrawViewReflectionPrefab();
                     break;
                 case WindowArea.Prefab:
                     //==========================预制件配置=========================
@@ -736,6 +741,35 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
             {
                 AssetDatabase.SaveAssets();
                 AssetDatabase.Refresh();
+            }
+        }
+
+        /// <summary>
+        /// 预制件映射
+        /// </summary>
+        private void DrawViewReflectionPrefab()
+        {
+            isFoldout = EditorGUILayout.Foldout(isFoldout, $"预制件映射列表:[{PrefabReflectionData.EnumForms.Count}]");
+            if (isFoldout)
+            {
+                centerReflectionScrollPosition = EditorGUILayout.BeginScrollView(centerReflectionScrollPosition);
+                for (int i = 0; i < PrefabReflectionData.EnumForms.Count; i++)
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    
+                    PrefabReflectionData.EnumForms[i].ViewEnum =
+                        (ViewEnum)EditorGUILayout.EnumPopup("ViewEnum", PrefabReflectionData.EnumForms[i].ViewEnum);
+                    PrefabReflectionData.EnumForms[i].form =
+                        (Form)EditorGUILayout.ObjectField("Form", PrefabReflectionData.EnumForms[i].form,typeof(Form));
+                    
+                    EditorGUILayout.EndHorizontal();
+                }
+
+                if (GUILayout.Button("+", GUILayout.Height(30)))
+                {
+                    PrefabReflectionData.EnumForms.Add(new EnumForm());
+                }
+                EditorGUILayout.EndScrollView();
             }
         }
 

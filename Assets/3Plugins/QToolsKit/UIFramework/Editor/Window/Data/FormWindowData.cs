@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using _3Plugins.QToolsKit.UIFramework.Editor.Utils;
 using _3Plugins.QToolsKit.UIFramework.Editor.Window.Data.Json;
 using _3Plugins.QToolsKit.UIFramework.Editor.Window.Enums;
 using _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView;
-using _3Plugins.QToolsKit.UIFramework.Scripts;
+using _3Plugins.QToolsKit.UIFramework.Scripts.Core;
 using Unity.Plastic.Newtonsoft.Json;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
@@ -268,7 +266,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
                     },
                 };
             }
-            else if (component is QUIFormScript)
+            else if (component is Form)
             {
                 return new List<SOEvent>
                 {
@@ -303,7 +301,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
         /// <returns></returns>
         private static bool IsLeagalComp(GameObject prefab)
         {
-            return prefab.GetComponent<QUIFormScript>();
+            return prefab.GetComponent<Form>();
         }
 
         /// <summary>

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-namespace QToolsKit.Loader
+namespace _3Plugins.QToolsKit.Loader
 {
     public class AssetBundleLoaderMgr
     {

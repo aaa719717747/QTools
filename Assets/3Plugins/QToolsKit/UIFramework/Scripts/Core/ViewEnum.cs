@@ -1,4 +1,4 @@
-﻿namespace _3Plugins.QToolsKit.UIFramework.Scripts
+﻿namespace _3Plugins.QToolsKit.UIFramework.Scripts.Core
 {
     public enum ViewEnum
     {

@@ -4,6 +4,7 @@ using _3Plugins.QToolsKit.UIFramework.Editor.Utils;
 using _3Plugins.QToolsKit.UIFramework.Editor.Window.Data;
 using _3Plugins.QToolsKit.UIFramework.Editor.Window.Data.Json;
 using _3Plugins.QToolsKit.UIFramework.Scripts;
+using _3Plugins.QToolsKit.UIFramework.Scripts.Core;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
@@ -201,7 +202,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView
                     components[i] is Text ||
                     components[i] is Slider ||
                     components[i] is Canvas ||
-                    components[i] is QUIFormScript ||
+                    components[i] is Form ||
                     components[i] is ScrollRect ||
                     components[i] is Toggle
                    )
