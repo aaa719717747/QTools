@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using _3Plugins.QToolsKit.UIFramework.Scripts.Config;
 using UnityEngine;
 
 namespace _3Plugins.QToolsKit.Loader
@@ -21,7 +22,7 @@ namespace _3Plugins.QToolsKit.Loader
         /// </summary>
         private static AssetBundleLoaderMgr s_instance;
 
-        public static AssetBundleLoaderMgr instance
+        public static AssetBundleLoaderMgr Instance
         {
             get
             {
@@ -90,6 +91,19 @@ namespace _3Plugins.QToolsKit.Loader
         {
             AssetBundle ab = LoadAssetBundle(abName);
             T t = ab.LoadAsset<T>(assetName);
+            return t;
+        }
+        /// <summary>
+        /// 从AssetBundle中加载Asset
+        /// </summary>
+        /// <typeparam name="T">类型</typeparam>
+        /// <param name="abName">AssetBundle名</param>
+        /// <param name="assetName">Asset名</param>
+        /// <returns></returns>
+        public T LoadAsset<T>(FormData abData) where T : Object
+        {
+            AssetBundle ab = LoadAssetBundle(abData.mABName);
+            T t = ab.LoadAsset<T>(abData.mAssetName);
             return t;
         }
     }

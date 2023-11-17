@@ -413,7 +413,7 @@ GameObject:
   - component: {fileID: 5942629869829264015}
   - component: {fileID: 6748445357236161240}
   - component: {fileID: 2443407039972642713}
-  - component: {fileID: 6649314725177368272}
+  - component: {fileID: 8169976333855575504}
   m_Layer: 5
   m_Name: LoginForm
   m_TagString: Untagged
@@ -504,7 +504,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &6649314725177368272
+--- !u!114 &8169976333855575504
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -513,8 +513,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 5976724693951280815}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c77d438a48764a2583f5aa4730371047, type: 3}
+  m_Script: {fileID: 11500000, guid: 917f328ae274413a84f3d21a2cab9c92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abPath: 
-  viewEnum: 0

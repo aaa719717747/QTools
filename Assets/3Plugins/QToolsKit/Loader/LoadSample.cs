@@ -13,13 +13,13 @@ namespace QToolsKit.Loader
         void Awake()
         {
             //初始化
-            AssetBundleLoaderMgr.instance.Init();
+            AssetBundleLoaderMgr.Instance.Init();
         }
  
         void LoadAsset()
         {
             //加载预设
-            GameObject prefab = AssetBundleLoaderMgr.instance.LoadAsset<GameObject>(assetBundle, prefabName);
+            GameObject prefab = AssetBundleLoaderMgr.Instance.LoadAsset<GameObject>(assetBundle, prefabName);
             //实例化预设
             Instantiate(prefab);
         }

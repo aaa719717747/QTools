@@ -42,10 +42,6 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Utils
             {
                 comName = "Toggle";
             }
-            else if (component is Form)
-            {
-                comName = "Form";
-            }
 
             return comName;
         }

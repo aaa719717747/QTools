@@ -749,26 +749,35 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
         /// </summary>
         private void DrawViewReflectionPrefab()
         {
-            isFoldout = EditorGUILayout.Foldout(isFoldout, $"预制件映射列表:[{PrefabReflectionData.EnumForms.Count}]");
+            isFoldout = EditorGUILayout.Foldout(isFoldout,
+                $"预制件映射列表:[{FormWindowData.ReflectionData.mFormDatas.Count}]");
             if (isFoldout)
             {
                 centerReflectionScrollPosition = EditorGUILayout.BeginScrollView(centerReflectionScrollPosition);
-                for (int i = 0; i < PrefabReflectionData.EnumForms.Count; i++)
+                for (int i = 0; i < FormWindowData.ReflectionData.mFormDatas.Count; i++)
                 {
-                    EditorGUILayout.BeginHorizontal();
-                    
-                    PrefabReflectionData.EnumForms[i].ViewEnum =
-                        (ViewEnum)EditorGUILayout.EnumPopup("ViewEnum", PrefabReflectionData.EnumForms[i].ViewEnum);
-                    PrefabReflectionData.EnumForms[i].form =
-                        (Form)EditorGUILayout.ObjectField("Form", PrefabReflectionData.EnumForms[i].form,typeof(Form));
-                    
-                    EditorGUILayout.EndHorizontal();
+                    EditorGUILayout.BeginVertical();
+
+                    FormWindowData.ReflectionData.mFormDatas[i].mViewEnum =
+                        (ViewEnum)EditorGUILayout.EnumPopup("ViewEnum",
+                            FormWindowData.ReflectionData.mFormDatas[i].mViewEnum);
+                    FormWindowData.ReflectionData.mFormDatas[i].mABName =
+                        EditorGUILayout.TextField("ABName", FormWindowData.ReflectionData.mFormDatas[i].mABName);
+                    FormWindowData.ReflectionData.mFormDatas[i].mAssetName =
+                        EditorGUILayout.TextField("AssetName", FormWindowData.ReflectionData.mFormDatas[i].mAssetName);
+                    if (GUILayout.Button("X"))
+                    {
+                        FormWindowData.ReflectionData.mFormDatas.RemoveAt(i);
+                    }
+
+                    EditorGUILayout.EndVertical();
                 }
 
                 if (GUILayout.Button("+", GUILayout.Height(30)))
                 {
-                    PrefabReflectionData.EnumForms.Add(new EnumForm());
+                    FormWindowData.ReflectionData.mFormDatas.Add(new FormData());
                 }
+
                 EditorGUILayout.EndScrollView();
             }
         }

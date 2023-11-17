@@ -1,27 +1,24 @@
 ﻿using _3Plugins.QToolsKit.UIFramework.Scripts;
 using _3Plugins.QToolsKit.UIFramework.Scripts.Core;
+using UnityEngine;
 
 namespace _3Plugins.QToolsKit.UIFramework.Sample.Login
 {
-    public class LoginPanel:PanelBase
+    public class LoginPanel : QUIForm, IForm<LoginBindView, LoginCtrl>
     {
-        public override void OnOpen(UserTB userData = null)
-        {
-          
-        }
-
-        public override void OnClose()
-        {
-            
-        }
+        public LoginBindView View { get; set; }
+        public LoginCtrl Ctrl { get; set; }
 
         public override void RegisterGlobalEvent()
         {
-           
         }
 
+        public override void OnOpen(UserTB userData = null)
+        {
+            Debug.Log("打开LoginPanel");
+        }
 
-        public void OnClikLoginBtn()
+        public override void OnClose()
         {
         }
     }
