@@ -2,51 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ebb0ebae-187f-42f0-bae6-eabc873a3dba" name="Changes" comment="【UIFramework】自动生成代码模块">
-      <change afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/Core/UITools.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.QTools/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/StandaloneWindows" beforeDir="false" afterPath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/StandaloneWindows" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/StandaloneWindows.manifest" beforeDir="false" afterPath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/StandaloneWindows.manifest" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/prefabs/maincitypanel" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/prefabs/maincitypanel.manifest" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/prefabs/sampleview" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/prefabs/sampleview.manifest" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/sprites/shoorscreen1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/sprites/shoorscreen1.manifest" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/sprites/shootscreen0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/AssetBundles/StandaloneWindows/ui/sprites/shootscreen0.manifest" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/Loader/AssetBundleLoaderMgr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/Loader/AssetBundleLoaderMgr.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/UIEditorSavedData.bytes" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/UIEditorSavedData.bytes" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/FormWindowData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/FormWindowData.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Editor/Window/PrefabTreeViewWindow.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Sample/Login/LoginBindView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Sample/Login/LoginBindView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Sample/Login/LoginCtrl.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Sample/Login/LoginCtrl.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Sample/Login/LoginPanel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Sample/Login/LoginPanel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/Config/PrefabReflectionData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/Config/PrefabReflectionData.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/Core/CtrlBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/Core/CtrlBase.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/Core/QUIForm.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/Core/QUIForm.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/Core/UIMgr.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/Core/UIMgr.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/Core/ViewBindBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/3Plugins/QToolsKit/UIFramework/Scripts/Core/ViewBindBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/LoginForm.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/LoginForm.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/LoginForm.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/LoginForm.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/RegisterForm.prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/RegisterForm.prefab.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/sample.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/sample.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/StandaloneWindows" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/StandaloneWindows" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/StandaloneWindows.manifest" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/StreamingAssets/StandaloneWindows.manifest" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/prefabs/maincitypanel" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/prefabs/maincitypanel.manifest" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/prefabs/maincitypanel.manifest.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/prefabs/maincitypanel.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/prefabs/sampleview" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/prefabs/sampleview.manifest" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/prefabs/sampleview.manifest.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/prefabs/sampleview.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shoorscreen1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shoorscreen1.manifest" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shoorscreen1.manifest.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shoorscreen1.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shootscreen0" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shootscreen0.manifest" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shootscreen0.manifest.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/StreamingAssets/ui/sprites/shootscreen0.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -215,7 +178,7 @@
       <workItem from="1699605997337" duration="2439000" />
       <workItem from="1700015358733" duration="15268000" />
       <workItem from="1700189294422" duration="11712000" />
-      <workItem from="1700447109653" duration="5155000" />
+      <workItem from="1700447109653" duration="10074000" />
     </task>
     <task id="LOCAL-00001" summary="uiframe1.co">
       <created>1691028022497</created>
@@ -413,7 +376,14 @@
       <option name="project" value="LOCAL" />
       <updated>1700214606336</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="【UIFramework】自动生成代码模块">
+      <created>1700452860547</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1700452860547</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -28,7 +28,7 @@ namespace _3Plugins.QToolsKit.UIFramework.Scripts.Core
             GameObject go = Instantiate(prefab, this.transform);
             go.transform.SetAsLastSibling();
             QUIForm form = go.GetComponent<QUIForm>();
-            form.OnInit();
+            form.Init();
             form.OnOpen(userData);
             Forms.Add(mViewEnum, form);
         }

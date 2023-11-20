@@ -1,4 +1,7 @@
-﻿namespace _3Plugins.QToolsKit.UIFramework.Scripts.Core
+﻿using UnityEngine;
+using UnityEngine.Events;
+
+namespace _3Plugins.QToolsKit.UIFramework.Scripts.Core
 {
     /// <summary>
     /// 此代码由UI编辑器自动生成，请不要修改!
@@ -6,6 +9,7 @@
     /// </summary>
     public abstract class ViewBindBase
     {
-        
+        public Transform MTransform { get; set; }
+        public abstract void OnInitBind(params UnityAction[] actions);
     }
 }
