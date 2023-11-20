@@ -6,7 +6,6 @@ using _3Plugins.QToolsKit.UIFramework.Editor.Window.Enums;
 using _3Plugins.QToolsKit.UIFramework.Editor.Window.TreeView;
 using _3Plugins.QToolsKit.UIFramework.Scripts.Config;
 using _3Plugins.QToolsKit.UIFramework.Scripts.Core;
-using Unity.Plastic.Newtonsoft.Json;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
 using UnityEngine;
@@ -25,39 +24,40 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
         public static int CurrentClikNodeId { get; set; }
         public static WindowArea windowArea = WindowArea.Base;
         private static string PrefabSavedPath = String.Empty;
-        private static string ABSavedPath = String.Empty;
+        // private static string ABSavedPath = String.Empty;
 
         public static void Init()
         {
             PrefabSavedPath = Path.Combine(Application.dataPath,
                 "3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/UIEditorSavedData.bytes");
-            ABSavedPath = Path.Combine(Application.dataPath,
-                "3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/UIEditorSavedData_AB.bytes");
+            ReflectionData = AssetDatabase.LoadAssetAtPath<PrefabReflectionData>("Assets/3Plugins/QToolsKit/UIFramework/Config/PrefabReflectionData.asset");
+            // ABSavedPath = Path.Combine(Application.dataPath,
+            //     "3Plugins/QToolsKit/UIFramework/Editor/Window/Data/Json/UIEditorSavedData_AB.bytes");
             //json存储
-            if (File.Exists(ABSavedPath))
-            {
-                string fileContent = File.ReadAllText(ABSavedPath);
-                ReflectionData = JsonConvert.DeserializeObject<PrefabReflectionData>(fileContent);
-            }
-            else
-            {
-                PrefabReflectionData gwd = new PrefabReflectionData();
-                string serializeContent = JsonConvert.SerializeObject(gwd);
-                File.WriteAllText(ABSavedPath, serializeContent);
-                ReflectionData = JsonConvert.DeserializeObject<PrefabReflectionData>(serializeContent);
-            }
+            // if (File.Exists(ABSavedPath))
+            // {
+            //     string fileContent = File.ReadAllText(ABSavedPath);
+            //     ReflectionData = JsonUtility.FromJson<PrefabReflectionData>(fileContent);
+            // }
+            // else
+            // {
+            //     PrefabReflectionData gwd = new PrefabReflectionData();
+            //     string serializeContent = JsonUtility.ToJson(gwd);
+            //     File.WriteAllText(ABSavedPath, serializeContent);
+            //     ReflectionData = JsonUtility.FromJson<PrefabReflectionData>(serializeContent);
+            // }
             //json存储
             if (File.Exists(PrefabSavedPath))
             {
                 string fileContent = File.ReadAllText(PrefabSavedPath);
-                WindowData = JsonConvert.DeserializeObject<GlobalUIWindowData>(fileContent);
+                WindowData = JsonUtility.FromJson<GlobalUIWindowData>(fileContent);
             }
             else
             {
                 GlobalUIWindowData gwd = new GlobalUIWindowData();
-                string serializeContent = JsonConvert.SerializeObject(gwd);
+                string serializeContent =JsonUtility.ToJson(gwd);
                 File.WriteAllText(PrefabSavedPath, serializeContent);
-                WindowData = JsonConvert.DeserializeObject<GlobalUIWindowData>(serializeContent);
+                WindowData = JsonUtility.FromJson<GlobalUIWindowData>(serializeContent);
             }
 
             if (CurrentTreeViewState == null)
@@ -68,8 +68,8 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window.Data
 
         public static void Saved()
         {
-            File.WriteAllText(PrefabSavedPath, JsonConvert.SerializeObject(WindowData));
-            File.WriteAllText(ABSavedPath, JsonConvert.SerializeObject(ReflectionData));
+            File.WriteAllText(PrefabSavedPath, JsonUtility.ToJson(WindowData));
+            // File.WriteAllText(ABSavedPath, JsonUtility.ToJson(ReflectionData));
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
            

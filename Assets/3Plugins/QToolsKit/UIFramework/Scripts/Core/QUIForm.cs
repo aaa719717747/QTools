@@ -18,8 +18,11 @@ namespace _3Plugins.QToolsKit.UIFramework.Scripts.Core
         public ViewEnum mViewEnum;
        
         public abstract void RegisterGlobalEvent();
+        public abstract void UnRegisterGlobalEvent();
+        public abstract void OnInit();
         public abstract void OnOpen(UserTB userData = null);
         public abstract void OnClose();
+       
 
         public virtual void Close()
         {

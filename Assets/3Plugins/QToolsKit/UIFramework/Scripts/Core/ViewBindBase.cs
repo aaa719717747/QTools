@@ -6,6 +6,6 @@
     /// </summary>
     public abstract class ViewBindBase
     {
-        public abstract void Init();
+        
     }
 }

@@ -13,6 +13,17 @@ namespace _3Plugins.QToolsKit.UIFramework.Sample.Login
         {
         }
 
+        public override void UnRegisterGlobalEvent()
+        {
+            
+        }
+
+        public override void OnInit()
+        {
+            View = new LoginBindView();
+            Ctrl = new LoginCtrl();
+        }
+
         public override void OnOpen(UserTB userData = null)
         {
             Debug.Log("打开LoginPanel");

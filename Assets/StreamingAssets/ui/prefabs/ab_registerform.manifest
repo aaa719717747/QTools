@@ -1,12 +1,15 @@
 ManifestFileVersion: 0
-CRC: 3000178383
+CRC: 3777372750
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: d576c0eb65cab93a651b344e43e143d5
+    Hash: 43f24f9b58d60715aafe75e427cd09cd
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 951ff0e1e4cca75519e21585b05fe195
+    Hash: 83fee098906312b7c0427f2dc0f9ced0
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 43f24f9b58d60715aafe75e427cd09cd
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -24,9 +27,15 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
 - Class: 114
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: eb0e12137ce54875aa917c9405b749c2, type: 3}
+  Script: {fileID: 11500000, guid: c77d438a48764a2583f5aa4730371047, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -43,10 +52,23 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: UnityEngine.CoreModule
   ClassName: UnityEngine.Events.PersistentCallGroup
 - AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.AnimationTriggers
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Button/ButtonClickedEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.ColorBlock
+- AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.FontData
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Navigation
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Slider/SliderEvent
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.SpriteState
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Toggle/ToggleEvent
 Assets:
-- Assets/Prefabs/UI/MainCityView.prefab
-Dependencies:
-- E:/WorkSpace/QTools/AssetBundles/StandaloneWindows/ui/sprites/shoorscreen1
+- Assets/Prefabs/UI/RegisterForm.prefab
+Dependencies: []

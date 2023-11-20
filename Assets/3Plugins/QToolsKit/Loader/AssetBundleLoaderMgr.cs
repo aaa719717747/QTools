@@ -45,7 +45,7 @@ namespace _3Plugins.QToolsKit.Loader
         /// <summary>
         /// 加载AssetBundle
         /// </summary>
-        /// <param name="abName">AssetBundle名称</param>
+        /// <param name="abName">AssetBundle名称(必须是ab全路径[ui/prefab/xxx])</param>
         /// <returns></returns>
         public AssetBundle LoadAssetBundle(string abName)
         {

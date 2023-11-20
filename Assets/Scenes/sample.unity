@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c61038c2ae84ab78ab98fa345c1d1dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mPrefabReflectionData: {fileID: 11400000, guid: 1c21e1d0083d3ec469a1de6eb0fecc53, type: 2}
+  ReflectionUIData: {fileID: 11400000, guid: 0945c1e16676d3741a97ab9e47594bbd, type: 2}
 --- !u!1 &1852363503
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,7 +8,8 @@ namespace _3Plugins.QToolsKit.UIFramework.Scripts.Core
 {
     public class UIMgr : MonoBehaviour
     {
-        public PrefabReflectionData mPrefabReflectionData;
+        public PrefabReflectionData ReflectionUIData;
+        private Dictionary<ViewEnum, QUIForm> Forms = new Dictionary<ViewEnum, QUIForm>();
 
         private void Awake()
         {
@@ -22,11 +23,20 @@ namespace _3Plugins.QToolsKit.UIFramework.Scripts.Core
 
         public void OpenForm(ViewEnum mViewEnum, UserTB userData = null)
         {
-            FormData abData = mPrefabReflectionData.GetFormData(mViewEnum);
+            FormData abData = ReflectionUIData.GetFormData(mViewEnum);
             GameObject prefab = AssetBundleLoaderMgr.Instance.LoadAsset<GameObject>(abData);
             GameObject go = Instantiate(prefab, this.transform);
             go.transform.SetAsLastSibling();
-            go.GetComponent<QUIForm>().OnOpen(userData);
+            QUIForm form = go.GetComponent<QUIForm>();
+            form.OnInit();
+            form.OnOpen(userData);
+            Forms.Add(mViewEnum, form);
+        }
+
+        public void CloseForm(ViewEnum mViewEnum)
+        {
+            Forms[mViewEnum].Close();
+            Forms.Remove(mViewEnum);
         }
     }
 }

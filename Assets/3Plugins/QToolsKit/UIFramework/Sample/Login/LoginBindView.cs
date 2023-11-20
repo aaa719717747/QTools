@@ -5,9 +5,6 @@ namespace _3Plugins.QToolsKit.UIFramework.Sample.Login
 {
     public class LoginBindView: ViewBindBase
     {
-        public override void Init()
-        {
-            
-        }
+       
     }
 }

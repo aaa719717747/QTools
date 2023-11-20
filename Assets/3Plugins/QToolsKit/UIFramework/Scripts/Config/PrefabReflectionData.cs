@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace _3Plugins.QToolsKit.UIFramework.Scripts.Config
 {
-    [System.Serializable]
-    public class PrefabReflectionData
+   [CreateAssetMenu(fileName = "PrefabReflectionData",menuName = "PrefabReflectionData(ScriptableObject)")]
+    public class PrefabReflectionData: ScriptableObject
     {
         public List<FormData> mFormDatas = new List<FormData>();
 

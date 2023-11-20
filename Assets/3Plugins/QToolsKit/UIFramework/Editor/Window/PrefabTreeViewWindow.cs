@@ -768,6 +768,8 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                     if (GUILayout.Button("X"))
                     {
                         FormWindowData.ReflectionData.mFormDatas.RemoveAt(i);
+                        AssetDatabase.SaveAssets();
+                        AssetDatabase.Refresh();
                     }
 
                     EditorGUILayout.EndVertical();
@@ -776,6 +778,8 @@ namespace _3Plugins.QToolsKit.UIFramework.Editor.Window
                 if (GUILayout.Button("+", GUILayout.Height(30)))
                 {
                     FormWindowData.ReflectionData.mFormDatas.Add(new FormData());
+                    AssetDatabase.SaveAssets();
+                    AssetDatabase.Refresh();
                 }
 
                 EditorGUILayout.EndScrollView();

@@ -1,12 +1,15 @@
 ManifestFileVersion: 0
-CRC: 3116273783
+CRC: 2268549962
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 970fc274710580035c4a04336cd24e63
+    Hash: 60a4910c681d90ad690a6d97ebdc905c
   TypeTreeHash:
     serializedVersion: 2
-    Hash: ad2573fd5a2dbb2284f5a835d03388ea
+    Hash: b99a56d6c7b9e1a832b17986d64bd05f
+  IncrementalBuildHash:
+    serializedVersion: 2
+    Hash: 60a4910c681d90ad690a6d97ebdc905c
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -18,23 +21,17 @@ ClassTypes:
 - Class: 48
   Script: {instanceID: 0}
 - Class: 114
+  Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+- Class: 114
   Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 31a19414c41e5ae4aae2af33fee712f6, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
 - Class: 114
   Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
 - Class: 114
-  Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 2a4db7a114972834c8e4117be1d82ba3, type: 3}
-- Class: 114
-  Script: {fileID: 11500000, guid: 1aa08ab6e0800fa44ae55d278d1423e3, type: 3}
+  Script: {fileID: 11500000, guid: 917f328ae274413a84f3d21a2cab9c92, type: 3}
 - Class: 115
   Script: {instanceID: 0}
 - Class: 128
@@ -53,6 +50,8 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.AnimationTriggers
 - AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.Button/ButtonClickedEvent
+- AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.ColorBlock
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.FontData
@@ -61,16 +60,7 @@ SerializeReferenceClassIdentifiers:
 - AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.Navigation
 - AssemblyName: UnityEngine.UI
-  ClassName: UnityEngine.UI.ScrollRect/ScrollRectEvent
-- AssemblyName: UnityEngine.UI
-  ClassName: UnityEngine.UI.Scrollbar/ScrollEvent
-- AssemblyName: UnityEngine.UI
-  ClassName: UnityEngine.UI.Slider/SliderEvent
-- AssemblyName: UnityEngine.UI
   ClassName: UnityEngine.UI.SpriteState
-- AssemblyName: UnityEngine.UI
-  ClassName: UnityEngine.UI.Toggle/ToggleEvent
 Assets:
-- Assets/Prefabs/UI/SampleView.prefab
-Dependencies:
-- E:/WorkSpace/QTools/AssetBundles/StandaloneWindows/ui/sprites/shootscreen0
+- Assets/Prefabs/UI/LoginForm.prefab
+Dependencies: []

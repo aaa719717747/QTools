@@ -1,19 +1,10 @@
 ManifestFileVersion: 0
-CRC: 703480208
-CRC: 4180079652
+CRC: 3021830502
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
-      Name: ui/prefabs/maincitypanel
-      Dependencies:
-        Dependency_0: ui/sprites/shoorscreen1
-    Info_1:
-      Name: ui/sprites/shootscreen0
+      Name: ui/prefabs/ab_loginform
       Dependencies: {}
     Info_1:
-      Name: ui/sprites/shoorscreen1
+      Name: ui/prefabs/ab_registerform
       Dependencies: {}
-    Info_3:
-      Name: ui/prefabs/sampleview
-      Dependencies:
-        Dependency_0: ui/sprites/shootscreen0
